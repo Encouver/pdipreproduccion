@@ -1,19 +1,19 @@
 <?php
 $this->breadcrumbs=array(
-	'Cronogramaimports'=>array('index'),
+	'Cronogramaexports'=>array('index'),
 	$model->id,
 );
 
 $this->menu=array(
-array('label'=>'List Cronogramaimport','url'=>array('index')),
-array('label'=>'Create Cronogramaimport','url'=>array('create')),
-array('label'=>'Update Cronogramaimport','url'=>array('update','id'=>$model->id)),
-array('label'=>'Delete Cronogramaimport','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
-array('label'=>'Manage Cronogramaimport','url'=>array('admin')),
+array('label'=>'List Cronogramaexport','url'=>array('index')),
+array('label'=>'Create Cronogramaexport','url'=>array('create')),
+array('label'=>'Update Cronogramaexport','url'=>array('update','id'=>$model->id)),
+array('label'=>'Delete Cronogramaexport','url'=>'#','linkOptions'=>array('submit'=>array('delete','id'=>$model->id),'confirm'=>'Are you sure you want to delete this item?')),
+array('label'=>'Manage Cronogramaexport','url'=>array('admin')),
 );
 ?>
 
-<h1>View Cronogramaimport #<?php echo $model->id; ?></h1>
+<h1>View Cronogramaexport #<?php echo $model->id; ?></h1>
 
 <?php $this->widget('booster.widgets.TbDetailView',array(
 'data'=>$model,
@@ -25,6 +25,7 @@ array('label'=>'Manage Cronogramaimport','url'=>array('admin')),
 		'cantidad',
 		'costo_total',
 		'fecha_estimada',
+		'pais_destino',
 		'fecha_registro',
 		'valido',
 		'proyecto_id',

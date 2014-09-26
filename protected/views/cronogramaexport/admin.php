@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Cronogramaimports'=>array('index'),
+	'Cronogramaexports'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-array('label'=>'List Cronogramaimport','url'=>array('index')),
-array('label'=>'Create Cronogramaimport','url'=>array('create')),
+array('label'=>'List Cronogramaexport','url'=>array('index')),
+array('label'=>'Create Cronogramaexport','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-form').toggle();
 return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('cronogramaimport-grid', {
+$.fn.yiiGridView.update('cronogramaexport-grid', {
 data: $(this).serialize()
 });
 return false;
@@ -23,7 +23,7 @@ return false;
 ");
 ?>
 
-<h1>Manage Cronogramaimports</h1>
+<h1>Manage Cronogramaexports</h1>
 
 <p>
 	You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>
@@ -39,7 +39,7 @@ return false;
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'cronogramaimport-grid',
+'id'=>'cronogramaexport-grid',
 'dataProvider'=>$model->search(),
 'filter'=>$model,
 'columns'=>array(
@@ -51,6 +51,7 @@ return false;
 		'costo_total',
 		/*
 		'fecha_estimada',
+		'pais_destino',
 		'fecha_registro',
 		'valido',
 		'proyecto_id',

@@ -32,11 +32,11 @@ array('allow',  // allow all users to perform 'index' and 'view' actions
 ),
 array('allow', // allow authenticated user to perform 'create' and 'update' actions
 'actions'=>array('create','update'),
-'users'=>array('@'),
+'users'=>array('*'),
 ),
 array('allow', // allow admin user to perform 'admin' and 'delete' actions
 'actions'=>array('admin','delete'),
-'users'=>array('admin'),
+'users'=>array('*'),
 ),
 array('deny',  // deny all users
 'users'=>array('*'),
@@ -61,14 +61,14 @@ $this->render('view',array(
 */
 public function actionCreate()
 {
-$model=new Cronogramaimport;
+$model=new Cronogramaexport;
 
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-if(isset($_POST['Cronogramaimport']))
+if(isset($_POST['Cronogramaexport']))
 {
-$model->attributes=$_POST['Cronogramaimport'];
+$model->attributes=$_POST['Cronogramaexport'];
 if($model->save())
 $this->redirect(array('view','id'=>$model->id));
 }
@@ -90,9 +90,9 @@ $model=$this->loadModel($id);
 // Uncomment the following line if AJAX validation is needed
 // $this->performAjaxValidation($model);
 
-if(isset($_POST['Cronogramaimport']))
+if(isset($_POST['Cronogramaexport']))
 {
-$model->attributes=$_POST['Cronogramaimport'];
+$model->attributes=$_POST['Cronogramaexport'];
 if($model->save())
 $this->redirect(array('view','id'=>$model->id));
 }
@@ -127,7 +127,7 @@ throw new CHttpException(400,'Invalid request. Please do not repeat this request
 */
 public function actionIndex()
 {
-$dataProvider=new CActiveDataProvider('Cronogramaimport');
+$dataProvider=new CActiveDataProvider('Cronogramaexport');
 $this->render('index',array(
 'dataProvider'=>$dataProvider,
 ));
@@ -138,10 +138,10 @@ $this->render('index',array(
 */
 public function actionAdmin()
 {
-$model=new Cronogramaimport('search');
+$model=new Cronogramaexport('search');
 $model->unsetAttributes();  // clear any default values
-if(isset($_GET['Cronogramaimport']))
-$model->attributes=$_GET['Cronogramaimport'];
+if(isset($_GET['Cronogramaexport']))
+$model->attributes=$_GET['Cronogramaexport'];
 
 $this->render('admin',array(
 'model'=>$model,
@@ -155,7 +155,7 @@ $this->render('admin',array(
 */
 public function loadModel($id)
 {
-$model=Cronogramaimport::model()->findByPk($id);
+$model=Cronogramaexport::model()->findByPk($id);
 if($model===null)
 throw new CHttpException(404,'The requested page does not exist.');
 return $model;
@@ -167,7 +167,7 @@ return $model;
 */
 protected function performAjaxValidation($model)
 {
-if(isset($_POST['ajax']) && $_POST['ajax']==='cronogramaimport-form')
+if(isset($_POST['ajax']) && $_POST['ajax']==='cronogramaexport-form')
 {
 echo CActiveForm::validate($model);
 Yii::app()->end();

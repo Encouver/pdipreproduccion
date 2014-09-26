@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Cronogramaimports',
+	'Cronogramaexports',
 );
 
 $this->menu=array(
-array('label'=>'Create Cronogramaimport','url'=>array('create')),
-array('label'=>'Manage Cronogramaimport','url'=>array('admin')),
+array('label'=>'Create Cronogramaexport','url'=>array('create')),
+array('label'=>'Manage Cronogramaexport','url'=>array('admin')),
 );
 ?>
 
-<h1>Cronogramaimports</h1>
+<h1>Cronogramaexports</h1>
 
 <?php $this->widget('booster.widgets.TbListView',array(
 'dataProvider'=>$dataProvider,
