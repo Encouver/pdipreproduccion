@@ -20,9 +20,6 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-        //'class'=>'ext.csvimport.ImportModule',
-        //'onAfterImport' => array('ImportEvent', 'onAfterImport'),
-        //'onBeforeShowForm' => array('ImportEvent', 'onBeforeShowForm'),
 	),
 
 	'modules'=>array(
@@ -38,6 +35,12 @@ return array(
  				'booster.gii'
  			),
 		),
+
+		'import'=>array(
+             'class'=>'ext.import.ImportModule',
+             'onAfterImport' => array('ImportEvent', 'onAfterImport'),
+             'onBeforeShowForm' => array('ImportEvent', 'onBeforeShowForm'),
+        ),
 		
 	),
 
