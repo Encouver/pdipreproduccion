@@ -87,12 +87,12 @@ return array(
 			//'enableProfiling' => true,
             //'enableParamLogging' => true,
 		),*/
-        'db2'=>array(
+        'db'=>array(
            'class'=> 'CDbConnection',
            'connectionString' => 'pgsql:host=localhost;port=5432;dbname=Prueba',
            //'emulatePrepare' => true,
-           'username' => 'postgres',
-           'password' => 'postgres',
+           'username' => 'divisa',
+           'password' => 'divisa',
            'charset' => 'utf8',
         ),
 		'errorHandler'=>array(
