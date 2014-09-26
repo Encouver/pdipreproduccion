@@ -36,7 +36,7 @@ class Cronogramaimport extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, fecha_registro, proyecto_id', 'required'),
+			array('insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, proyecto_id', 'required'),
 			array('cod_arancelario, unidad_id, cantidad, costo_total, proyecto_id', 'numerical', 'integerOnly'=>true),
 			array('insumo', 'length', 'max'=>30),
 			array('valido', 'length', 'max'=>1),
