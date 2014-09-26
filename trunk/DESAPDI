@@ -1,0 +1,135 @@
+CREATE TABLE datosbasicos
+(
+  id serial NOT NULL,
+  id_empresa int8range NOT NULL,
+  num_declaracion character varying(10) NOT NULL,
+  fecha_islr date NOT NULL,
+  monto_islr double precision NOT NULL,
+  num_empleados integer NOT NULL,
+  numero_declaracionivss character varying(10) NOT NULL,
+  fecha_ivss date NOT NULL,
+  estatus character varying(1) NOT NULL DEFAULT 1,
+  CONSTRAINT id_datosbasicos PRIMARY KEY (id)
+)
+
+CREATE TABLE bienes 
+    ( 
+     id serial NOT NULL,
+     codarancel_id integer NOT NULL,
+     unidad_id integer NOT NULL,
+     cant_pro_actual double precision NOT NULL,
+     capac_max_anual_actual double precision NOT NULL,
+     proyecto_id integer NOT NULL,
+     fecha_registro date NOT NULL,
+     estatus character varying(1) NOT NULL DEFAULT 1,
+     CONSTRAINT bienes_PK PRIMARY KEY ( id )
+    ) 
+;
+
+
+
+CREATE TABLE planinversion 
+    ( 
+     id serial NOT NULL,
+     activo_id integer NOT NULL,
+     monto_total double precision NOT NULL,
+     fondospropios double precision NOT NULL,
+     financiamiento double precision NOT NULL,
+     empresa_id integer NOT NULL,
+     fecha_registro date NOT NULL,
+     estatus character varying(1) NOT NULL DEFAULT 1,
+     proyecto_id integer NOT NULL,
+     CONSTRAINT planinversion_PK PRIMARY KEY ( id )
+    ) 
+;
+
+
+CREATE TABLE presupuestos
+    ( 
+	  id serial NOT NULL,
+	  codarancel_id integer NOT NULL,
+	  detarancelario_id integer NOT NULL,
+	  unidad_id integer NOT NULL,
+	  num_declaracion character varying(10) NOT NULL,
+	  fecha_cierre date NOT NULL,
+	  montousd double precision NOT NULL,
+	  num_empleados integer NOT NULL,
+	  numero_declaracionivss character varying(10) NOT NULL,
+	  fecha_ivss date NOT NULL,
+	  fecha_registro date NOT NULL,
+	  estatus character varying(1) NOT NULL DEFAULT 1,
+	  empresa_id integer NOT NULL,
+	  CONSTRAINT id_presupuestos PRIMARY KEY (id)	
+
+    ) 
+;
+
+
+CREATE TABLE activos 
+    ( 
+    id serial NOT NULL,
+    nom_activo character varying(20) NOT NULL, 
+    fecha_registro date NOT NULL,
+    estatus character varying(1) NOT NULL DEFAULT 1,
+    CONSTRAINT id_activos PRIMARY KEY (id)	
+    ) 
+;
+
+CREATE TABLE tipoactivos 
+    ( 
+    id serial NOT NULL,
+    nombre_tipo character varying(20) NOT NULL, 
+    fecha_registro date NOT NULL,
+    estatus character varying(1) NOT NULL DEFAULT 1,
+    CONSTRAINT id_tipoactivos PRIMARY KEY (id)	
+    ) 
+;
+
+CREATE TABLE financiamientos
+    ( 
+     id serial NOT NULL,
+     capitalpropio double precision NOT NULL,
+     proyecto_id integer NOT NULL,
+     fecha_registro date NOT NULL,
+     estatus character varying(1) NOT NULL DEFAULT 1,
+     tipo_financiamiento_id INTEGER  NOT NULL, 
+     CONSTRAINT id_financiamientos PRIMARY KEY (id)	
+    ) 
+;
+
+CREATE TABLE entidadesfinancieras
+    (
+	id serial NOT NULL,
+	financiamiento_id integer NOT NULL,
+        capitalfinanciado double precision NOT NULL, 
+        banco_id integer  NOT NULL , 
+        tasainteres double precision NOT NULL,
+        anualidades double precision NOT NULL,
+        plazoprestamo DATE  NOT NULL ,  
+        fecha_registro date NOT NULL,
+	estatus character varying(1) NOT NULL DEFAULT 1,
+        CONSTRAINT id_entidadesfinancieras PRIMARY KEY (id)	
+    ) 
+;
+
+
+CREATE TABLE proyectos
+    ( 
+    id serial NOT NULL,
+    objetivoproducto text  NOT NULL , 
+    nombreproyecto text  NOT NULL , 
+    puntoreferencia text  NOT NULL , 
+    calleavenida text NOT NULL , 
+    coordenadasutm text  NOT NULL , 
+    fecha_inicio DATE  NOT NULL , 
+    fecha_fin date NOT NULL , 
+    empresa_id INTEGER  NOT NULL , 
+    tipo_proyecto_id INTEGER  NOT NULL,
+    estado_id integer NOT NULL,
+    municipio_id integer NOT NULL,
+    ciudad character varying(30) NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) NOT NULL DEFAULT 1,
+    CONSTRAINT proyectos_PK PRIMARY KEY ( id ) 
+    ) 
+;
