@@ -37,7 +37,7 @@ return array(
 		),
 
 		'import'=>array(
-             'class'=>'ext.import.ImportModule',
+             'class'=>'ext.csvimport.ImportModule',
              'onAfterImport' => array('ImportEvent', 'onAfterImport'),
              'onBeforeShowForm' => array('ImportEvent', 'onBeforeShowForm'),
         ),

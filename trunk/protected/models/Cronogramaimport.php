@@ -137,7 +137,7 @@ class Cronogramaimport extends CActiveRecord
 	                'description'=>array('displayName'=>'Description', 'sample'=>'really good oranges'),
 	            ),
 	            //url that the user is returned to after successful import
-	            'returnUrl'=> '/deals/index',
+	            'returnUrl'=> '/Cronogramaimport/index',
 	            //the "title" field of the model
 	            'titleField'=> 'title',
 	            //do you want the user to see the data in form view
