@@ -68,9 +68,10 @@ class CronogramaimportController extends Controller
 
 		if(isset($_POST['Cronogramaimport']))
 		{
-		$model->attributes=$_POST['Cronogramaimport'];
-		if($model->save())
-		$this->redirect(array('view','id'=>$model->id));
+			$model->attributes=$_POST['Cronogramaimport'];
+			
+			if($model->save())
+			$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
