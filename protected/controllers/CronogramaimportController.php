@@ -18,14 +18,6 @@ class CronogramaimportController extends Controller
 		);
 	}
 
-	public function actions()
-	{
-	    return array(
-	        'import'=>array('class'=>'ext.csvimport.components.ImportModels', 'model'=>'Cronogramaimport'),
-	        'template'=>array('class'=>'ext.csvimport.components.ImportTemplate', 'model'=>'Cronogramaimport')
-	    );
-	}
-
 		/**
 	* Specifies the access control rules.
 	* This method is used by the 'accessControl' filter.

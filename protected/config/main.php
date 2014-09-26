@@ -35,12 +35,6 @@ return array(
  				'booster.gii'
  			),
 		),
-
-		'import'=>array(
-             'class'=>'ext.csvimport.ImportModule',
-             'onAfterImport' => array('ImportEvent', 'onAfterImport'),
-             'onBeforeShowForm' => array('ImportEvent', 'onBeforeShowForm'),
-        ),
 		
 	),
 
@@ -91,7 +85,7 @@ return array(
 		),*/
         'db'=>array(
            'class'=> 'CDbConnection',
-           'connectionString' => 'pgsql:host=localhost;port=5432;dbname=prueba',
+           'connectionString' => 'pgsql:host=localhost;port=5432;dbname=Prueba',
            //'emulatePrepare' => true,
            'username' => 'divisa',
            'password' => 'divisa',
