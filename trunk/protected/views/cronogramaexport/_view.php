@@ -29,6 +29,10 @@
 	<br />
 
 	<?php /*
+	<b><?php echo CHtml::encode($data->getAttributeLabel('pais_destino')); ?>:</b>
+	<?php echo CHtml::encode($data->pais_destino); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('fecha_registro')); ?>:</b>
 	<?php echo CHtml::encode($data->fecha_registro); ?>
 	<br />

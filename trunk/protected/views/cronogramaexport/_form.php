@@ -1,5 +1,5 @@
 <?php $form=$this->beginWidget('booster.widgets.TbActiveForm',array(
-	'id'=>'cronogramaimport-form',
+	'id'=>'cronogramaexport-form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -18,6 +18,8 @@
 	<?php echo $form->textFieldGroup($model,'costo_total',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 	<?php echo $form->datePickerGroup($model,'fecha_estimada',array('widgetOptions'=>array('options'=>array(),'htmlOptions'=>array('class'=>'span5')), 'prepend'=>'<i class="glyphicon glyphicon-calendar"></i>', 'append'=>'Click on Month/Year to select a different Month/Year.')); ?>
+
+	<?php echo $form->textFieldGroup($model,'pais_destino',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 	<?php echo $form->textFieldGroup($model,'fecha_registro',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 

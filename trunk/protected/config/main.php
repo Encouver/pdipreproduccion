@@ -14,8 +14,7 @@ return array(
 	'sourceLanguage'=>'es',
 	'theme'=>'booster',
 
-	// preloading 'log' component
-	'preload'=>array('log','bootstrap'),
+	
 
 	// autoloading model and component classes
 	'import'=>array(
@@ -44,7 +43,7 @@ return array(
 
 	// application components
 	'components'=>array(
-		'booster' => array(
+		'booster' => array(     //booster
     		'class' => 'ext.booster.components.Booster',
 			'responsiveCss' => true,
 		),
@@ -115,6 +114,10 @@ return array(
 			),
 		),
 	),
+
+	// preloading 'log' component
+	'preload'=>array('log','booster'),   //tenian aqui bootstrap
+
 	'defaultController'=>'site/login',
 	// application-level parameters that can be accessed
 	// using Yii::app()->params['paramName']
