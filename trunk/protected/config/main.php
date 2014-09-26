@@ -11,7 +11,7 @@ return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Plan de Divisas',
 	'language'=>'es', // Este es el lenguaje en el que querés que muestre las cosas
-	'sourceLanguage'=>'en',
+	'sourceLanguage'=>'es',
 	'theme'=>'booster',
 
 	// preloading 'log' component
@@ -21,6 +21,9 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+        //'class'=>'ext.csvimport.ImportModule',
+        //'onAfterImport' => array('ImportEvent', 'onAfterImport'),
+        //'onBeforeShowForm' => array('ImportEvent', 'onBeforeShowForm'),
 	),
 
 	'modules'=>array(
