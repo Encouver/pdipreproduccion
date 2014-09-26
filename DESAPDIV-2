@@ -1,0 +1,1436 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.2.9
+-- Dumped by pg_dump version 9.2.9
+-- Started on 2014-09-22 10:07:27 VET
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 200 (class 3079 OID 11732)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2125 (class 0 OID 0)
+-- Dependencies: 200
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 177 (class 1259 OID 16570)
+-- Name: activos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE activos (
+    id integer NOT NULL,
+    nom_activo character varying(20) NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.activos OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 16568)
+-- Name: activos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE activos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.activos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2126 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: activos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE activos_id_seq OWNED BY activos.id;
+
+
+--
+-- TOC entry 197 (class 1259 OID 16664)
+-- Name: arancelesempresas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE arancelesempresas (
+    id integer NOT NULL,
+    descripcion character varying(50) NOT NULL,
+    cod_arancelario integer NOT NULL,
+    detalle_arancel integer NOT NULL,
+    unidad integer NOT NULL,
+    cantidad integer NOT NULL,
+    monto_anual double precision NOT NULL,
+    pais_destino integer NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    empresa_id integer NOT NULL
+);
+
+
+ALTER TABLE public.arancelesempresas OWNER TO postgres;
+
+--
+-- TOC entry 196 (class 1259 OID 16662)
+-- Name: arancelesempresas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE arancelesempresas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.arancelesempresas_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2127 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: arancelesempresas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE arancelesempresas_id_seq OWNED BY arancelesempresas.id;
+
+
+--
+-- TOC entry 171 (class 1259 OID 16543)
+-- Name: bienes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE bienes (
+    id integer NOT NULL,
+    codarancel_id integer NOT NULL,
+    unidad_id integer NOT NULL,
+    cant_pro_actual double precision NOT NULL,
+    capac_max_anual_actual double precision NOT NULL,
+    proyecto_id integer NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.bienes OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 16541)
+-- Name: bienes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE bienes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bienes_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2128 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: bienes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE bienes_id_seq OWNED BY bienes.id;
+
+
+--
+-- TOC entry 195 (class 1259 OID 16655)
+-- Name: cronogramaexport; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cronogramaexport (
+    id integer NOT NULL,
+    insumo character varying(30) NOT NULL,
+    cod_arancelario integer NOT NULL,
+    unidad integer NOT NULL,
+    cantidad integer NOT NULL,
+    costo_total integer NOT NULL,
+    fecha_estimada date NOT NULL,
+    pais_destino integer NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    proyecto_id integer NOT NULL
+);
+
+
+ALTER TABLE public.cronogramaexport OWNER TO postgres;
+
+--
+-- TOC entry 194 (class 1259 OID 16653)
+-- Name: cronogramaexport_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE cronogramaexport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cronogramaexport_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2129 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: cronogramaexport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE cronogramaexport_id_seq OWNED BY cronogramaexport.id;
+
+
+--
+-- TOC entry 193 (class 1259 OID 16646)
+-- Name: cronogramaimport; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE cronogramaimport (
+    id integer NOT NULL,
+    insumo character varying(30) NOT NULL,
+    cod_arancelario integer NOT NULL,
+    unidad integer NOT NULL,
+    cantidad integer NOT NULL,
+    costo_total integer NOT NULL,
+    fecha_estimada date NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    proyecto_id integer NOT NULL
+);
+
+
+ALTER TABLE public.cronogramaimport OWNER TO postgres;
+
+--
+-- TOC entry 192 (class 1259 OID 16644)
+-- Name: cronogramaimport_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE cronogramaimport_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.cronogramaimport_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2130 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: cronogramaimport_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE cronogramaimport_id_seq OWNED BY cronogramaimport.id;
+
+
+--
+-- TOC entry 169 (class 1259 OID 16387)
+-- Name: datosbasicos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE datosbasicos (
+    id integer NOT NULL,
+    id_empresa int8range NOT NULL,
+    num_declaracion character varying(10) NOT NULL,
+    fecha_islr date NOT NULL,
+    monto_islr double precision NOT NULL,
+    num_empleados integer NOT NULL,
+    numero_declaracionivss character varying(10) NOT NULL,
+    fecha_ivss date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.datosbasicos OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 16385)
+-- Name: datosbasicos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE datosbasicos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.datosbasicos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2131 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: datosbasicos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE datosbasicos_id_seq OWNED BY datosbasicos.id;
+
+
+--
+-- TOC entry 183 (class 1259 OID 16597)
+-- Name: entidadesfinancieras; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE entidadesfinancieras (
+    id integer NOT NULL,
+    financiamiento_id integer NOT NULL,
+    capitalfinanciado double precision NOT NULL,
+    banco_id integer NOT NULL,
+    tasainteres double precision NOT NULL,
+    anualidades double precision NOT NULL,
+    plazoprestamo date NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.entidadesfinancieras OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 16595)
+-- Name: entidadesfinancieras_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE entidadesfinancieras_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.entidadesfinancieras_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2132 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: entidadesfinancieras_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE entidadesfinancieras_id_seq OWNED BY entidadesfinancieras.id;
+
+
+--
+-- TOC entry 181 (class 1259 OID 16588)
+-- Name: financiamientos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE financiamientos (
+    id integer NOT NULL,
+    capitalpropio double precision NOT NULL,
+    proyecto_id integer NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    tipo_financiamiento_id integer NOT NULL
+);
+
+
+ALTER TABLE public.financiamientos OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 16586)
+-- Name: financiamientos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE financiamientos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.financiamientos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2133 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: financiamientos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE financiamientos_id_seq OWNED BY financiamientos.id;
+
+
+--
+-- TOC entry 189 (class 1259 OID 16628)
+-- Name: flujocajas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE flujocajas (
+    id integer NOT NULL,
+    inversion double precision NOT NULL,
+    prestamo double precision NOT NULL,
+    ingresos double precision NOT NULL,
+    costos double precision NOT NULL,
+    reinversion double precision NOT NULL,
+    valor_residual double precision NOT NULL,
+    pagos double precision NOT NULL,
+    depreciacion_negativo double precision NOT NULL,
+    utilidad_antesimp double precision NOT NULL,
+    utilidad_despuesimp double precision NOT NULL,
+    impuestos double precision NOT NULL,
+    depreciacion_positivo double precision NOT NULL,
+    flujo_operativo double precision NOT NULL,
+    flujo_proyectado double precision NOT NULL,
+    ingresos_rcb double precision NOT NULL,
+    costos_rcb double precision NOT NULL,
+    ingresos_rcbact double precision NOT NULL,
+    costos_rcbact double precision NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    proyecto_id integer NOT NULL
+);
+
+
+ALTER TABLE public.flujocajas OWNER TO postgres;
+
+--
+-- TOC entry 188 (class 1259 OID 16626)
+-- Name: flujocajas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE flujocajas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.flujocajas_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2134 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: flujocajas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE flujocajas_id_seq OWNED BY flujocajas.id;
+
+
+--
+-- TOC entry 173 (class 1259 OID 16552)
+-- Name: planinversion; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE planinversion (
+    id integer NOT NULL,
+    activo_id integer NOT NULL,
+    monto_total double precision NOT NULL,
+    fondospropios double precision NOT NULL,
+    financiamiento double precision NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    proyecto_id integer NOT NULL
+);
+
+
+ALTER TABLE public.planinversion OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 16550)
+-- Name: planinversion_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE planinversion_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.planinversion_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2135 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: planinversion_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE planinversion_id_seq OWNED BY planinversion.id;
+
+
+--
+-- TOC entry 175 (class 1259 OID 16561)
+-- Name: presupuestos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE presupuestos (
+    id integer NOT NULL,
+    codarancel_id integer NOT NULL,
+    detarancelario_id integer NOT NULL,
+    unidad_id integer NOT NULL,
+    num_declaracion character varying(10) NOT NULL,
+    fecha_cierre date NOT NULL,
+    montousd double precision NOT NULL,
+    num_empleados integer NOT NULL,
+    numero_declaracionivss character varying(10) NOT NULL,
+    fecha_ivss date NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL,
+    empresa_id integer NOT NULL
+);
+
+
+ALTER TABLE public.presupuestos OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 16559)
+-- Name: presupuestos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE presupuestos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.presupuestos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2136 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: presupuestos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE presupuestos_id_seq OWNED BY presupuestos.id;
+
+
+--
+-- TOC entry 185 (class 1259 OID 16606)
+-- Name: proyectos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE proyectos (
+    id integer NOT NULL,
+    objetivoproducto text NOT NULL,
+    nombreproyecto text NOT NULL,
+    puntoreferencia text NOT NULL,
+    calleavenida text NOT NULL,
+    coordenadasutm text NOT NULL,
+    fecha_inicio date NOT NULL,
+    fecha_fin date NOT NULL,
+    empresa_id integer NOT NULL,
+    tipo_proyecto_id integer NOT NULL,
+    estado_id integer NOT NULL,
+    municipio_id integer NOT NULL,
+    ciudad character varying(30) NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.proyectos OWNER TO postgres;
+
+--
+-- TOC entry 184 (class 1259 OID 16604)
+-- Name: proyectos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE proyectos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.proyectos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2137 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: proyectos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE proyectos_id_seq OWNED BY proyectos.id;
+
+
+--
+-- TOC entry 179 (class 1259 OID 16579)
+-- Name: tipoactivos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipoactivos (
+    id integer NOT NULL,
+    nombre_tipo character varying(20) NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.tipoactivos OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 16577)
+-- Name: tipoactivos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tipoactivos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipoactivos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2138 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: tipoactivos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tipoactivos_id_seq OWNED BY tipoactivos.id;
+
+
+--
+-- TOC entry 187 (class 1259 OID 16619)
+-- Name: tipoproyectos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tipoproyectos (
+    id integer NOT NULL,
+    nombre_tipo character varying(20) NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.tipoproyectos OWNER TO postgres;
+
+--
+-- TOC entry 186 (class 1259 OID 16617)
+-- Name: tipoproyectos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tipoproyectos_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tipoproyectos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2139 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: tipoproyectos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tipoproyectos_id_seq OWNED BY tipoproyectos.id;
+
+
+--
+-- TOC entry 199 (class 1259 OID 16673)
+-- Name: tiposfinanciamiento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE tiposfinanciamiento (
+    id integer NOT NULL,
+    nombre_tipo character varying(20) NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.tiposfinanciamiento OWNER TO postgres;
+
+--
+-- TOC entry 198 (class 1259 OID 16671)
+-- Name: tiposfinanciamiento_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE tiposfinanciamiento_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tiposfinanciamiento_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2140 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: tiposfinanciamiento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE tiposfinanciamiento_id_seq OWNED BY tiposfinanciamiento.id;
+
+
+--
+-- TOC entry 191 (class 1259 OID 16637)
+-- Name: totalflujocajas; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE totalflujocajas (
+    id integer NOT NULL,
+    proyecto_id integer NOT NULL,
+    valor_neto double precision NOT NULL,
+    costo_beneficio double precision NOT NULL,
+    tasa_retorno double precision NOT NULL,
+    tasa_rendimineto double precision NOT NULL,
+    fecha_registro date NOT NULL,
+    estatus character varying(1) DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.totalflujocajas OWNER TO postgres;
+
+--
+-- TOC entry 190 (class 1259 OID 16635)
+-- Name: totalflujocajas_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE totalflujocajas_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.totalflujocajas_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 2141 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: totalflujocajas_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE totalflujocajas_id_seq OWNED BY totalflujocajas.id;
+
+
+--
+-- TOC entry 1913 (class 2604 OID 16573)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activos ALTER COLUMN id SET DEFAULT nextval('activos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1933 (class 2604 OID 16667)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY arancelesempresas ALTER COLUMN id SET DEFAULT nextval('arancelesempresas_id_seq'::regclass);
+
+
+--
+-- TOC entry 1907 (class 2604 OID 16546)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY bienes ALTER COLUMN id SET DEFAULT nextval('bienes_id_seq'::regclass);
+
+
+--
+-- TOC entry 1931 (class 2604 OID 16658)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cronogramaexport ALTER COLUMN id SET DEFAULT nextval('cronogramaexport_id_seq'::regclass);
+
+
+--
+-- TOC entry 1929 (class 2604 OID 16649)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cronogramaimport ALTER COLUMN id SET DEFAULT nextval('cronogramaimport_id_seq'::regclass);
+
+
+--
+-- TOC entry 1905 (class 2604 OID 16390)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY datosbasicos ALTER COLUMN id SET DEFAULT nextval('datosbasicos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1919 (class 2604 OID 16600)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY entidadesfinancieras ALTER COLUMN id SET DEFAULT nextval('entidadesfinancieras_id_seq'::regclass);
+
+
+--
+-- TOC entry 1917 (class 2604 OID 16591)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY financiamientos ALTER COLUMN id SET DEFAULT nextval('financiamientos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1925 (class 2604 OID 16631)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY flujocajas ALTER COLUMN id SET DEFAULT nextval('flujocajas_id_seq'::regclass);
+
+
+--
+-- TOC entry 1909 (class 2604 OID 16555)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY planinversion ALTER COLUMN id SET DEFAULT nextval('planinversion_id_seq'::regclass);
+
+
+--
+-- TOC entry 1911 (class 2604 OID 16564)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY presupuestos ALTER COLUMN id SET DEFAULT nextval('presupuestos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1921 (class 2604 OID 16609)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY proyectos ALTER COLUMN id SET DEFAULT nextval('proyectos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1915 (class 2604 OID 16582)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tipoactivos ALTER COLUMN id SET DEFAULT nextval('tipoactivos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1923 (class 2604 OID 16622)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tipoproyectos ALTER COLUMN id SET DEFAULT nextval('tipoproyectos_id_seq'::regclass);
+
+
+--
+-- TOC entry 1935 (class 2604 OID 16676)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY tiposfinanciamiento ALTER COLUMN id SET DEFAULT nextval('tiposfinanciamiento_id_seq'::regclass);
+
+
+--
+-- TOC entry 1927 (class 2604 OID 16640)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY totalflujocajas ALTER COLUMN id SET DEFAULT nextval('totalflujocajas_id_seq'::regclass);
+
+
+--
+-- TOC entry 2095 (class 0 OID 16570)
+-- Dependencies: 177
+-- Data for Name: activos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY activos (id, nom_activo, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2142 (class 0 OID 0)
+-- Dependencies: 176
+-- Name: activos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('activos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2115 (class 0 OID 16664)
+-- Dependencies: 197
+-- Data for Name: arancelesempresas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY arancelesempresas (id, descripcion, cod_arancelario, detalle_arancel, unidad, cantidad, monto_anual, pais_destino, fecha_registro, estatus, empresa_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2143 (class 0 OID 0)
+-- Dependencies: 196
+-- Name: arancelesempresas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('arancelesempresas_id_seq', 1, false);
+
+
+--
+-- TOC entry 2089 (class 0 OID 16543)
+-- Dependencies: 171
+-- Data for Name: bienes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY bienes (id, codarancel_id, unidad_id, cant_pro_actual, capac_max_anual_actual, proyecto_id, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2144 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: bienes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('bienes_id_seq', 1, false);
+
+
+--
+-- TOC entry 2113 (class 0 OID 16655)
+-- Dependencies: 195
+-- Data for Name: cronogramaexport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cronogramaexport (id, insumo, cod_arancelario, unidad, cantidad, costo_total, fecha_estimada, pais_destino, fecha_registro, estatus, proyecto_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2145 (class 0 OID 0)
+-- Dependencies: 194
+-- Name: cronogramaexport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cronogramaexport_id_seq', 1, false);
+
+
+--
+-- TOC entry 2111 (class 0 OID 16646)
+-- Dependencies: 193
+-- Data for Name: cronogramaimport; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY cronogramaimport (id, insumo, cod_arancelario, unidad, cantidad, costo_total, fecha_estimada, fecha_registro, estatus, proyecto_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2146 (class 0 OID 0)
+-- Dependencies: 192
+-- Name: cronogramaimport_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('cronogramaimport_id_seq', 1, false);
+
+
+--
+-- TOC entry 2087 (class 0 OID 16387)
+-- Dependencies: 169
+-- Data for Name: datosbasicos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY datosbasicos (id, id_empresa, num_declaracion, fecha_islr, monto_islr, num_empleados, numero_declaracionivss, fecha_ivss, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2147 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: datosbasicos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('datosbasicos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2101 (class 0 OID 16597)
+-- Dependencies: 183
+-- Data for Name: entidadesfinancieras; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY entidadesfinancieras (id, financiamiento_id, capitalfinanciado, banco_id, tasainteres, anualidades, plazoprestamo, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2148 (class 0 OID 0)
+-- Dependencies: 182
+-- Name: entidadesfinancieras_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('entidadesfinancieras_id_seq', 1, false);
+
+
+--
+-- TOC entry 2099 (class 0 OID 16588)
+-- Dependencies: 181
+-- Data for Name: financiamientos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY financiamientos (id, capitalpropio, proyecto_id, fecha_registro, estatus, tipo_financiamiento_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2149 (class 0 OID 0)
+-- Dependencies: 180
+-- Name: financiamientos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('financiamientos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2107 (class 0 OID 16628)
+-- Dependencies: 189
+-- Data for Name: flujocajas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY flujocajas (id, inversion, prestamo, ingresos, costos, reinversion, valor_residual, pagos, depreciacion_negativo, utilidad_antesimp, utilidad_despuesimp, impuestos, depreciacion_positivo, flujo_operativo, flujo_proyectado, ingresos_rcb, costos_rcb, ingresos_rcbact, costos_rcbact, fecha_registro, estatus, proyecto_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2150 (class 0 OID 0)
+-- Dependencies: 188
+-- Name: flujocajas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('flujocajas_id_seq', 1, false);
+
+
+--
+-- TOC entry 2091 (class 0 OID 16552)
+-- Dependencies: 173
+-- Data for Name: planinversion; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY planinversion (id, activo_id, monto_total, fondospropios, financiamiento, fecha_registro, estatus, proyecto_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2151 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: planinversion_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('planinversion_id_seq', 1, false);
+
+
+--
+-- TOC entry 2093 (class 0 OID 16561)
+-- Dependencies: 175
+-- Data for Name: presupuestos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY presupuestos (id, codarancel_id, detarancelario_id, unidad_id, num_declaracion, fecha_cierre, montousd, num_empleados, numero_declaracionivss, fecha_ivss, fecha_registro, estatus, empresa_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2152 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: presupuestos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('presupuestos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2103 (class 0 OID 16606)
+-- Dependencies: 185
+-- Data for Name: proyectos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY proyectos (id, objetivoproducto, nombreproyecto, puntoreferencia, calleavenida, coordenadasutm, fecha_inicio, fecha_fin, empresa_id, tipo_proyecto_id, estado_id, municipio_id, ciudad, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2153 (class 0 OID 0)
+-- Dependencies: 184
+-- Name: proyectos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('proyectos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2097 (class 0 OID 16579)
+-- Dependencies: 179
+-- Data for Name: tipoactivos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tipoactivos (id, nombre_tipo, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2154 (class 0 OID 0)
+-- Dependencies: 178
+-- Name: tipoactivos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tipoactivos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2105 (class 0 OID 16619)
+-- Dependencies: 187
+-- Data for Name: tipoproyectos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tipoproyectos (id, nombre_tipo, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2155 (class 0 OID 0)
+-- Dependencies: 186
+-- Name: tipoproyectos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tipoproyectos_id_seq', 1, false);
+
+
+--
+-- TOC entry 2117 (class 0 OID 16673)
+-- Dependencies: 199
+-- Data for Name: tiposfinanciamiento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY tiposfinanciamiento (id, nombre_tipo, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2156 (class 0 OID 0)
+-- Dependencies: 198
+-- Name: tiposfinanciamiento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('tiposfinanciamiento_id_seq', 1, false);
+
+
+--
+-- TOC entry 2109 (class 0 OID 16637)
+-- Dependencies: 191
+-- Data for Name: totalflujocajas; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY totalflujocajas (id, proyecto_id, valor_neto, costo_beneficio, tasa_retorno, tasa_rendimineto, fecha_registro, estatus) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2157 (class 0 OID 0)
+-- Dependencies: 190
+-- Name: totalflujocajas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('totalflujocajas_id_seq', 1, false);
+
+
+--
+-- TOC entry 1940 (class 2606 OID 16549)
+-- Name: bienes_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY bienes
+    ADD CONSTRAINT bienes_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1946 (class 2606 OID 16576)
+-- Name: id_activos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY activos
+    ADD CONSTRAINT id_activos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1966 (class 2606 OID 16670)
+-- Name: id_arancelesempresa; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY arancelesempresas
+    ADD CONSTRAINT id_arancelesempresa PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1938 (class 2606 OID 16396)
+-- Name: id_datosbasicos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY datosbasicos
+    ADD CONSTRAINT id_datosbasicos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1952 (class 2606 OID 16603)
+-- Name: id_entidadesfinancieras; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY entidadesfinancieras
+    ADD CONSTRAINT id_entidadesfinancieras PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1964 (class 2606 OID 16661)
+-- Name: id_exportaciones; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cronogramaexport
+    ADD CONSTRAINT id_exportaciones PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1950 (class 2606 OID 16594)
+-- Name: id_financiamientos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY financiamientos
+    ADD CONSTRAINT id_financiamientos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1958 (class 2606 OID 16634)
+-- Name: id_flujocajas; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY flujocajas
+    ADD CONSTRAINT id_flujocajas PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1962 (class 2606 OID 16652)
+-- Name: id_importaciones; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY cronogramaimport
+    ADD CONSTRAINT id_importaciones PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1944 (class 2606 OID 16567)
+-- Name: id_presupuestos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY presupuestos
+    ADD CONSTRAINT id_presupuestos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1948 (class 2606 OID 16585)
+-- Name: id_tipoactivos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipoactivos
+    ADD CONSTRAINT id_tipoactivos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1968 (class 2606 OID 16679)
+-- Name: id_tipofinanciamiento; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tiposfinanciamiento
+    ADD CONSTRAINT id_tipofinanciamiento PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1956 (class 2606 OID 16625)
+-- Name: id_tipoproyectos; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY tipoproyectos
+    ADD CONSTRAINT id_tipoproyectos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1960 (class 2606 OID 16643)
+-- Name: id_totalflujocajas; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY totalflujocajas
+    ADD CONSTRAINT id_totalflujocajas PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1942 (class 2606 OID 16558)
+-- Name: planinversion_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY planinversion
+    ADD CONSTRAINT planinversion_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1954 (class 2606 OID 16615)
+-- Name: proyectos_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY proyectos
+    ADD CONSTRAINT proyectos_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1971 (class 2606 OID 16722)
+-- Name: activos_plan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY planinversion
+    ADD CONSTRAINT activos_plan FOREIGN KEY (activo_id) REFERENCES activos(id);
+
+
+--
+-- TOC entry 1974 (class 2606 OID 16697)
+-- Name: financiamiento_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY entidadesfinancieras
+    ADD CONSTRAINT financiamiento_fk FOREIGN KEY (financiamiento_id) REFERENCES financiamientos(id);
+
+
+--
+-- TOC entry 1973 (class 2606 OID 16707)
+-- Name: financiamiento_tipo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY financiamientos
+    ADD CONSTRAINT financiamiento_tipo FOREIGN KEY (tipo_financiamiento_id) REFERENCES tiposfinanciamiento(id);
+
+
+--
+-- TOC entry 1972 (class 2606 OID 16702)
+-- Name: poyecto_financiamiento; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY financiamientos
+    ADD CONSTRAINT poyecto_financiamiento FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1969 (class 2606 OID 16682)
+-- Name: proyecto_bienes; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY bienes
+    ADD CONSTRAINT proyecto_bienes FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1979 (class 2606 OID 16687)
+-- Name: proyecto_export; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cronogramaexport
+    ADD CONSTRAINT proyecto_export FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1976 (class 2606 OID 16712)
+-- Name: proyecto_flujo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY flujocajas
+    ADD CONSTRAINT proyecto_flujo FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1977 (class 2606 OID 16732)
+-- Name: proyecto_flujototal; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY totalflujocajas
+    ADD CONSTRAINT proyecto_flujototal FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1978 (class 2606 OID 16692)
+-- Name: proyecto_import; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY cronogramaimport
+    ADD CONSTRAINT proyecto_import FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1970 (class 2606 OID 16717)
+-- Name: proyecto_plan; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY planinversion
+    ADD CONSTRAINT proyecto_plan FOREIGN KEY (proyecto_id) REFERENCES proyectos(id);
+
+
+--
+-- TOC entry 1975 (class 2606 OID 16727)
+-- Name: tipo_proyecto_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY proyectos
+    ADD CONSTRAINT tipo_proyecto_fk FOREIGN KEY (tipo_proyecto_id) REFERENCES tipoproyectos(id);
+
+
+--
+-- TOC entry 2124 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2014-09-22 10:07:27 VET
+
+--
+-- PostgreSQL database dump complete
+--
+
