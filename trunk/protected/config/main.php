@@ -88,7 +88,7 @@ return array(
 		),*/
         'db'=>array(
            'class'=> 'CDbConnection',
-           'connectionString' => 'pgsql:host=localhost;port=5432;dbname=Prueba',
+           'connectionString' => 'pgsql:host=localhost;port=5432;dbname=prueba',
            //'emulatePrepare' => true,
            'username' => 'divisa',
            'password' => 'divisa',

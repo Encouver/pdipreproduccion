@@ -121,4 +121,31 @@ class Cronogramaimport extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function behaviors() {
+	    return array(
+	        'import' => array(
+	            'class' => 'ext.csvimport.behaviors.ImportBehavior',
+	            //name of model
+	            'model'=>'Cronogramaimport',
+	            //name of the controller
+	            'controller'=>'Cronogramaimport',
+	            'fields'=>array(
+	                'title'=>array('displayName'=>'Title', 'sample'=>'Oranges'),
+	                'itemName'=>array('displayName'=>'Item Name', 'sample'=>'Oranges'),
+	                'price'=>array('displayName'=>'Price', 'sample'=>'4 for $1'),
+	                'description'=>array('displayName'=>'Description', 'sample'=>'really good oranges'),
+	            ),
+	            //url that the user is returned to after successful import
+	            'returnUrl'=> '/deals/index',
+	            //the "title" field of the model
+	            'titleField'=> 'title',
+	            //do you want the user to see the data in form view
+	            'showImportForm'=> false,
+	            //only used if "showImportForm" is set to true
+	            //the view that must exist in the model's view folder
+	            'importView'=>'show_import_stores_ext'
+	        ),
+	    );
+	}
 }
