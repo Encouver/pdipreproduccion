@@ -27,7 +27,7 @@ class CronogramaimportController extends Controller
 	{
 		return array(
 		array('allow',  // allow all users to perform 'index' and 'view' actions
-		'actions'=>array('index','view'),
+		'actions'=>array('index','view', 'subircsv'),
 		'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -100,6 +100,11 @@ class CronogramaimportController extends Controller
 		$this->render('update',array(
 		'model'=>$model,
 		));
+	}
+
+	public function actionSubircsv()
+	{
+		$this->render('subircsv');
 	}
 
 	/**
