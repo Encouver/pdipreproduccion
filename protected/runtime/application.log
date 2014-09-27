@@ -6975,3 +6975,6 @@ in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreprod
 2014/09/27 12:26:24 [warning] [application] Error al establecer unsafe al atributo "archivo" de "Archivoscsv".
 in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\ArchivoscsvController.php (89)
 in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php (13)
+2014/09/27 16:47:05 [warning] [application] Error al establecer unsafe al atributo "archivo" de "Archivoscsv".
+in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\ArchivoscsvController.php (89)
+in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php (13)
