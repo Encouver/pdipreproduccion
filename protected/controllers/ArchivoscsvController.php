@@ -31,7 +31,7 @@ public function accessRules()
 		'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-		'actions'=>array('importcsv','update','exportcsv',),
+		'actions'=>array('import','update','export',),
 		'users'=>array('*'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -72,7 +72,7 @@ $this->render('view',array(
 * Creates a new model.
 * If creation is successful, the browser will be redirected to the 'view' page.
 */
-public function actionExportcsv()
+public function actionExport()
 {
 	$model=new Archivoscsv;
 	
@@ -97,22 +97,25 @@ public function actionExportcsv()
 
 			$fila = 1;
 			$caracteres_porLinea = 1000;
+			$patron = ";";
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
-			    while (($datos = fgetcsv($gestor, $caracteres_porLinea, ",")) !== FALSE) {
+			    while (($datos = fgetcsv($gestor, $caracteres_porLinea, $patron)) !== FALSE) {
 			        
 			        $numero = count($datos);
 			        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
 
 			        if($numero==7)
 			        {
-				    	$cronograma = new Cronogramaexport;
+				    	$cronograma = new ImportExport;
+
+				    	$cronograma->tipo = 'importacion';
 
 				    	if($datos[0])
 				    		$cronograma->insumo	= $datos[0];
 				    	if($datos[1])
 				    		$cronograma->cod_arancelario = $datos[1];
 				    	if($datos[2]){
-				    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2]))->cunidad);
+				    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2])))->cunidad;
 				    		if($cunidad)
 				    			$cronograma->unidad_id = $cunidad;
 				    		else
@@ -150,14 +153,95 @@ public function actionExportcsv()
 		}
 	}
 
-	$this->render('exportcsv',array(
+	$this->render('export',array(
 		'model'=>$model,'errores'=>$errores
 	));
 }
 
-public function actionImportcsv()
+public function actionImport()
 {
 
+$model=new Archivoscsv;
+	
+	$errores='';
+	// Uncomment the following line if AJAX validation is needed
+	// $this->performAjaxValidation($model);
+
+	if(isset($_POST['Archivoscsv']))
+	{
+		$nombre_tem = $this->NewGuid().'.csv';
+
+		$model->proyecto_id=3;
+		$model->tipo_csv=0;
+		$model->attributes=$_POST['Archivoscsv'];
+		$archivo=CUploadedFile::getInstance($model,'archivo');
+		$model->archivo = $nombre_tem;
+		if($model->save())
+		{
+			$archivo->saveAs('csv/'.$model->archivo);
+
+			$archivo = dirname(Yii::app()->request->scriptFile)."/csv/".$model->archivo;
+
+			$fila = 1;
+			$caracteres_porLinea = 1000;
+			if (($gestor = fopen($archivo, "r")) !== FALSE) {
+			    while (($datos = fgetcsv($gestor, $caracteres_porLinea, ",")) !== FALSE) {
+			        
+			        $numero = count($datos);
+			        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
+
+			        if($numero==7)
+			        {
+				    	$cronograma = new ImportExport;
+
+				    	$cronograma->tipo = 'importacion';
+
+				    	if($datos[0])
+				    		$cronograma->insumo	= $datos[0];
+				    	if($datos[1])
+				    		$cronograma->cod_arancelario = $datos[1];
+				    	if($datos[2]){
+				    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2])))->cunidad;
+				    		if($cunidad)
+				    			$cronograma->unidad_id = $cunidad;
+				    		else
+				    			$errores .= '<br> unidad: '.$cunidad.' no existe';
+				    	}
+				    	if($datos[3])
+				    		$cronograma->cantidad = $datos[3];
+				    	if($datos[4])
+				    		$cronograma->costo_total = $datos[4];
+				    	if($datos[5])
+				    		$cronograma->fecha_estimada	= $datos[5];
+						if($datos[6])
+				    		$cronograma->pais_destino	=1;// $datos[6];				    	
+
+				    	$cronograma->proyecto_id = 3;
+				    	$cronograma->fecha_registro = '2014-10-01';
+
+				    	if($cronograma->save())
+				    	{
+				    		echo 'Registro número: '.$fila.' guardado satisfactoriamente.';
+				    	}else{
+							$errores .= CHtml::errorSummary($cronograma);
+				    	}
+			        }else
+			        	$errores .= '<br>Falta una o varias columna/s en la linea: '.$fila;
+
+
+			        $fila++;
+
+			    }
+			    fclose($gestor);
+			}
+			if($errores=='')
+				$this->redirect(array('view','id'=>$model->id));
+		}
+	}
+
+	$this->render('import',array(
+		'model'=>$model,'errores'=>$errores
+	));
 }
 
 /**
