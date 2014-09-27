@@ -93,9 +93,10 @@ public function actionExportcsv()
 		{
 			$archivo->saveAs('csv/'.$model->archivo);
 
-			$archivo = Yii::app()->basePath."\..\csv\".$model->archivo;
+			$archivo = Yii::app()->basePath."\\csv\ ".$model->archivo;
 
 			$fila = 1;
+			$errores='';
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
 			    while (($datos = fgetcsv($gestor, 6, ",")) !== FALSE) {
 			        
@@ -111,7 +112,11 @@ public function actionExportcsv()
 				    	if($datos[1])
 				    		$cronograma->cod_arancelario = $datos[1];
 				    	if($datos[2]){
-				    		$cronograma->unidad_id = $datos[2];
+				    		$cunidad = GenUnidades::model()->find('dunidad=:unidad',array(':unidad'=>$datos[2]))->cunidad;
+				    		if($cunidad)
+				    			$cronograma->unidad_id = $cunidad;
+				    		else
+				    			//$errores .= '<br> unidad: '.$cunidad.' no existe';
 				    	}
 				    	if($datos[3])
 				    		$cronograma->cantidad = $datos[3];
@@ -119,7 +124,14 @@ public function actionExportcsv()
 				    		$cronograma->costo_total = $datos[4];
 				    	if($datos[5])
 				    		$cronograma->fecha_estimada	= $datos[5];
-			        }
+
+				    	if($cronograma->save())
+				    	{
+				    		//echo 'Registro número: '.$fila.' guardado satisfactoriamente.'
+				    	}
+			        }else
+			        	//$errores .= '<br>\n Falta una coplumna en la linea: '.$fila;
+
 
 			        $fila++;
 			        /*for ($c=0; $c < $numero; $c++) {
