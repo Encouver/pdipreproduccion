@@ -75,6 +75,7 @@ $this->render('view',array(
 public function actionCreate()
 {
 	$model=new Archivoscsv;
+	
 
 	// Uncomment the following line if AJAX validation is needed
 	// $this->performAjaxValidation($model);
@@ -91,6 +92,42 @@ public function actionCreate()
 		if($model->save())
 		{
 			$archivo->saveAs('csv/'.$model->archivo);
+
+			$archivo = Yii::app()->basePath."/csv/".$model->archivo;
+
+			$fila = 1;
+			if (($gestor = fopen($archivo, "r")) !== FALSE) {
+			    while (($datos = fgetcsv($gestor, 6, ",")) !== FALSE) {
+			        
+			        $numero = count($datos);
+			        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
+
+			        if($numero==6)
+			        {
+				    	$cronograma = new Cronogramaimport;
+
+				    	if($datos[0])
+				    		$cronograma->insumo	= $datos[0];
+				    	if($datos[1])
+				    		$cronograma->cod_arancelario = $datos[1];
+				    	if($datos[2])
+				    		$cronograma->unidad_id = $datos[2];
+				    	if($datos[3])
+				    		$cronograma->cantidad = $datos[3];
+				    	if($datos[4])
+				    		$cronograma->costo_total = $datos[4];
+				    	if($datos[5])
+				    		$cronograma->fecha_estimada	= $datos[5];
+			        }
+
+			        $fila++;
+			        /*for ($c=0; $c < $numero; $c++) {
+			            echo $datos[$c] . "<br />\n";
+			        }*/
+			    }
+			    fclose($gestor);
+			}
+
 			$this->redirect(array('view','id'=>$model->id));
 		}
 	}
