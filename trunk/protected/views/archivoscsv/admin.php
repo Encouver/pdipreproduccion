@@ -6,7 +6,7 @@ $this->breadcrumbs=array(
 
 $this->menu=array(
 array('label'=>'List Archivoscsv','url'=>array('index')),
-array('label'=>'Create Archivoscsv','url'=>array('create')),
+array('label'=>'Create Archivoscsv','url'=>array('importcsv')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

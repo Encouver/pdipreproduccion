@@ -4,7 +4,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-array('label'=>'Create Archivoscsv','url'=>array('create')),
+array('label'=>'Create Archivoscsv','url'=>array('importcsv')),
 array('label'=>'Manage Archivoscsv','url'=>array('admin')),
 );
 ?>
