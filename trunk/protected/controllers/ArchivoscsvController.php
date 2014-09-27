@@ -60,7 +60,7 @@ private function NewGuid() {
                 return $guidText;
 	}
 
-	
+
 public function actionView($id)
 {
 $this->render('view',array(
@@ -81,13 +81,16 @@ public function actionCreate()
 
 	if(isset($_POST['Archivoscsv']))
 	{
+		$nombre_tem = $this->NewGuid().'.csv';
+
 		$model->proyecto_id=3;
 		$model->tipo_csv=1;
 		$model->attributes=$_POST['Archivoscsv'];
-		$model->archivo=CUploadedFile::getInstance($model,'archivo');
+		$archivo=CUploadedFile::getInstance($model,'archivo');
+		$model->archivo = $nombre_tem;
 		if($model->save())
 		{
-			$model->archivo->saveAs('csv/'.$model->archivo);
+			$archivo->saveAs('csv/'.$model->archivo);
 			$this->redirect(array('view','id'=>$model->id));
 		}
 	}
