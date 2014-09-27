@@ -72,7 +72,7 @@ $this->render('view',array(
 * Creates a new model.
 * If creation is successful, the browser will be redirected to the 'view' page.
 */
-public function actionImportcsv()
+public function actionExportcsv()
 {
 	$model=new Archivoscsv;
 	
@@ -93,7 +93,7 @@ public function actionImportcsv()
 		{
 			$archivo->saveAs('csv/'.$model->archivo);
 
-			$archivo = Yii::app()->basePath."/csv/".$model->archivo;
+			$archivo = Yii::app()->basePath."\..\csv\".$model->archivo;
 
 			$fila = 1;
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
@@ -104,14 +104,15 @@ public function actionImportcsv()
 
 			        if($numero==6)
 			        {
-				    	$cronograma = new Cronogramaimport;
+				    	$cronograma = new Cronogramaexport;
 
 				    	if($datos[0])
 				    		$cronograma->insumo	= $datos[0];
 				    	if($datos[1])
 				    		$cronograma->cod_arancelario = $datos[1];
-				    	if($datos[2])
+				    	if($datos[2]){
 				    		$cronograma->unidad_id = $datos[2];
+				    	}
 				    	if($datos[3])
 				    		$cronograma->cantidad = $datos[3];
 				    	if($datos[4])
@@ -137,7 +138,7 @@ public function actionImportcsv()
 	));
 }
 
-public function actionExportcsv()
+public function actionImportcsv()
 {
 
 }
