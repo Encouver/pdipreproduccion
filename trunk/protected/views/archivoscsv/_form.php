@@ -10,7 +10,7 @@
 
 	<?php //echo $form->textFieldGroup($model,'proyecto_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->FileFieldGroup($model,'archivo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>255)))); ?>
+	<?php echo $form->FileFieldGroup($model,'archivo',array('widgetOptions'=>array('htmlOptions'=>array('accept'=>'.csv','class'=>'span5','maxlength'=>255)))); ?>
 
 	<?php //echo $form->textFieldGroup($model,'tipo_csv',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
