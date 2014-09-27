@@ -31,7 +31,7 @@ public function accessRules()
 		'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-		'actions'=>array('importcsv','update'),
+		'actions'=>array('importcsv','update','exportcsv',),
 		'users'=>array('*'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -76,7 +76,7 @@ public function actionExportcsv()
 {
 	$model=new Archivoscsv;
 	
-
+	$errores='';
 	// Uncomment the following line if AJAX validation is needed
 	// $this->performAjaxValidation($model);
 
@@ -85,7 +85,7 @@ public function actionExportcsv()
 		$nombre_tem = $this->NewGuid().'.csv';
 
 		$model->proyecto_id=3;
-		$model->tipo_csv=1;
+		$model->tipo_csv=0;
 		$model->attributes=$_POST['Archivoscsv'];
 		$archivo=CUploadedFile::getInstance($model,'archivo');
 		$model->archivo = $nombre_tem;
@@ -93,17 +93,17 @@ public function actionExportcsv()
 		{
 			$archivo->saveAs('csv/'.$model->archivo);
 
-			$archivo = Yii::app()->basePath."\\csv\ ".$model->archivo;
+			$archivo = dirname(Yii::app()->request->scriptFile)."/csv/".$model->archivo;
 
 			$fila = 1;
-			$errores='';
+			$caracteres_porLinea = 1000;
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
-			    while (($datos = fgetcsv($gestor, 6, ",")) !== FALSE) {
+			    while (($datos = fgetcsv($gestor, $caracteres_porLinea, ",")) !== FALSE) {
 			        
 			        $numero = count($datos);
 			        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
 
-			        if($numero==6)
+			        if($numero==7)
 			        {
 				    	$cronograma = new Cronogramaexport;
 
@@ -116,7 +116,7 @@ public function actionExportcsv()
 				    		if($cunidad)
 				    			$cronograma->unidad_id = $cunidad;
 				    		else
-				    			//$errores .= '<br> unidad: '.$cunidad.' no existe';
+				    			$errores .= '<br> unidad: '.$cunidad.' no existe';
 				    	}
 				    	if($datos[3])
 				    		$cronograma->cantidad = $datos[3];
@@ -124,29 +124,34 @@ public function actionExportcsv()
 				    		$cronograma->costo_total = $datos[4];
 				    	if($datos[5])
 				    		$cronograma->fecha_estimada	= $datos[5];
+						if($datos[6])
+				    		$cronograma->pais_destino	=1;// $datos[6];				    	
+
+				    	$cronograma->proyecto_id = 3;
+				    	$cronograma->fecha_registro = '2014-10-01';
 
 				    	if($cronograma->save())
 				    	{
-				    		//echo 'Registro número: '.$fila.' guardado satisfactoriamente.'
+				    		echo 'Registro número: '.$fila.' guardado satisfactoriamente.';
+				    	}else{
+							$errores .= CHtml::errorSummary($cronograma);
 				    	}
 			        }else
-			        	//$errores .= '<br>\n Falta una coplumna en la linea: '.$fila;
+			        	$errores .= '<br>\n Falta una columna en la linea: '.$fila;
 
 
 			        $fila++;
-			        /*for ($c=0; $c < $numero; $c++) {
-			            echo $datos[$c] . "<br />\n";
-			        }*/
+
 			    }
 			    fclose($gestor);
 			}
-
-			$this->redirect(array('view','id'=>$model->id));
+			if($errores=='')
+				$this->redirect(array('view','id'=>$model->id));
 		}
 	}
 
-	$this->render('importcsv',array(
-		'model'=>$model,
+	$this->render('exportcsv',array(
+		'model'=>$model,'errores'=>$errores
 	));
 }
 
