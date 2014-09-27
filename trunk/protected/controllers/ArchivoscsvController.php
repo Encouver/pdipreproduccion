@@ -112,7 +112,7 @@ public function actionExportcsv()
 				    	if($datos[1])
 				    		$cronograma->cod_arancelario = $datos[1];
 				    	if($datos[2]){
-				    		$cunidad = GenUnidades::model()->find('dunidad=:unidad',array(':unidad'=>$datos[2]))->cunidad;
+				    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2]))->cunidad);
 				    		if($cunidad)
 				    			$cronograma->unidad_id = $cunidad;
 				    		else
@@ -137,7 +137,7 @@ public function actionExportcsv()
 							$errores .= CHtml::errorSummary($cronograma);
 				    	}
 			        }else
-			        	$errores .= '<br>\n Falta una columna en la linea: '.$fila;
+			        	$errores .= '<br>Falta una o varias columna/s en la linea: '.$fila;
 
 
 			        $fila++;
