@@ -13,7 +13,7 @@
 <?php echo $form->error($model,'artistaid'); ?>
 	<?php echo $form->dropDownList($totalFlujosCajas, 'anos', 
              array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10),
-             array('empty' => '(eleccione año'));
+             array('empty' => '(Seleccione año'));
        ?>
 	<?php echo $form->dropDownList($totalFlujosCajas,'periodo_id',CHtml::listData(Periodos::model()->findAll(),'id','nombre'),array('empty' =>'Seleccione'),array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
