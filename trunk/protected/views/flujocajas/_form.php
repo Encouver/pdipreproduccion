@@ -21,11 +21,11 @@
 	<?php echo $form->error($totalFlujosCajas,'periodo_id'); ?>
 
 
-	<?php echo CHtml::ajaxButton('Cargar','flujoscaja/create',array (
+	<?php echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujoscaja/create'),array(
 													        'type'=>'POST',
 													        'dataType'=>'json',
 													        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
-													        ), ); ?>
+													        ) ); ?>
 
 	<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
