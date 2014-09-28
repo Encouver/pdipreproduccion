@@ -18,7 +18,14 @@
 
     <?php echo $form->labelEx($totalFlujosCajas,'periodo_id'); ?>
 	<?php echo $form->dropDownList($totalFlujosCajas,'periodo_id',CHtml::listData(Periodos::model()->findAll(),'id','nombre'),array('empty' =>'Seleccione'),array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-	 <?php echo $form->error($totalFlujosCajas,'periodo_id'); ?>
+	<?php echo $form->error($totalFlujosCajas,'periodo_id'); ?>
+
+
+	<?php echo CHtml::ajaxButton('Cargar','flujoscaja/create',array (
+													        'type'=>'POST',
+													        'dataType'=>'json',
+													        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
+													        ), ); ?>
 
 	<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
