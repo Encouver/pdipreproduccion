@@ -38,7 +38,7 @@ class Cronogramas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cod_arancelario, unidad_id, cantidad, pais_destino, proyecto_id', 'numerical', 'integerOnly'=>true),
+			array('cod_arancelario, unidad_id, cantidad, proyecto_id', 'numerical', 'integerOnly'=>true),
 			array('costo_total', 'numerical'),
 			array('insumo', 'length', 'max'=>30),
 			array('valido', 'length', 'max'=>1),
@@ -74,7 +74,6 @@ class Cronogramas extends CActiveRecord
 			'cantidad' => 'Cantidad',
 			'costo_total' => 'Costo Total',
 			'fecha_estimada' => 'Fecha Estimada',
-			'pais_destino' => 'Pais Destino',
 			'fecha_registro' => 'Fecha Registro',
 			'valido' => 'Valido',
 			'proyecto_id' => 'Proyecto',
@@ -107,7 +106,6 @@ class Cronogramas extends CActiveRecord
 		$criteria->compare('cantidad',$this->cantidad);
 		$criteria->compare('costo_total',$this->costo_total);
 		$criteria->compare('fecha_estimada',$this->fecha_estimada,true);
-		$criteria->compare('pais_destino',$this->pais_destino);
 		$criteria->compare('fecha_registro',$this->fecha_registro,true);
 		$criteria->compare('valido',$this->valido,true);
 		$criteria->compare('proyecto_id',$this->proyecto_id);
