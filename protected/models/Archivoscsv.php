@@ -32,8 +32,8 @@ class Archivoscsv extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('proyecto_id, archivo, tipo_csv', 'required'),
-			array('proyecto_id, tipo_csv', 'numerical', 'integerOnly'=>true),
-			array('archivo', 'length', 'max'=>255),
+			array('proyecto_id', 'numerical', 'integerOnly'=>true),
+			array('archivo, tipo_csv', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, proyecto_id, archivo, tipo_csv, fecha', 'safe', 'on'=>'search'),
@@ -87,7 +87,7 @@ class Archivoscsv extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('proyecto_id',$this->proyecto_id);
 		$criteria->compare('archivo',$this->archivo,true);
-		$criteria->compare('tipo_csv',$this->tipo_csv);
+		$criteria->compare('tipo_csv',$this->tipo_csv, true);
 		$criteria->compare('fecha',$this->fecha,true);
 
 		return new CActiveDataProvider($this, array(

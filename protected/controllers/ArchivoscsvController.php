@@ -87,12 +87,14 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 		$nombre_tem = $this->NewGuid().'.csv';
 
 		$model->proyecto_id=3;
-		$model->tipo_csv=0;
+		$model->tipo_csv=$tipoCronograma;
 		if($tipoCronograma == 'importacion')
-			$model->tipo_csv=1;
+			$model->tipo_csv=$tipoCronograma;
 		$model->attributes=$_POST['Archivoscsv'];
 		$archivo=CUploadedFile::getInstance($model,'archivo');
 		$model->archivo = $nombre_tem;
+
+		Archivoscsv::model()->deleteAll('proyecto_id=:proyecto_id and tipo_csv=:tipo',array(':proyecto_id'=>$model->proyecto_id, ':tipo'=>$tipoCronograma));
 		if($model->save())
 		{
 			$archivo->saveAs('csv/'.$tipoCronograma.'/'.$model->archivo);
@@ -103,15 +105,11 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 			$caracteres_porLinea = 1000;
 			$patron = ";";
 
-			$tieneArchivo = Archivoscsv::model()->find('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
+			
+			Cronogramas::model()->deleteAll('proyecto_id=:proyecto_id and tipo=:tipo',array(':proyecto_id'=>$model->proyecto_id, ':tipo'=>$tipoCronograma));
+			ExportacionesPaises::model()->deleteAll('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
 
-			if($tieneArchivo)
-			{
-				Cronogramas::model()->deleteAll('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
-				$tieneArchivo->delete();
-				ExportacionesPaises::model()->deleteAll('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
-
-			}
+			
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
 				/*$transaction=Yii::app()->db->beginTransaction();
 				try
@@ -156,6 +154,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 						    	if($cronograma->save())
 						    	{
 							    	if($datos[6]){
+
 										$delimitador_pais = "|";
 										$paises = explode($delimitador_pais, $datos[6]);
 										//print_r($paises);
@@ -168,7 +167,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 													$modelPaises->cpais = $GenPais->cpais;
 													$modelPaises->cronograma_id = $cronograma->id;
 													$modelPaises->proyecto_id = $model->proyecto_id;
-													
+
 													if($modelPaises->save()){
 														//echo satisfactorio
 														//$transaction->commit();
