@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.2
 -- Dumped by pg_dump version 9.3.2
--- Started on 2014-09-28 07:33:06
+-- Started on 2014-09-28 09:48:03
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -42,7 +42,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2376 (class 0 OID 0)
+-- TOC entry 2375 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -59,7 +59,7 @@ CREATE EXTENSION IF NOT EXISTS dblink WITH SCHEMA public;
 
 
 --
--- TOC entry 2377 (class 0 OID 0)
+-- TOC entry 2376 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: EXTENSION dblink; Type: COMMENT; Schema: -; Owner: 
 --
@@ -124,7 +124,7 @@ CREATE TABLE activos (
 ALTER TABLE pdi.activos OWNER TO postgres;
 
 --
--- TOC entry 2378 (class 0 OID 0)
+-- TOC entry 2377 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN activos.id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -133,7 +133,7 @@ COMMENT ON COLUMN activos.id IS 'numero secuencial para identificar el activo';
 
 
 --
--- TOC entry 2379 (class 0 OID 0)
+-- TOC entry 2378 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN activos.descripcion; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -142,7 +142,7 @@ COMMENT ON COLUMN activos.descripcion IS 'descripción del activo';
 
 
 --
--- TOC entry 2380 (class 0 OID 0)
+-- TOC entry 2379 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN activos.fecha_registro; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -151,7 +151,7 @@ COMMENT ON COLUMN activos.fecha_registro IS 'fecha de registro del activo';
 
 
 --
--- TOC entry 2381 (class 0 OID 0)
+-- TOC entry 2380 (class 0 OID 0)
 -- Dependencies: 174
 -- Name: COLUMN activos.valido; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -175,7 +175,7 @@ CREATE SEQUENCE activos_id_seq
 ALTER TABLE pdi.activos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2382 (class 0 OID 0)
+-- TOC entry 2381 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: activos_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -204,7 +204,7 @@ CREATE TABLE arancelesempresas (
 ALTER TABLE pdi.arancelesempresas OWNER TO postgres;
 
 --
--- TOC entry 2383 (class 0 OID 0)
+-- TOC entry 2382 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN arancelesempresas.id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -213,7 +213,7 @@ COMMENT ON COLUMN arancelesempresas.id IS 'numero secuencial de para identificar
 
 
 --
--- TOC entry 2384 (class 0 OID 0)
+-- TOC entry 2383 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN arancelesempresas.descripcion; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -222,7 +222,7 @@ COMMENT ON COLUMN arancelesempresas.descripcion IS 'descripción del arancel';
 
 
 --
--- TOC entry 2385 (class 0 OID 0)
+-- TOC entry 2384 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN arancelesempresas.unidad_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -231,7 +231,7 @@ COMMENT ON COLUMN arancelesempresas.unidad_id IS 'campo foráneo que viene de la
 
 
 --
--- TOC entry 2386 (class 0 OID 0)
+-- TOC entry 2385 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN arancelesempresas.fecha_registro; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -240,7 +240,7 @@ COMMENT ON COLUMN arancelesempresas.fecha_registro IS 'fecha de registro del ara
 
 
 --
--- TOC entry 2387 (class 0 OID 0)
+-- TOC entry 2386 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN arancelesempresas.valido; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -249,7 +249,7 @@ COMMENT ON COLUMN arancelesempresas.valido IS 'campo para identificar si el regi
 
 
 --
--- TOC entry 2388 (class 0 OID 0)
+-- TOC entry 2387 (class 0 OID 0)
 -- Dependencies: 176
 -- Name: COLUMN arancelesempresas.empresa_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -273,7 +273,7 @@ CREATE SEQUENCE arancelesempresas_id_seq
 ALTER TABLE pdi.arancelesempresas_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2389 (class 0 OID 0)
+-- TOC entry 2388 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: arancelesempresas_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -349,7 +349,7 @@ CREATE SEQUENCE archivoscsv_id_seq
 ALTER TABLE pdi.archivoscsv_id_seq OWNER TO divisa;
 
 --
--- TOC entry 2390 (class 0 OID 0)
+-- TOC entry 2389 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: archivoscsv_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: divisa
 --
@@ -377,7 +377,7 @@ CREATE TABLE bienes (
 ALTER TABLE pdi.bienes OWNER TO postgres;
 
 --
--- TOC entry 2391 (class 0 OID 0)
+-- TOC entry 2390 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN bienes.id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -386,7 +386,7 @@ COMMENT ON COLUMN bienes.id IS 'número secuencial de identificación de los bie
 
 
 --
--- TOC entry 2392 (class 0 OID 0)
+-- TOC entry 2391 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN bienes.unidad_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -395,7 +395,7 @@ COMMENT ON COLUMN bienes.unidad_id IS 'campo foráneo que viene de la tabla gen_
 
 
 --
--- TOC entry 2393 (class 0 OID 0)
+-- TOC entry 2392 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN bienes.proyecto_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -404,7 +404,7 @@ COMMENT ON COLUMN bienes.proyecto_id IS 'campo foráneo que viene de la tabla pr
 
 
 --
--- TOC entry 2394 (class 0 OID 0)
+-- TOC entry 2393 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN bienes.fecha_registro; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -413,7 +413,7 @@ COMMENT ON COLUMN bienes.fecha_registro IS 'fecha de registro del arancel';
 
 
 --
--- TOC entry 2395 (class 0 OID 0)
+-- TOC entry 2394 (class 0 OID 0)
 -- Dependencies: 180
 -- Name: COLUMN bienes.valido; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -437,7 +437,7 @@ CREATE SEQUENCE bienes_id_seq
 ALTER TABLE pdi.bienes_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2396 (class 0 OID 0)
+-- TOC entry 2395 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: bienes_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -484,7 +484,7 @@ CREATE SEQUENCE cronograma_id_seq
 ALTER TABLE pdi.cronograma_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2397 (class 0 OID 0)
+-- TOC entry 2396 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: cronograma_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -514,7 +514,7 @@ CREATE TABLE datosbasicos (
 ALTER TABLE pdi.datosbasicos OWNER TO postgres;
 
 --
--- TOC entry 2398 (class 0 OID 0)
+-- TOC entry 2397 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN datosbasicos.id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -523,7 +523,7 @@ COMMENT ON COLUMN datosbasicos.id IS 'número secuencial que identifica el conju
 
 
 --
--- TOC entry 2399 (class 0 OID 0)
+-- TOC entry 2398 (class 0 OID 0)
 -- Dependencies: 182
 -- Name: COLUMN datosbasicos.valido; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -547,7 +547,7 @@ CREATE SEQUENCE datosbasicos_id_seq
 ALTER TABLE pdi.datosbasicos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2400 (class 0 OID 0)
+-- TOC entry 2399 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: datosbasicos_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -576,7 +576,7 @@ CREATE TABLE entidadesfinancieras (
 ALTER TABLE pdi.entidadesfinancieras OWNER TO postgres;
 
 --
--- TOC entry 2401 (class 0 OID 0)
+-- TOC entry 2400 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN entidadesfinancieras.id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -585,7 +585,7 @@ COMMENT ON COLUMN entidadesfinancieras.id IS 'número secuencial que identifica 
 
 
 --
--- TOC entry 2402 (class 0 OID 0)
+-- TOC entry 2401 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN entidadesfinancieras.financiamiento_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -594,7 +594,7 @@ COMMENT ON COLUMN entidadesfinancieras.financiamiento_id IS 'campo foráneo que 
 
 
 --
--- TOC entry 2403 (class 0 OID 0)
+-- TOC entry 2402 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN entidadesfinancieras.fecha_registro; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -603,7 +603,7 @@ COMMENT ON COLUMN entidadesfinancieras.fecha_registro IS 'fecha de registro del 
 
 
 --
--- TOC entry 2404 (class 0 OID 0)
+-- TOC entry 2403 (class 0 OID 0)
 -- Dependencies: 184
 -- Name: COLUMN entidadesfinancieras.valido; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -627,7 +627,7 @@ CREATE SEQUENCE entidadesfinancieras_id_seq
 ALTER TABLE pdi.entidadesfinancieras_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2405 (class 0 OID 0)
+-- TOC entry 2404 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: entidadesfinancieras_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -671,7 +671,8 @@ ALTER TABLE pdi.estatus OWNER TO postgres;
 CREATE TABLE exportaciones_paises (
     id integer NOT NULL,
     cpais character varying(6),
-    cronograma_id integer
+    cronograma_id integer,
+    proyecto_id integer NOT NULL
 );
 
 
@@ -693,7 +694,7 @@ CREATE SEQUENCE exportaciones_paises_id_seq
 ALTER TABLE pdi.exportaciones_paises_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2406 (class 0 OID 0)
+-- TOC entry 2405 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: exportaciones_paises_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -719,7 +720,7 @@ CREATE TABLE financiamientos (
 ALTER TABLE pdi.financiamientos OWNER TO postgres;
 
 --
--- TOC entry 2407 (class 0 OID 0)
+-- TOC entry 2406 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: COLUMN financiamientos.id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -728,7 +729,7 @@ COMMENT ON COLUMN financiamientos.id IS 'número secuencial para identificar el 
 
 
 --
--- TOC entry 2408 (class 0 OID 0)
+-- TOC entry 2407 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: COLUMN financiamientos.proyecto_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -737,7 +738,7 @@ COMMENT ON COLUMN financiamientos.proyecto_id IS 'campo foránero que viene de l
 
 
 --
--- TOC entry 2409 (class 0 OID 0)
+-- TOC entry 2408 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: COLUMN financiamientos.fecha_registro; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -746,7 +747,7 @@ COMMENT ON COLUMN financiamientos.fecha_registro IS 'fecha de registro del aranc
 
 
 --
--- TOC entry 2410 (class 0 OID 0)
+-- TOC entry 2409 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: COLUMN financiamientos.valido; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -755,7 +756,7 @@ COMMENT ON COLUMN financiamientos.valido IS 'campo para identificar si el regist
 
 
 --
--- TOC entry 2411 (class 0 OID 0)
+-- TOC entry 2410 (class 0 OID 0)
 -- Dependencies: 190
 -- Name: COLUMN financiamientos.tipo_financiamiento_id; Type: COMMENT; Schema: pdi; Owner: postgres
 --
@@ -779,7 +780,7 @@ CREATE SEQUENCE financiamientos_id_seq
 ALTER TABLE pdi.financiamientos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2412 (class 0 OID 0)
+-- TOC entry 2411 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: financiamientos_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -836,7 +837,7 @@ CREATE SEQUENCE flujocajas_id_seq
 ALTER TABLE pdi.flujocajas_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2413 (class 0 OID 0)
+-- TOC entry 2412 (class 0 OID 0)
 -- Dependencies: 193
 -- Name: flujocajas_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -907,7 +908,7 @@ CREATE SEQUENCE planinversion_id_seq
 ALTER TABLE pdi.planinversion_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2414 (class 0 OID 0)
+-- TOC entry 2413 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: planinversion_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -951,7 +952,7 @@ CREATE SEQUENCE presupuestos_id_seq
 ALTER TABLE pdi.presupuestos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2415 (class 0 OID 0)
+-- TOC entry 2414 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: presupuestos_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -1003,7 +1004,7 @@ CREATE SEQUENCE proyectos_id_seq
 ALTER TABLE pdi.proyectos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2416 (class 0 OID 0)
+-- TOC entry 2415 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: proyectos_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -1042,7 +1043,7 @@ CREATE SEQUENCE tipoproyectos_id_seq
 ALTER TABLE pdi.tipoproyectos_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2417 (class 0 OID 0)
+-- TOC entry 2416 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: tipoproyectos_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -1081,7 +1082,7 @@ CREATE SEQUENCE tiposfinanciamiento_id_seq
 ALTER TABLE pdi.tiposfinanciamiento_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2418 (class 0 OID 0)
+-- TOC entry 2417 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: tiposfinanciamiento_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -1124,7 +1125,7 @@ CREATE SEQUENCE totalflujocajas_id_seq
 ALTER TABLE pdi.totalflujocajas_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2419 (class 0 OID 0)
+-- TOC entry 2418 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: totalflujocajas_id_seq; Type: SEQUENCE OWNED BY; Schema: pdi; Owner: postgres
 --
@@ -1507,7 +1508,7 @@ ALTER TABLE ONLY totalflujocajas ALTER COLUMN id SET DEFAULT nextval('totalflujo
 
 
 --
--- TOC entry 2316 (class 0 OID 157341)
+-- TOC entry 2315 (class 0 OID 157341)
 -- Dependencies: 174
 -- Data for Name: activos; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1517,7 +1518,7 @@ COPY activos (id, descripcion, fecha_registro, valido) FROM stdin;
 
 
 --
--- TOC entry 2420 (class 0 OID 0)
+-- TOC entry 2419 (class 0 OID 0)
 -- Dependencies: 175
 -- Name: activos_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1526,7 +1527,7 @@ SELECT pg_catalog.setval('activos_id_seq', 1, false);
 
 
 --
--- TOC entry 2318 (class 0 OID 157348)
+-- TOC entry 2317 (class 0 OID 157348)
 -- Dependencies: 176
 -- Data for Name: arancelesempresas; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1536,7 +1537,7 @@ COPY arancelesempresas (id, descripcion, cod_arancelario, unidad_id, cantidad, m
 
 
 --
--- TOC entry 2421 (class 0 OID 0)
+-- TOC entry 2420 (class 0 OID 0)
 -- Dependencies: 177
 -- Name: arancelesempresas_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1545,7 +1546,7 @@ SELECT pg_catalog.setval('arancelesempresas_id_seq', 1, false);
 
 
 --
--- TOC entry 2320 (class 0 OID 157355)
+-- TOC entry 2319 (class 0 OID 157355)
 -- Dependencies: 178
 -- Data for Name: archivo_estatus; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1555,7 +1556,7 @@ COPY archivo_estatus (archivo_id, estatus_id, valido, fecha_registro) FROM stdin
 
 
 --
--- TOC entry 2321 (class 0 OID 157359)
+-- TOC entry 2320 (class 0 OID 157359)
 -- Dependencies: 179
 -- Data for Name: archivo_presupuestos_tmp; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1565,7 +1566,7 @@ COPY archivo_presupuestos_tmp (codarancel_id, unidad_id, fecha_cierre, montousd,
 
 
 --
--- TOC entry 2365 (class 0 OID 157728)
+-- TOC entry 2364 (class 0 OID 157728)
 -- Dependencies: 223
 -- Data for Name: archivoscsv; Type: TABLE DATA; Schema: pdi; Owner: divisa
 --
@@ -1575,20 +1576,30 @@ COPY archivoscsv (id, proyecto_id, archivo, tipo_csv, fecha) FROM stdin;
 2	3	389C36F5E56E55693FC0D5D407C4ED64.csv	0	2014-09-27
 3	3	B345A190105FBD4DB15AF3764B1CF003.csv	0	2014-09-27
 6	3	2F2674D8D1648B598CC7A6CC73217C98.csv	0	2014-09-27
+7	3	EAC45FABC0FB7906E90DC28568C75470.csv	0	2014-09-28
+8	3	D8F788F9C63583E26A0920A7FC0BC92D.csv	0	2014-09-28
+9	3	3C7DD98D08B05EEEA2D94A43CD1D9654.csv	0	2014-09-28
+10	3	20FA361A5BF2A82E5F646FA5A1A20621.csv	0	2014-09-28
+11	3	FDFEED2533448C746446F31A3D930DC8.csv	0	2014-09-28
+12	3	08E0949D4DE1B8D52D286F8E18A38F29.csv	0	2014-09-28
+13	3	32E18C396720C3E53F39DCD59DC67903.csv	0	2014-09-28
+14	3	19132A9B1C527FA2FAAE2BBE5F14D3E3.csv	0	2014-09-28
+15	3	2EFDA1FE703BC920061AF530D0903F61.csv	0	2014-09-28
+16	3	C5936E6D57CBE76EBE4F4EFDC86E7A0F.csv	0	2014-09-28
 \.
 
 
 --
--- TOC entry 2422 (class 0 OID 0)
+-- TOC entry 2421 (class 0 OID 0)
 -- Dependencies: 224
 -- Name: archivoscsv_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: divisa
 --
 
-SELECT pg_catalog.setval('archivoscsv_id_seq', 6, true);
+SELECT pg_catalog.setval('archivoscsv_id_seq', 16, true);
 
 
 --
--- TOC entry 2322 (class 0 OID 157363)
+-- TOC entry 2321 (class 0 OID 157363)
 -- Dependencies: 180
 -- Data for Name: bienes; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1598,7 +1609,7 @@ COPY bienes (id, codarancel_id, unidad_id, cant_pro_actual, capac_max_anual_actu
 
 
 --
--- TOC entry 2423 (class 0 OID 0)
+-- TOC entry 2422 (class 0 OID 0)
 -- Dependencies: 181
 -- Name: bienes_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1607,26 +1618,27 @@ SELECT pg_catalog.setval('bienes_id_seq', 1, false);
 
 
 --
--- TOC entry 2424 (class 0 OID 0)
+-- TOC entry 2423 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: cronograma_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('cronograma_id_seq', 1, false);
+SELECT pg_catalog.setval('cronograma_id_seq', 100004, true);
 
 
 --
--- TOC entry 2336 (class 0 OID 157409)
+-- TOC entry 2335 (class 0 OID 157409)
 -- Dependencies: 194
 -- Data for Name: cronogramas; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
 
 COPY cronogramas (insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, pais_destino, fecha_registro, valido, proyecto_id, tipo, id) FROM stdin;
+Fortuner 2016	2	10	45	546654	1989-09-09	\N	2014-09-28	\N	3	exportacion	100004
 \.
 
 
 --
--- TOC entry 2324 (class 0 OID 157370)
+-- TOC entry 2323 (class 0 OID 157370)
 -- Dependencies: 182
 -- Data for Name: datosbasicos; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1636,7 +1648,7 @@ COPY datosbasicos (id, num_declaracion, fecha_islr, monto_islr, num_empleados, n
 
 
 --
--- TOC entry 2425 (class 0 OID 0)
+-- TOC entry 2424 (class 0 OID 0)
 -- Dependencies: 183
 -- Name: datosbasicos_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1645,7 +1657,7 @@ SELECT pg_catalog.setval('datosbasicos_id_seq', 19, true);
 
 
 --
--- TOC entry 2326 (class 0 OID 157377)
+-- TOC entry 2325 (class 0 OID 157377)
 -- Dependencies: 184
 -- Data for Name: entidadesfinancieras; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1655,7 +1667,7 @@ COPY entidadesfinancieras (id, financiamiento_id, capitalfinanciado, banco_id, t
 
 
 --
--- TOC entry 2426 (class 0 OID 0)
+-- TOC entry 2425 (class 0 OID 0)
 -- Dependencies: 185
 -- Name: entidadesfinancieras_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1664,7 +1676,7 @@ SELECT pg_catalog.setval('entidadesfinancieras_id_seq', 1, false);
 
 
 --
--- TOC entry 2328 (class 0 OID 157384)
+-- TOC entry 2327 (class 0 OID 157384)
 -- Dependencies: 186
 -- Data for Name: estado; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1674,7 +1686,7 @@ COPY estado (id, destado) FROM stdin;
 
 
 --
--- TOC entry 2329 (class 0 OID 157387)
+-- TOC entry 2328 (class 0 OID 157387)
 -- Dependencies: 187
 -- Data for Name: estatus; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1684,26 +1696,26 @@ COPY estatus (id, descripcion, fecha_registro, valido) FROM stdin;
 
 
 --
--- TOC entry 2330 (class 0 OID 157390)
+-- TOC entry 2329 (class 0 OID 157390)
 -- Dependencies: 188
 -- Data for Name: exportaciones_paises; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
 
-COPY exportaciones_paises (id, cpais, cronograma_id) FROM stdin;
+COPY exportaciones_paises (id, cpais, cronograma_id, proyecto_id) FROM stdin;
 \.
 
 
 --
--- TOC entry 2427 (class 0 OID 0)
+-- TOC entry 2426 (class 0 OID 0)
 -- Dependencies: 189
 -- Name: exportaciones_paises_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('exportaciones_paises_id_seq', 1, false);
+SELECT pg_catalog.setval('exportaciones_paises_id_seq', 2, true);
 
 
 --
--- TOC entry 2332 (class 0 OID 157395)
+-- TOC entry 2331 (class 0 OID 157395)
 -- Dependencies: 190
 -- Data for Name: financiamientos; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1713,7 +1725,7 @@ COPY financiamientos (id, capitalpropio, proyecto_id, fecha_registro, valido, ti
 
 
 --
--- TOC entry 2428 (class 0 OID 0)
+-- TOC entry 2427 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: financiamientos_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1722,7 +1734,7 @@ SELECT pg_catalog.setval('financiamientos_id_seq', 1, false);
 
 
 --
--- TOC entry 2334 (class 0 OID 157402)
+-- TOC entry 2333 (class 0 OID 157402)
 -- Dependencies: 192
 -- Data for Name: flujocajas; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1732,7 +1744,7 @@ COPY flujocajas (id, inversion, prestamo, ingresos, costos, reinversion, valor_r
 
 
 --
--- TOC entry 2429 (class 0 OID 0)
+-- TOC entry 2428 (class 0 OID 0)
 -- Dependencies: 193
 -- Name: flujocajas_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1741,7 +1753,7 @@ SELECT pg_catalog.setval('flujocajas_id_seq', 1, false);
 
 
 --
--- TOC entry 2337 (class 0 OID 157412)
+-- TOC entry 2336 (class 0 OID 157412)
 -- Dependencies: 195
 -- Data for Name: municipio; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1751,7 +1763,7 @@ COPY municipio (id, descripcion, estado_id) FROM stdin;
 
 
 --
--- TOC entry 2338 (class 0 OID 157415)
+-- TOC entry 2337 (class 0 OID 157415)
 -- Dependencies: 196
 -- Data for Name: parroquia; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1761,7 +1773,7 @@ COPY parroquia (id, descripcion, municipio_id) FROM stdin;
 
 
 --
--- TOC entry 2339 (class 0 OID 157418)
+-- TOC entry 2338 (class 0 OID 157418)
 -- Dependencies: 197
 -- Data for Name: planinversion; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1771,7 +1783,7 @@ COPY planinversion (id, activo_id, monto_total, fondospropios, financiamiento, f
 
 
 --
--- TOC entry 2430 (class 0 OID 0)
+-- TOC entry 2429 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: planinversion_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1780,7 +1792,7 @@ SELECT pg_catalog.setval('planinversion_id_seq', 1, false);
 
 
 --
--- TOC entry 2341 (class 0 OID 157425)
+-- TOC entry 2340 (class 0 OID 157425)
 -- Dependencies: 199
 -- Data for Name: presupuestos; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1790,7 +1802,7 @@ COPY presupuestos (id, codarancel_id, unidad_id, fecha_cierre, cantidad, montous
 
 
 --
--- TOC entry 2431 (class 0 OID 0)
+-- TOC entry 2430 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: presupuestos_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1799,7 +1811,7 @@ SELECT pg_catalog.setval('presupuestos_id_seq', 1, false);
 
 
 --
--- TOC entry 2343 (class 0 OID 157432)
+-- TOC entry 2342 (class 0 OID 157432)
 -- Dependencies: 201
 -- Data for Name: proyectos; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1810,7 +1822,7 @@ COPY proyectos (id, objetivoproducto, nom_proyecto, puntoreferencia, calleavenid
 
 
 --
--- TOC entry 2432 (class 0 OID 0)
+-- TOC entry 2431 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: proyectos_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1819,7 +1831,7 @@ SELECT pg_catalog.setval('proyectos_id_seq', 1, false);
 
 
 --
--- TOC entry 2345 (class 0 OID 157442)
+-- TOC entry 2344 (class 0 OID 157442)
 -- Dependencies: 203
 -- Data for Name: tipoproyectos; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1830,7 +1842,7 @@ COPY tipoproyectos (id, descripcion, fecha_registro, estatus) FROM stdin;
 
 
 --
--- TOC entry 2433 (class 0 OID 0)
+-- TOC entry 2432 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: tipoproyectos_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1839,7 +1851,7 @@ SELECT pg_catalog.setval('tipoproyectos_id_seq', 1, false);
 
 
 --
--- TOC entry 2347 (class 0 OID 157449)
+-- TOC entry 2346 (class 0 OID 157449)
 -- Dependencies: 205
 -- Data for Name: tiposfinanciamiento; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1849,7 +1861,7 @@ COPY tiposfinanciamiento (id, descripcion, fecha_registro, estatus) FROM stdin;
 
 
 --
--- TOC entry 2434 (class 0 OID 0)
+-- TOC entry 2433 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: tiposfinanciamiento_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1858,7 +1870,7 @@ SELECT pg_catalog.setval('tiposfinanciamiento_id_seq', 1, false);
 
 
 --
--- TOC entry 2349 (class 0 OID 157456)
+-- TOC entry 2348 (class 0 OID 157456)
 -- Dependencies: 207
 -- Data for Name: totalflujocajas; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
@@ -1868,7 +1880,7 @@ COPY totalflujocajas (id, proyecto_id, valor_neto, costo_beneficio, tasa_retorno
 
 
 --
--- TOC entry 2435 (class 0 OID 0)
+-- TOC entry 2434 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: totalflujocajas_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
@@ -1879,7 +1891,7 @@ SELECT pg_catalog.setval('totalflujocajas_id_seq', 1, false);
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2351 (class 0 OID 157463)
+-- TOC entry 2350 (class 0 OID 157463)
 -- Dependencies: 209
 -- Data for Name: det_bienes; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1889,7 +1901,7 @@ COPY det_bienes (id, carancelario, nunidadmedida, cant_pro_actual, capac_max_anu
 
 
 --
--- TOC entry 2352 (class 0 OID 157466)
+-- TOC entry 2351 (class 0 OID 157466)
 -- Dependencies: 210
 -- Data for Name: det_plan_inversion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1899,7 +1911,7 @@ COPY det_plan_inversion (id, activo_id, mtotal, mfondospropios, nfinanciamiento,
 
 
 --
--- TOC entry 2353 (class 0 OID 157469)
+-- TOC entry 2352 (class 0 OID 157469)
 -- Dependencies: 211
 -- Data for Name: det_presupuesto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1909,7 +1921,7 @@ COPY det_presupuesto (id, codarancelsol, carancelario, cunidadmedida, montousd, 
 
 
 --
--- TOC entry 2354 (class 0 OID 157472)
+-- TOC entry 2353 (class 0 OID 157472)
 -- Dependencies: 212
 -- Data for Name: estatus; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1919,7 +1931,7 @@ COPY estatus (id, descripcion, fecha_registro, valido) FROM stdin;
 
 
 --
--- TOC entry 2355 (class 0 OID 157475)
+-- TOC entry 2354 (class 0 OID 157475)
 -- Dependencies: 213
 -- Data for Name: gen_activos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1929,7 +1941,7 @@ COPY gen_activos (id, dactivo, fregistro, bestatus) FROM stdin;
 
 
 --
--- TOC entry 2356 (class 0 OID 157478)
+-- TOC entry 2355 (class 0 OID 157478)
 -- Dependencies: 214
 -- Data for Name: gen_estado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1939,7 +1951,7 @@ COPY gen_estado (id, destado) FROM stdin;
 
 
 --
--- TOC entry 2357 (class 0 OID 157481)
+-- TOC entry 2356 (class 0 OID 157481)
 -- Dependencies: 215
 -- Data for Name: gen_financiamiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1949,7 +1961,7 @@ COPY gen_financiamiento (id, mcapitalpropio, mcapitalfinanciado, nbanco, ctasain
 
 
 --
--- TOC entry 2358 (class 0 OID 157484)
+-- TOC entry 2357 (class 0 OID 157484)
 -- Dependencies: 216
 -- Data for Name: gen_municipio; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1959,7 +1971,7 @@ COPY gen_municipio (id, dmunicipio, estado_id) FROM stdin;
 
 
 --
--- TOC entry 2359 (class 0 OID 157487)
+-- TOC entry 2358 (class 0 OID 157487)
 -- Dependencies: 217
 -- Data for Name: gen_pais; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2169,7 +2181,7 @@ COPY gen_pais (cpais, dpais, sesion_id, ddocumento_identificacion, cdivisa_acept
 
 
 --
--- TOC entry 2360 (class 0 OID 157494)
+-- TOC entry 2359 (class 0 OID 157494)
 -- Dependencies: 218
 -- Data for Name: gen_parroquia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2179,7 +2191,7 @@ COPY gen_parroquia (id, dparroquia, municipio_id) FROM stdin;
 
 
 --
--- TOC entry 2361 (class 0 OID 157497)
+-- TOC entry 2360 (class 0 OID 157497)
 -- Dependencies: 219
 -- Data for Name: gen_proyecto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2189,7 +2201,7 @@ COPY gen_proyecto (id, dobjetivoproducto, dnombreproyecto, dpuntoreferencia, dca
 
 
 --
--- TOC entry 2362 (class 0 OID 157503)
+-- TOC entry 2361 (class 0 OID 157503)
 -- Dependencies: 220
 -- Data for Name: gen_tipo_financiamiento; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2199,7 +2211,7 @@ COPY gen_tipo_financiamiento (id, dtipofinaciamiento) FROM stdin;
 
 
 --
--- TOC entry 2363 (class 0 OID 157506)
+-- TOC entry 2362 (class 0 OID 157506)
 -- Dependencies: 221
 -- Data for Name: gen_tipo_proyecto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2209,7 +2221,7 @@ COPY gen_tipo_proyecto (id, dtipoproyecto, fregistro, bestatus) FROM stdin;
 
 
 --
--- TOC entry 2364 (class 0 OID 157509)
+-- TOC entry 2363 (class 0 OID 157509)
 -- Dependencies: 222
 -- Data for Name: gen_unidades; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -2653,7 +2665,7 @@ CREATE INDEX fki_proyectos_archivos ON archivoscsv USING btree (proyecto_id);
 
 
 --
--- TOC entry 2195 (class 2606 OID 157607)
+-- TOC entry 2194 (class 2606 OID 157607)
 -- Name: activos_plan; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2698,7 +2710,7 @@ ALTER TABLE ONLY entidadesfinancieras
 
 
 --
--- TOC entry 2190 (class 2606 OID 157632)
+-- TOC entry 2189 (class 2606 OID 157632)
 -- Name: financiamiento_tipo; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2707,7 +2719,7 @@ ALTER TABLE ONLY financiamientos
 
 
 --
--- TOC entry 2208 (class 2606 OID 157738)
+-- TOC entry 2207 (class 2606 OID 157738)
 -- Name: fk_proyectos_archivos; Type: FK CONSTRAINT; Schema: pdi; Owner: divisa
 --
 
@@ -2716,7 +2728,7 @@ ALTER TABLE ONLY archivoscsv
 
 
 --
--- TOC entry 2193 (class 2606 OID 157642)
+-- TOC entry 2192 (class 2606 OID 157642)
 -- Name: municipio_estado_fk; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2725,7 +2737,7 @@ ALTER TABLE ONLY municipio
 
 
 --
--- TOC entry 2194 (class 2606 OID 157647)
+-- TOC entry 2193 (class 2606 OID 157647)
 -- Name: parroquia_municipio_fk; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2734,16 +2746,7 @@ ALTER TABLE ONLY parroquia
 
 
 --
--- TOC entry 2189 (class 2606 OID 157761)
--- Name: pki_exportaciones_cronograma; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
---
-
-ALTER TABLE ONLY exportaciones_paises
-    ADD CONSTRAINT pki_exportaciones_cronograma FOREIGN KEY (cronograma_id) REFERENCES cronogramas(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- TOC entry 2191 (class 2606 OID 157652)
+-- TOC entry 2190 (class 2606 OID 157652)
 -- Name: poyecto_financiamiento; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2761,7 +2764,7 @@ ALTER TABLE ONLY bienes
 
 
 --
--- TOC entry 2192 (class 2606 OID 157662)
+-- TOC entry 2191 (class 2606 OID 157662)
 -- Name: proyecto_flujo; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2770,7 +2773,7 @@ ALTER TABLE ONLY flujocajas
 
 
 --
--- TOC entry 2198 (class 2606 OID 157667)
+-- TOC entry 2197 (class 2606 OID 157667)
 -- Name: proyecto_flujototal; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2779,7 +2782,7 @@ ALTER TABLE ONLY totalflujocajas
 
 
 --
--- TOC entry 2196 (class 2606 OID 157672)
+-- TOC entry 2195 (class 2606 OID 157672)
 -- Name: proyecto_plan; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2788,7 +2791,7 @@ ALTER TABLE ONLY planinversion
 
 
 --
--- TOC entry 2197 (class 2606 OID 157677)
+-- TOC entry 2196 (class 2606 OID 157677)
 -- Name: tipo_proyecto_fk; Type: FK CONSTRAINT; Schema: pdi; Owner: postgres
 --
 
@@ -2799,7 +2802,7 @@ ALTER TABLE ONLY proyectos
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 2199 (class 2606 OID 157682)
+-- TOC entry 2198 (class 2606 OID 157682)
 -- Name: det_bienes_gen_proyecto_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2808,7 +2811,7 @@ ALTER TABLE ONLY det_bienes
 
 
 --
--- TOC entry 2200 (class 2606 OID 157687)
+-- TOC entry 2199 (class 2606 OID 157687)
 -- Name: det_plan_inversion_gen_activos_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2817,7 +2820,7 @@ ALTER TABLE ONLY det_plan_inversion
 
 
 --
--- TOC entry 2201 (class 2606 OID 157692)
+-- TOC entry 2200 (class 2606 OID 157692)
 -- Name: det_presupuesto_estado_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2826,7 +2829,7 @@ ALTER TABLE ONLY det_presupuesto
 
 
 --
--- TOC entry 2202 (class 2606 OID 157697)
+-- TOC entry 2201 (class 2606 OID 157697)
 -- Name: det_presupuesto_municipio_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2835,7 +2838,7 @@ ALTER TABLE ONLY det_presupuesto
 
 
 --
--- TOC entry 2203 (class 2606 OID 157702)
+-- TOC entry 2202 (class 2606 OID 157702)
 -- Name: det_presupuesto_parroquia_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2844,7 +2847,7 @@ ALTER TABLE ONLY det_presupuesto
 
 
 --
--- TOC entry 2204 (class 2606 OID 157707)
+-- TOC entry 2203 (class 2606 OID 157707)
 -- Name: gen_financiamiento_get_tipo_financiamiento_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2853,7 +2856,7 @@ ALTER TABLE ONLY gen_financiamiento
 
 
 --
--- TOC entry 2207 (class 2606 OID 157712)
+-- TOC entry 2206 (class 2606 OID 157712)
 -- Name: gen_proyecto_gen_tipo_proyecto_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2862,7 +2865,7 @@ ALTER TABLE ONLY gen_proyecto
 
 
 --
--- TOC entry 2205 (class 2606 OID 157717)
+-- TOC entry 2204 (class 2606 OID 157717)
 -- Name: municipio_estado_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2871,7 +2874,7 @@ ALTER TABLE ONLY gen_municipio
 
 
 --
--- TOC entry 2206 (class 2606 OID 157722)
+-- TOC entry 2205 (class 2606 OID 157722)
 -- Name: parroquia_municipio_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2880,7 +2883,7 @@ ALTER TABLE ONLY gen_parroquia
 
 
 --
--- TOC entry 2373 (class 0 OID 0)
+-- TOC entry 2372 (class 0 OID 0)
 -- Dependencies: 7
 -- Name: odbclink; Type: ACL; Schema: -; Owner: postgres
 --
@@ -2892,7 +2895,7 @@ GRANT USAGE ON SCHEMA odbclink TO PUBLIC;
 
 
 --
--- TOC entry 2375 (class 0 OID 0)
+-- TOC entry 2374 (class 0 OID 0)
 -- Dependencies: 8
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -2903,7 +2906,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-09-28 07:33:07
+-- Completed on 2014-09-28 09:48:03
 
 --
 -- PostgreSQL database dump complete
