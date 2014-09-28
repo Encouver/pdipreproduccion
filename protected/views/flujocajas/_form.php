@@ -22,13 +22,16 @@
 		<?php echo $form->error($totalFlujoCajas,'periodo_id'); ?>
 
 
-		<?php echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujocajas/create'),array(
+		<?php  /*echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujocajas/create'),array(
 														        'type'=>'POST',
 														        'dataType'=>'json',
 														        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
-														        ) ); ?>
+														        ) ); */
+				echo CHtml::button('Cargar', array('submit' => array('flujocajas/create')));			
+																	        ?><div id="your_id"></div>
 	<?php 
 	}else{ ?>
+		Años: <?php echo $totalFlujoCajas->anos; ?> Periodo: <?php echo Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->nombre; ?>
 
 		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
