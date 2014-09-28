@@ -12,4 +12,4 @@ array('label'=>'Manage Flujocajas','url'=>array('admin')),
 
 <h1>Create Flujocajas</h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas)); ?>
