@@ -86,9 +86,9 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 		$model->archivo = $nombre_tem;
 		if($model->save())
 		{
-			$archivo->saveAs('csv/.'.$tipoCronograma.'/'.$model->archivo);
+			$archivo->saveAs('csv/'.$tipoCronograma.'/'.$model->archivo);
 
-			$archivo = dirname(Yii::app()->request->scriptFile)."/csv/".$model->archivo;
+			$archivo = dirname(Yii::app()->request->scriptFile).'/csv/'.$tipoCronograma.'/'.$model->archivo;
 
 			$fila = 1;
 			$caracteres_porLinea = 1000;
@@ -205,7 +205,7 @@ public function actionExport()
 {
 	$model=new Archivoscsv;
 
-	$this->Cronograma($model,'expotracion');
+	$this->Cronograma($model,'exportacion');
 }
 
 public function actionImport()
