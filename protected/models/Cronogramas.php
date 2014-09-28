@@ -1,32 +1,33 @@
 <?php
 
 /**
- * This is the model class for table "pdi.cronograma".
+ * This is the model class for table "pdi.cronogramas".
  *
- * The followings are the available columns in table 'pdi.cronograma':
- * @property integer $id
+ * The followings are the available columns in table 'pdi.cronogramas':
  * @property string $insumo
  * @property integer $cod_arancelario
  * @property integer $unidad_id
- * @property double $cantidad
- * @property integer $costo_total
+ * @property integer $cantidad
+ * @property double $costo_total
  * @property string $fecha_estimada
+ * @property integer $pais_destino
  * @property string $fecha_registro
  * @property string $valido
  * @property integer $proyecto_id
  * @property string $tipo
+ * @property integer $id
  *
  * The followings are the available model relations:
  * @property ExportacionesPaises[] $exportacionesPaises
  */
-class Cronograma extends CActiveRecord
+class Cronogramas extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'pdi.cronograma';
+		return 'pdi.cronogramas';
 	}
 
 	/**
@@ -37,16 +38,15 @@ class Cronograma extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id', 'required'),
-			array('id, cod_arancelario, unidad_id, costo_total, proyecto_id', 'numerical', 'integerOnly'=>true),
-			array('cantidad', 'numerical'),
+			array('cod_arancelario, unidad_id, cantidad, pais_destino, proyecto_id', 'numerical', 'integerOnly'=>true),
+			array('costo_total', 'numerical'),
 			array('insumo', 'length', 'max'=>30),
 			array('valido', 'length', 'max'=>1),
 			array('tipo', 'length', 'max'=>100),
 			array('fecha_estimada, fecha_registro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, fecha_registro, valido, proyecto_id, tipo', 'safe', 'on'=>'search'),
+			array('insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, pais_destino, fecha_registro, valido, proyecto_id, tipo, id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,17 +68,18 @@ class Cronograma extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id' => 'ID',
 			'insumo' => 'Insumo',
 			'cod_arancelario' => 'Cod Arancelario',
 			'unidad_id' => 'Unidad',
 			'cantidad' => 'Cantidad',
 			'costo_total' => 'Costo Total',
 			'fecha_estimada' => 'Fecha Estimada',
+			'pais_destino' => 'Pais Destino',
 			'fecha_registro' => 'Fecha Registro',
 			'valido' => 'Valido',
 			'proyecto_id' => 'Proyecto',
 			'tipo' => 'Tipo',
+			'id' => 'ID',
 		);
 	}
 
@@ -100,17 +101,18 @@ class Cronograma extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
 		$criteria->compare('insumo',$this->insumo,true);
 		$criteria->compare('cod_arancelario',$this->cod_arancelario);
 		$criteria->compare('unidad_id',$this->unidad_id);
 		$criteria->compare('cantidad',$this->cantidad);
 		$criteria->compare('costo_total',$this->costo_total);
 		$criteria->compare('fecha_estimada',$this->fecha_estimada,true);
+		$criteria->compare('pais_destino',$this->pais_destino);
 		$criteria->compare('fecha_registro',$this->fecha_registro,true);
 		$criteria->compare('valido',$this->valido,true);
 		$criteria->compare('proyecto_id',$this->proyecto_id);
 		$criteria->compare('tipo',$this->tipo,true);
+		$criteria->compare('id',$this->id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -121,7 +123,7 @@ class Cronograma extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Cronograma the static model class
+	 * @return Cronogramas the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

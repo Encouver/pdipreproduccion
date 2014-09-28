@@ -88,6 +88,8 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 		$model->proyecto_id=3;
 		$model->tipo_csv=0;
+		if($tipoCronograma == 'importacion')
+			$model->tipo_csv=1;
 		$model->attributes=$_POST['Archivoscsv'];
 		$archivo=CUploadedFile::getInstance($model,'archivo');
 		$model->archivo = $nombre_tem;
@@ -108,33 +110,35 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 				        
 				        $numero = count($datos);
 				        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
-				        if($fila==0)
+				        if(!$fila==0)
 				        {
-				        	$fila++;
+				        	//$fila++;
 
 					        if($numero==$nc)
 					        {
-						    	$cronograma = new Cronograma;
+						    	$cronograma = new Cronogramas;
 
 						    	$cronograma->tipo = $tipoCronograma;
 
 						    	if($datos[0])
 						    		$cronograma->insumo	= $datos[0];
 						    	if($datos[1])
-						    		$cronograma->cod_arancelario = $datos[1]; //Que este en la otra tabla
+						    		$cronograma->cod_arancelario = intval($datos[1]); //Que este en la otra tabla
 						    	if($datos[2]){
-						    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2])))->cunidad;
-						    		if($cunidad)
-						    			$cronograma->unidad_id = $cunidad;
+
+						    		$GenUnidades = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2])));
+
+						    		if($GenUnidades)
+						    			$cronograma->unidad_id = $GenUnidades->cunidad;
 						    		else
-						    			$errores .= '<br> unidad: '.$cunidad.' no existe';
+						    			$errores .= '<br> unidad: '.$datos[2].' no existe';
 						    	}
 						    	if($datos[3])
-						    		$cronograma->cantidad = $datos[3];
+						    		$cronograma->cantidad = floatval($datos[3]);
 						    	if($datos[4])
-						    		$cronograma->costo_total = $datos[4];
+						    		$cronograma->costo_total = floatval($datos[4]);
 						    	if($datos[5])
-						    		$cronograma->fecha_estimada	= $datos[5];
+						    		$cronograma->fecha_estimada	= date("Y-m-d H:i:s",strtotime($datos[5]));
 
 						    	$cronograma->proyecto_id = 3;
 						    	//$cronograma->fecha_registro = '2014-10-01';
@@ -155,10 +159,10 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 												if($modelPaises->save()){
 													//echo satisfactorio
-													$transaction->commit();
+													//$transaction->commit();
 												}
 												else{
-													$transaction->rollback();
+													//$transaction->rollback();
 													$errores.=CHtml::errorSummary($modelPaises);
 												}
 
@@ -167,10 +171,12 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 										}
 							    						    	
+									}else{
+										//$transaction->commit();
 									}
 						    		//echo 'Registro número: '.$fila.' guardado satisfactoriamente.';
 						    	}else{
-						    		$transaction->rollback();
+						    		//$transaction->rollback();
 									$errores .= CHtml::errorSummary($cronograma);
 						    	}
 
@@ -181,10 +187,11 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 				        }
 				        $fila++;
-
 				    }
-				  if($errores="")
+				  if(!$errores=='')
 				  	$transaction->rollback();
+				  else
+				  	$transaction->commit();
 				}catch(Exception $e)
 				{
 				    $transaction->rollback();
