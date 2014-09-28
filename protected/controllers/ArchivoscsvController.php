@@ -103,9 +103,9 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 			$caracteres_porLinea = 1000;
 			$patron = ";";
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
-				$transaction=Yii::app()->db->beginTransaction();
+				/*$transaction=Yii::app()->db->beginTransaction();
 				try
-				{
+				{*/
 				    while (($datos = fgetcsv($gestor, $caracteres_porLinea, $patron)) !== FALSE) {
 				        
 				        $numero = count($datos);
@@ -134,7 +134,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 						    			$errores .= '<br> unidad: '.$datos[2].' no existe';
 						    	}
 						    	if($datos[3])
-						    		$cronograma->cantidad = floatval($datos[3]);
+						    		$cronograma->cantidad = intval($datos[3]);
 						    	if($datos[4])
 						    		$cronograma->costo_total = floatval($datos[4]);
 						    	if($datos[5])
@@ -147,15 +147,15 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 						    	{
 							    	if($datos[6]){
 										$delimitador_pais = "|";
-										$paises = explode("|", $datos[6]);
+										$paises = explode($delimitador_pais, $datos[6]);
 
 										foreach ($paises as $pais => $pkey) {
-											$GenPais = GenPais::model()->find('dpais=:pais',array(':pais'=>$pais));
-											if($GenPais)
+											$GenPais = GenPais::model()->find('dpais=:pais',array(':pais'=>trim($pkey)));
+											if($GenPais){
 												if(!ExportacionesPaises::model()->find('cpais=:pais AND cronograma_id=:id',array(':pais'=>$GenPais->cpais,':id'=>$cronograma->id)))
 												{
 													$modelPaises = new ExportacionesPaises;
-													$modelPaises->cpais = $cpais;
+													$modelPaises->cpais = $GenPais->cpais;
 													$modelPaises->cronograma_id = $cronograma->id;
 
 													if($modelPaises->save()){
@@ -168,8 +168,10 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 													}
 
 												}else
-													$errores.="Pais repetido.";
+													$errores.='Pais repetido.';
 
+											}else
+												$errores.='Pais: "'.trim($pkey).'" no existe.';
 										}
 							    						    	
 									}else{
@@ -189,7 +191,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 				        }
 				        $fila++;
 				    }
-				  if(!$errores=='')
+			/*	  if(!$errores=='')
 				  	$transaction->rollback();
 				  else
 				  	$transaction->commit();
@@ -197,7 +199,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 				{
 				    $transaction->rollback();
 				    throw $e;
-				}
+				}*/
 
 			    fclose($gestor);
 			}
