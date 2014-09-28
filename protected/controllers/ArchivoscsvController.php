@@ -150,24 +150,25 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 										$paises = explode("|", $datos[6]);
 
 										foreach ($paises as $pais => $pkey) {
-											$cpais = GenPais::model()->find('dpais=:pais',array(':pais'=>$pais))->cpais;
-											if(!ExportacionesPaises::model()->find('cpais=:pais AND cronograma_id=:id',array(':pais'=>$cpais,':id'=>$cronograma->id)))
-											{
-												$modelPaises = new ExportacionesPaises;
-												$modelPaises->cpais = $cpais;
-												$modelPaises->cronograma_id = $cronograma->id;
+											$GenPais = GenPais::model()->find('dpais=:pais',array(':pais'=>$pais));
+											if($GenPais)
+												if(!ExportacionesPaises::model()->find('cpais=:pais AND cronograma_id=:id',array(':pais'=>$GenPais->cpais,':id'=>$cronograma->id)))
+												{
+													$modelPaises = new ExportacionesPaises;
+													$modelPaises->cpais = $cpais;
+													$modelPaises->cronograma_id = $cronograma->id;
 
-												if($modelPaises->save()){
-													//echo satisfactorio
-													//$transaction->commit();
-												}
-												else{
-													//$transaction->rollback();
-													$errores.=CHtml::errorSummary($modelPaises);
-												}
+													if($modelPaises->save()){
+														//echo satisfactorio
+														//$transaction->commit();
+													}
+													else{
+														//$transaction->rollback();
+														$errores.=CHtml::errorSummary($modelPaises);
+													}
 
-											}else
-												$errores.="Pais repetido.";
+												}else
+													$errores.="Pais repetido.";
 
 										}
 							    						    	
