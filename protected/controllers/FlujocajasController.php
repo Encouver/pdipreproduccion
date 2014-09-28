@@ -69,10 +69,11 @@ public function actionCreate()
 	if(isset($_POST['Totalflujocajas']))
 	{
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
-		
+
 		$this->renderPartial('_form2',array(
 			'model'=>$model,
 			));
+		//Yii::app()->end();
 	}
 
 	if(isset($_POST['Flujocajas']))
