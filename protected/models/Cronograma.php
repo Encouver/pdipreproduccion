@@ -8,10 +8,9 @@
  * @property string $insumo
  * @property integer $cod_arancelario
  * @property integer $unidad_id
- * @property integer $cantidad
+ * @property double $cantidad
  * @property integer $costo_total
  * @property string $fecha_estimada
- * @property integer $pais_destino
  * @property string $fecha_registro
  * @property string $valido
  * @property integer $proyecto_id
@@ -39,14 +38,15 @@ class Cronograma extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('id', 'required'),
-			array('id, cod_arancelario, unidad_id, cantidad, costo_total, pais_destino, proyecto_id', 'numerical', 'integerOnly'=>true),
+			array('id, cod_arancelario, unidad_id, costo_total, proyecto_id', 'numerical', 'integerOnly'=>true),
+			array('cantidad', 'numerical'),
 			array('insumo', 'length', 'max'=>30),
 			array('valido', 'length', 'max'=>1),
 			array('tipo', 'length', 'max'=>100),
 			array('fecha_estimada, fecha_registro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, pais_destino, fecha_registro, valido, proyecto_id, tipo', 'safe', 'on'=>'search'),
+			array('id, insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, fecha_registro, valido, proyecto_id, tipo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,7 +58,7 @@ class Cronograma extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'exportacionesPaises' => array(self::HAS_MANY, 'ExportacionesPaises', 'import_export_id'),
+			'exportacionesPaises' => array(self::HAS_MANY, 'ExportacionesPaises', 'cronograma_id'),
 		);
 	}
 
@@ -75,7 +75,6 @@ class Cronograma extends CActiveRecord
 			'cantidad' => 'Cantidad',
 			'costo_total' => 'Costo Total',
 			'fecha_estimada' => 'Fecha Estimada',
-			'pais_destino' => 'Pais Destino',
 			'fecha_registro' => 'Fecha Registro',
 			'valido' => 'Valido',
 			'proyecto_id' => 'Proyecto',
@@ -108,7 +107,6 @@ class Cronograma extends CActiveRecord
 		$criteria->compare('cantidad',$this->cantidad);
 		$criteria->compare('costo_total',$this->costo_total);
 		$criteria->compare('fecha_estimada',$this->fecha_estimada,true);
-		$criteria->compare('pais_destino',$this->pais_destino);
 		$criteria->compare('fecha_registro',$this->fecha_registro,true);
 		$criteria->compare('valido',$this->valido,true);
 		$criteria->compare('proyecto_id',$this->proyecto_id);
