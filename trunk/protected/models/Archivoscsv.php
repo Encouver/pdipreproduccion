@@ -31,11 +31,9 @@ class Archivoscsv extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proyecto_id, tipo_csv', 'required'),
+			array('proyecto_id, archivo, tipo_csv', 'required'),
 			array('proyecto_id, tipo_csv', 'numerical', 'integerOnly'=>true),
-
-			array('archivo','file','types'=>'csv'),
-			//array('archivo', 'length', 'max'=>255),
+			array('archivo', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, proyecto_id, archivo, tipo_csv, fecha', 'safe', 'on'=>'search'),
