@@ -70,8 +70,8 @@ public function actionCreate()
 	{
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
 
-		$this->renderPartial('_form2',array(
-			'model'=>$model,
+		$this->renderPartial('_form',array(
+			'model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas
 			));
 		//Yii::app()->end();
 	}
@@ -84,7 +84,7 @@ public function actionCreate()
 	}
 
 	$this->render('create',array(
-	'model'=>$model,
+	'model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas
 	));
 }
 

@@ -7,67 +7,73 @@
 
 <?php echo $form->errorSummary($model); ?>
 
-<?php Periodos::model()->find(); $totalFlujosCajas = new Totalflujocajas; ?>
+	<?php 
+	if(!isset($totalFlujoCajas->anos) && !isset($totalFlujoCajas->periodo_id)){ ?>
 
-	<?php echo $form->labelEx($totalFlujosCajas,'anos'); ?>
-	<?php echo $form->dropDownList($totalFlujosCajas, 'anos', 
-             array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10),
-             array('empty' => '(Seleccione año'));
-       ?>
-    <?php echo $form->error($totalFlujosCajas,'anos'); ?>
+		<?php echo $form->labelEx($totalFlujoCajas,'anos'); ?>
+		<?php echo $form->dropDownList($totalFlujoCajas, 'anos', 
+	             array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10),
+	             array('empty' => '(Seleccione año'));
+	       ?>
+	    <?php echo $form->error($totalFlujoCajas,'anos'); ?>
 
-    <?php echo $form->labelEx($totalFlujosCajas,'periodo_id'); ?>
-	<?php echo $form->dropDownList($totalFlujosCajas,'periodo_id',CHtml::listData(Periodos::model()->findAll(),'id','nombre'),array('empty' =>'Seleccione'),array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
-	<?php echo $form->error($totalFlujosCajas,'periodo_id'); ?>
+	    <?php echo $form->labelEx($totalFlujoCajas,'periodo_id'); ?>
+		<?php echo $form->dropDownList($totalFlujoCajas,'periodo_id',CHtml::listData(Periodos::model()->findAll(),'id','nombre'),array('empty' =>'Seleccione'),array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->error($totalFlujoCajas,'periodo_id'); ?>
 
 
-	<?php echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujoscaja/create'),array(
-													        'type'=>'POST',
-													        'dataType'=>'json',
-													        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
-													        ) ); ?>
+		<?php echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujoscaja/create'),array(
+														        'type'=>'POST',
+														        'dataType'=>'json',
+														        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
+														        ) ); ?>
+	<?php 
+	}else{ ?>
 
-	<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'prestamo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'prestamo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'ingresos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'ingresos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'costos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'costos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'reinversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'reinversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'valor_residual',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'valor_residual',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'pagos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'pagos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'depreciacion_negativo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'depreciacion_negativo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'utilidad_antesimp',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'utilidad_antesimp',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'utilidad_despuesimp',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'utilidad_despuesimp',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'impuestos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'impuestos',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'depreciacion_positivo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'depreciacion_positivo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'flujo_operativo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'flujo_operativo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'flujo_proyectado',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'flujo_proyectado',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'ingresos_rcb',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'ingresos_rcb',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'costos_rcb',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'costos_rcb',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'ingresos_rcbact',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'ingresos_rcbact',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'costos_rcbact',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'costos_rcbact',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'fecha_registro',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'fecha_registro',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
-	<?php echo $form->textFieldGroup($model,'estatus',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>1)))); ?>
+		<?php echo $form->textFieldGroup($model,'estatus',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5','maxlength'=>1)))); ?>
 
-	<?php echo $form->textFieldGroup($model,'proyecto_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+		<?php echo $form->textFieldGroup($model,'proyecto_id',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+
+	<?php 
+	} ?>
 <?php 
 
 /*$this->widget('ext.editable.EditableField', array(
