@@ -13,7 +13,7 @@
 		<?php echo $form->labelEx($totalFlujoCajas,'anos'); ?>
 		<?php echo $form->dropDownList($totalFlujoCajas, 'anos', 
 	             array('1' => 1, '2' => 2, '3' => 3, '4' => 4, '5' => 5, '6' => 6, '7' => 7, '8' => 8, '9' => 9, '10' => 10),
-	             array('empty' => 'daño'));
+	             array('empty' => 'año'));
 	       ?>
 	    <?php echo $form->error($totalFlujoCajas,'anos'); ?>
 
@@ -22,7 +22,7 @@
 		<?php echo $form->error($totalFlujoCajas,'periodo_id'); ?>
 
 
-		<?php echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('/pdipreproduccion/index.php?r=flujocajas/create'),array(
+		<?php echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujocajas/create'),array(
 														        'type'=>'POST',
 														        'dataType'=>'json',
 														        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
