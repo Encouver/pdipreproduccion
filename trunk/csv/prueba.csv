@@ -1,6 +1,2 @@
-Fortuner 2016,2,Ki,lo,gramos,45,546654,09/09/1989, Estados Unidos
-4runner 2016,3,Kilogramos,45,546654,09/09/1989, España
-FJCruiser 2016,4,Kilog,ramos,45,546654,09/09/1989, Francia
-Mustang 2016,5,Kilogramos,45,546654,09/09/1989, Inglaterra
-Hummer 2016,6,Kilogramos,45,546654,09/09/1989, Alemania
-Land Cruiser 2016,7,Kilogramos,45,546654,2014/10/01, Estados Unidos
+insumo;arancel;unidad;cantidad;costo_total;fecha_estimada;Paises
+Fortuner 2016;2;Kilogramos;45;546654;09/09/1989; Estados Unidos

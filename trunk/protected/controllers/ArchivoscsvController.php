@@ -102,6 +102,16 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 			$fila = 0;
 			$caracteres_porLinea = 1000;
 			$patron = ";";
+
+			$tieneArchivo = Archivoscsv::model()->find('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
+
+			if($tieneArchivo)
+			{
+				Cronogramas::model()->deleteAll('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
+				$tieneArchivo->delete();
+				ExportacionesPaises::model()->deleteAll('proyecto_id=:proyecto_id',array(':proyecto_id'=>$model->proyecto_id));
+
+			}
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
 				/*$transaction=Yii::app()->db->beginTransaction();
 				try
@@ -148,7 +158,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 							    	if($datos[6]){
 										$delimitador_pais = "|";
 										$paises = explode($delimitador_pais, $datos[6]);
-
+										//print_r($paises);
 										foreach ($paises as $pais => $pkey) {
 											$GenPais = GenPais::model()->find('dpais=:pais',array(':pais'=>trim($pkey)));
 											if($GenPais){
@@ -157,7 +167,8 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 													$modelPaises = new ExportacionesPaises;
 													$modelPaises->cpais = $GenPais->cpais;
 													$modelPaises->cronograma_id = $cronograma->id;
-
+													$modelPaises->proyecto_id = $model->proyecto_id;
+													
 													if($modelPaises->save()){
 														//echo satisfactorio
 														//$transaction->commit();
