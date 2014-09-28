@@ -72,8 +72,8 @@ class Totalflujocajas extends CActiveRecord
 			'tasa_retorno' => 'Tasa Retorno',
 			'fecha_registro' => 'Fecha Registro',
 			'estatus' => 'Estatus',
-			'anos' => 'Anos',
-			'periodo_id' => 'Periodo',
+			'anos' => 'Cantidad de Años',
+			'periodo_id' => 'Tipo de Periodo',
 		);
 	}
 
