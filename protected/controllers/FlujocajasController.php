@@ -61,21 +61,30 @@ $this->render('view',array(
 */
 public function actionCreate()
 {
-$model=new Flujocajas;
+	$model=new Flujocajas;
+	$totalFlujoCajas = new Totalflujocajas;
+	// Uncomment the following line if AJAX validation is needed
+	// $this->performAjaxValidation($model);
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+	if(isset($_POST['Totalflujocajas']))
+	{
+		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
+		
+		$this->renderPartial('_form2',array(
+			'model'=>$model,
+			));
+	}
 
-if(isset($_POST['Flujocajas']))
-{
-$model->attributes=$_POST['Flujocajas'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->id));
-}
+	if(isset($_POST['Flujocajas']))
+	{
+		$model->attributes=$_POST['Flujocajas'];
+		if($model->save())
+		$this->redirect(array('view','id'=>$model->id));
+	}
 
-$this->render('create',array(
-'model'=>$model,
-));
+	$this->render('create',array(
+	'model'=>$model,
+	));
 }
 
 /**
