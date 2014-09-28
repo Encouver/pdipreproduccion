@@ -74,6 +74,13 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 	$errores='';
 	// Uncomment the following line if AJAX validation is needed
 	// $this->performAjaxValidation($model);
+		
+	$nc=7;
+	$vista = 'export';
+	if($tipoCronograma == 'importacion'){
+		$nc=6;
+		$vista = 'import';
+	}
 
 	if(isset($_POST['Archivoscsv']))
 	{
@@ -90,7 +97,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 			$archivo = dirname(Yii::app()->request->scriptFile).'/csv/'.$tipoCronograma.'/'.$model->archivo;
 
-			$fila = 1;
+			$fila = 0;
 			$caracteres_porLinea = 1000;
 			$patron = ";";
 			if (($gestor = fopen($archivo, "r")) !== FALSE) {
@@ -101,75 +108,78 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 				        
 				        $numero = count($datos);
 				        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
-
-				        if($numero==7)
+				        if($fila==0)
 				        {
-					    	$cronograma = new ImportExport;
+				        	$fila++;
 
-					    	$cronograma->tipo = $tipoCronograma;
+					        if($numero==$nc)
+					        {
+						    	$cronograma = new Cronograma;
 
-					    	if($datos[0])
-					    		$cronograma->insumo	= $datos[0];
-					    	if($datos[1])
-					    		$cronograma->cod_arancelario = $datos[1]; //Que este en la otra tabla
-					    	if($datos[2]){
-					    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2])))->cunidad;
-					    		if($cunidad)
-					    			$cronograma->unidad_id = $cunidad;
-					    		else
-					    			$errores .= '<br> unidad: '.$cunidad.' no existe';
-					    	}
-					    	if($datos[3])
-					    		$cronograma->cantidad = $datos[3];
-					    	if($datos[4])
-					    		$cronograma->costo_total = $datos[4];
-					    	if($datos[5])
-					    		$cronograma->fecha_estimada	= $datos[5];
+						    	$cronograma->tipo = $tipoCronograma;
 
-					    	$cronograma->proyecto_id = 3;
-					    	//$cronograma->fecha_registro = '2014-10-01';
+						    	if($datos[0])
+						    		$cronograma->insumo	= $datos[0];
+						    	if($datos[1])
+						    		$cronograma->cod_arancelario = $datos[1]; //Que este en la otra tabla
+						    	if($datos[2]){
+						    		$cunidad = GenUnidades::model()->find('LOWER(dunidad)=:unidad',array(':unidad'=>strtolower($datos[2])))->cunidad;
+						    		if($cunidad)
+						    			$cronograma->unidad_id = $cunidad;
+						    		else
+						    			$errores .= '<br> unidad: '.$cunidad.' no existe';
+						    	}
+						    	if($datos[3])
+						    		$cronograma->cantidad = $datos[3];
+						    	if($datos[4])
+						    		$cronograma->costo_total = $datos[4];
+						    	if($datos[5])
+						    		$cronograma->fecha_estimada	= $datos[5];
 
-					    	if($cronograma->save())
-					    	{
-						    	if($datos[6]){
-									$delimitador_pais = "|";
-									$paises = explode("|", $datos[6]);
+						    	$cronograma->proyecto_id = 3;
+						    	//$cronograma->fecha_registro = '2014-10-01';
 
-									foreach ($paises as $pais => $pkey) {
-										$cpais = GenPais::model()->find('dpais=:pais',array(':pais'=>$pais))->cpais;
-										if(!ExportacionesPaises::model()->find('cpais=:pais AND cronograma_id=:id',array(':pais'=>$cpais,':id'=>$cronograma->id)))
-										{
-											$modelPaises = new ExportacionesPaises;
-											$modelPaises->cpais = $cpais;
-											$modelPaises->cronograma_id = $cronograma->id;
+						    	if($cronograma->save())
+						    	{
+							    	if($datos[6]){
+										$delimitador_pais = "|";
+										$paises = explode("|", $datos[6]);
 
-											if($modelPaises->save()){
-												//echo satisfactorio
-												$transaction->commit();
-											}
-											else{
-												$transaction->rollback();
-												$errores.=CHtml::errorSummary($modelPaises);
-											}
+										foreach ($paises as $pais => $pkey) {
+											$cpais = GenPais::model()->find('dpais=:pais',array(':pais'=>$pais))->cpais;
+											if(!ExportacionesPaises::model()->find('cpais=:pais AND cronograma_id=:id',array(':pais'=>$cpais,':id'=>$cronograma->id)))
+											{
+												$modelPaises = new ExportacionesPaises;
+												$modelPaises->cpais = $cpais;
+												$modelPaises->cronograma_id = $cronograma->id;
 
-										}else
-											$errores.="Pais repetido.";
+												if($modelPaises->save()){
+													//echo satisfactorio
+													$transaction->commit();
+												}
+												else{
+													$transaction->rollback();
+													$errores.=CHtml::errorSummary($modelPaises);
+												}
 
+											}else
+												$errores.="Pais repetido.";
+
+										}
+							    						    	
 									}
-						    						    	
-								}
-					    		//echo 'Registro número: '.$fila.' guardado satisfactoriamente.';
-					    	}else{
-					    		$transaction->rollback();
-								$errores .= CHtml::errorSummary($cronograma);
-					    	}
+						    		//echo 'Registro número: '.$fila.' guardado satisfactoriamente.';
+						    	}else{
+						    		$transaction->rollback();
+									$errores .= CHtml::errorSummary($cronograma);
+						    	}
 
-				        }else{
-				        	//$transaction->rollback();
-				        	$errores .= '<br>Falta una o varias columna/s en la linea: '.$fila;
+					        }else{
+					        	//$transaction->rollback();
+					        	$errores .= '<br>Falta una o varias columna/s en la linea: '.$fila;
+					        }
+
 				        }
-
-
 				        $fila++;
 
 				    }
@@ -187,10 +197,6 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 				$this->redirect(array('view','id'=>$model->id));
 		}
 	}
-
-	$vista = 'export';
-	if($tipoCronograma == 'importacion')
-		$vista = 'import';
 
 	$this->render($vista,array(
 		'model'=>$model,'errores'=>$errores
