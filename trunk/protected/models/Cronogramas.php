@@ -10,15 +10,11 @@
  * @property integer $cantidad
  * @property double $costo_total
  * @property string $fecha_estimada
- * @property integer $pais_destino
  * @property string $fecha_registro
  * @property string $valido
  * @property integer $proyecto_id
  * @property string $tipo
  * @property integer $id
- *
- * The followings are the available model relations:
- * @property ExportacionesPaises[] $exportacionesPaises
  */
 class Cronogramas extends CActiveRecord
 {
@@ -46,7 +42,7 @@ class Cronogramas extends CActiveRecord
 			array('fecha_estimada, fecha_registro', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, pais_destino, fecha_registro, valido, proyecto_id, tipo, id', 'safe', 'on'=>'search'),
+			array('insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, fecha_registro, valido, proyecto_id, tipo, id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,7 +54,6 @@ class Cronogramas extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'exportacionesPaises' => array(self::HAS_MANY, 'ExportacionesPaises', 'cronograma_id'),
 		);
 	}
 
