@@ -184,13 +184,13 @@ $this->widget('booster.widgets.TbGridView', array(
 ));
 */
 ?>
-
+<!--
 <div class="form-actions">
 	<?php $this->widget('booster.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'context'=>'primary',
 			'label'=>$model->isNewRecord ? 'Create' : 'Save',
 		)); ?>
-</div>
+</div>-->
 
 <?php $this->endWidget(); ?>
