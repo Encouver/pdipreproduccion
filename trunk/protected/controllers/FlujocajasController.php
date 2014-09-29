@@ -57,11 +57,14 @@ $this->render('view',array(
 
 public function actionAnterior(){
 	$modelos = Yii::app()->session['modelos'];
-	if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
+	if(isset($_POST['Flujocajas']))
 	{
-		$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
-		if($modelos->save())
-			echo 'bien';
+		if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
+		{
+			$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
+			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->save())
+				echo 'bien';
+		}
 	}
 	Yii::app()->session['periodo']-=1;
 	Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
@@ -79,24 +82,24 @@ public function actionSiguiente(){
 
 	if(isset($_POST['Flujocajas']))
 	{
-		if(isset($modelos[Yii::app()->session['ano'].'_'.Yii::app()->session['periodo']]))
+		if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
 		{
-			$modelos[Yii::app()->session['ano'].'_'.Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
-			if($modelos[Yii::app()->session['ano'].'_'.Yii::app()->session['periodo']]->save())
+			$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
+			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->save())
 				echo 'bien';
 		}
 	}
 
 	Yii::app()->session['periodo']+=1;
 	Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
-	if(Yii::app()->['periodo'] == 0){	
+	if(Yii::app()->session['periodo'] == 0){	
 		if(Yii::app()->session['ano'] < Yii::app()->session['anoSel'])	
 			Yii::app()->session['ano']+=1;
 	}
 	Yii::app()->session['modelos'] = $modelos;
 
 	$this->renderPartial('_form',array(
-		'model'=>Yii::app()->session['modelos'],//'totalFlujoCajas'=>$totalFlujoCajas
+		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],//'totalFlujoCajas'=>$totalFlujoCajas
 	));
 }
 
@@ -119,11 +122,11 @@ public function actionCreate()
 
 		$valorPeriodo = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->valor;
 
-		//$modelos = array(array());
+		$modelos[] = array();
 		for($i=0; $i<$totalFlujoCajas->anos; $i++)
 		{
 			for($j=0;$j<$valorPeriodo;$j++)
-				$modelos[$i.'_'.$j] = new Flujocajas;
+				$modelos[$i][$j] = new Flujocajas;
 		}
 		Yii::app()->session['modelos'] = $modelos;
 
