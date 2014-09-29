@@ -44,11 +44,14 @@
 
     			<?php echo CHtml::ajaxSubmitButton('<-- Anterior',Yii::app()->createUrl('flujocajas/anterior'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
-    															array('id'=>'_anterior')); ?>
+    															array('id'=>'_anterior','disabled'=> (Yii::app()->session['periodo']==0 &&
+                                                                         Yii::app()->session['ano']==0) )); ?>
     			Años: <?php echo Yii::app()->session['ano']; ?> Periodo: <?php echo Yii::app()->session['periodo']; ?>
-    			<?php echo CHtml::ajaxSubmitButton('Siguiente -->',Yii::app()->createUrl('flujocajas/siguiente'),
+    			<?php 
+              echo CHtml::ajaxSubmitButton('Siguiente -->',Yii::app()->createUrl('flujocajas/siguiente'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
-    															array('id'=>'_siguiente')); ?>
+    															array('id'=>'_siguiente','disabled'=> (Yii::app()->session['periodo']==Yii::app()->session['periodoSel'] &&
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']-1) )); ?>
     		</div>
 
         <?php echo $form->errorSummary($model); ?>
