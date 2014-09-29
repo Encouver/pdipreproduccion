@@ -31,7 +31,7 @@ public function accessRules()
 		'users'=>array('*'),
 		),
 		array('allow', // allow authenticated user to perform 'create' and 'update' actions
-		'actions'=>array('import','update','export',),
+		'actions'=>array('import','update','export'),
 		'users'=>array('*'),
 		),
 		array('allow', // allow admin user to perform 'admin' and 'delete' actions
