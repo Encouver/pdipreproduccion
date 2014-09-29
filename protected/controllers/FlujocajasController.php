@@ -63,7 +63,7 @@ public function actionAnterior(){
 		if($modelos->save())
 			echo 'bien';
 	}
-	Yii::app()->session['periodo']--;
+	Yii::app()->session['periodo']-=1;
 	Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
 	if(Yii::app()->session['periodo'] == Yii::app()->session['periodoSel']-1){	
 		if(Yii::app()->session['ano'] > 0)	
@@ -91,7 +91,7 @@ public function actionSiguiente(){
 	Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
 	if(Yii::app()->session['periodo'] == 0){	
 		if(Yii::app()->session['ano'] < Yii::app()->session['anoSel'])	
-			Yii::app()->session['ano']++;
+			Yii::app()->session['ano']+=1;
 	}
 	Yii::app()->session['modelos'] = $modelos;
 
