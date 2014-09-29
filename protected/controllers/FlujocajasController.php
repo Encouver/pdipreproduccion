@@ -102,9 +102,9 @@ public function actionCreate()
 	{
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
 
-		$valorPeriodo = Periodos::model()->find('id=?'array($totalFlujoCajas->periodo_id)->valor;
+		$valorPeriodo = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->valor;
 
-		//$modelos['ano']['periodo'] = new Model;
+		//$modelos = array(array());
 		for($i=0; $i<$totalFlujoCajas->ano; $i++)
 		{
 			for($j=0;$j<$valorPeriodo;$j++)
