@@ -6,7 +6,7 @@ class FlujocajasController extends Controller
 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 * using two-column layout. See 'protected/views/layouts/column2.php'.
 */
-public $layout='//layouts/column2';
+//public $layout='//layouts/column2';
 
 /**
 * @return array action filters
@@ -103,7 +103,7 @@ public function actionSiguiente(){
 		if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
 		{
 			$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
-			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->save()){
+			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->validate()){
 				//echo 'bien';
 				Yii::app()->session['periodo']+=1;
 				Yii::app()->session['periodo']=abs(Yii::app()->session['periodo'] % $periodoAno);
@@ -121,12 +121,21 @@ public function actionSiguiente(){
 		}
 	}
 
+
 	
 	Yii::app()->session['modelos'] = $modelos;
+	$ultimo = (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']);
+	
 
-	$this->renderPartial('_form',array(
-		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],//'totalFlujoCajas'=>$totalFlujoCajas
-	));
+	if($ultimo)
+			$this->renderPartial('_form',array(
+				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'total'=>Yii::app()->session['totalFlujoCajas']
+			));
+	else
+			$this->renderPartial('_form',array(
+				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],
+			));
 }
 
 public function actionGtod()
@@ -140,15 +149,21 @@ public function actionGtod()
 	$periodoAno = Yii::app()->session['periodoSel'];
 	$anos = Yii::app()->session['anoSel'];
 
+	
+	if(isset($_POST['Totalflujocajas'])){
+		$totalFlujoCajas->attributes =  $_POST['Totalflujocajas'];
+		if($totalFlujoCajas->validate()){
+		}
+	}
 	if(isset($_POST['Flujocajas']))
 	{
 		//if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
 		$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
 		if(!$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->validate())
 		{
-				$this->renderPartial('create',array(
+				/*$this->renderPartial('create',array(
 				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'totalFlujoCajas'=>$totalFlujoCajas
-				));
+				));*/
 		}
 
 	}
@@ -162,14 +177,16 @@ public function actionGtod()
 				if($modelos[$i][$j]->save())
 				{
 
-				}else {//throw new Exception("Hubo un error guardando los datos.", 1);
-					$this->renderPartial('create',array(
+				}else{//throw new Exception("Hubo un error guardando los datos.", 1);
+					/*$this->renderPartial('create',array(
 					'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'totalFlujoCajas'=>$totalFlujoCajas
-					));
+					));*/
 				}
 			}
 		}
-	  	///$transaction->commit();
+		$totalFlujoCajas->save();
+	  	$transaction->commit();
+	  	echo 'Grabe';
 	  	//$this->redirect(array('view'));
 	}catch(Exception $e)
 	{
@@ -197,8 +214,12 @@ public function actionCreate()
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
 		
 		if($totalFlujoCajas->validate(array('periodo_id','anos')))
-		{		
+		{	
+			$totalFlujoCajas->proyecto_id = 3;
+			$totalFlujoCajas->estatus = 1;
+
 			Yii::app()->session['totalFlujoCajas'] = $totalFlujoCajas;
+
 			$periodoAno = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->valor;
 
 			$modelos[][] = new Flujocajas;
