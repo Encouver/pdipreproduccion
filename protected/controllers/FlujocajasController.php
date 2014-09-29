@@ -74,8 +74,8 @@ public function actionAnterior(){
 
 		Yii::app()->session['periodo'] = Yii::app()->session['periodo'] - 1;
 		if(Yii::app()->session['periodo']<0)
-			Yii::app()->session['periodo'] = Yii::app()->session['periodoSel']-1;
-		if(Yii::app()->session['periodo'] == 0){	
+			Yii::app()->session['periodo'] = $periodoAno-1;	
+		if(Yii::app()->session['periodo'] == $periodoAno-1){	
 			if(Yii::app()->session['ano'] > 0)	
 				Yii::app()->session['ano']= Yii::app()->session['ano'] - 1;
 			else
@@ -83,6 +83,7 @@ public function actionAnterior(){
 				Yii::app()->session['periodo']+=1;
 				Yii::app()->session['periodo']=abs(Yii::app()->session['periodo'] % $periodoAno);
 			}
+
 		}
 
 	Yii::app()->session['modelos'] = $modelos;
