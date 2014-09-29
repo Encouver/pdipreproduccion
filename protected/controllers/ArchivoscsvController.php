@@ -90,10 +90,13 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 		$model->tipo_csv=$tipoCronograma;
 		if($tipoCronograma == 'importacion')
 			$model->tipo_csv=$tipoCronograma;
+
 		$model->attributes=$_POST['Archivoscsv'];
 		$archivo=CUploadedFile::getInstance($model,'archivo');
-		$model->archivo = $nombre_tem;
-
+		if($archivo)
+		{
+			$model->archivo = $nombre_tem;
+		}
 		Archivoscsv::model()->deleteAll('proyecto_id=:proyecto_id and tipo_csv=:tipo',array(':proyecto_id'=>$model->proyecto_id, ':tipo'=>$tipoCronograma));
 		if($model->save())
 		{
@@ -118,7 +121,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 				        
 				        $numero = count($datos);
 				        //echo "<p> $numero de campos en la línea $fila: <br /></p>\n";
-				        if(!$fila==0)
+				        if(!$fila==0)   //saltamos el encabezado
 				        {
 				        	//$fila++;
 
@@ -195,7 +198,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 					        }else{
 					        	//$transaction->rollback();
-					        	$errores .= '<br>Falta una o varias columna/s en la linea: '.$fila;
+					        	$errores .= $nc.'<br>Falta una o varias columna/s en la linea: '.$fila;
 					        }
 
 				        }

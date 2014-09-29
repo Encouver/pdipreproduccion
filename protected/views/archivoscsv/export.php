@@ -12,6 +12,6 @@ if($errores)
 	echo $errores;
 ?>
 
-<h1>Create Archivoscsv</h1>
+<h1>Subir archivo para export</h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
