@@ -22,17 +22,34 @@
 		<?php echo $form->error($totalFlujoCajas,'periodo_id'); ?>
 
 
-		<?php  /*echo CHtml::ajaxButton('Cargar', Yii::app()->createUrl('flujocajas/create'),array(
-														        'type'=>'POST',
-														        'dataType'=>'json',
-														        'success'=>'function(html){ jQuery("#your_id").empty().html(html); }'
-														        ) ); */
+		<?php 
 				echo CHtml::button('Cargar', array('submit' => array('flujocajas/create')));			
 																	        ?><div id="your_id"></div>
 	<?php 
 	}else{ ?>
-		Años: <?php echo $totalFlujoCajas->anos; ?> Periodo: <?php echo Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->nombre; ?>
 
+	<?php Yii::app()->clientScript->registerScript('navegador-flujo-script',
+										'$(document).ready(function(){
+												$("#_anterior").prop("disabled", true);
+											  $("#_anterior").click(function(){
+											    	
+											  });
+											  $("#_siguiente").click(function(){
+											    	
+											  });
+										});', CclientScript::POS_END);?>
+		<div id='navegador-flujo' >
+
+			<?php echo CHtml::ajaxSubmitButton('<-- Anterior',Yii::app()->createUrl('flujocajas/anterior'),
+															array('success'=>'function(html){ jQuery("#form-flujo").html(html); }'), 
+															array('id'=>'_anterior')); ?>
+			Años: <?php echo $totalFlujoCajas->anos; ?> Periodo: <?php echo Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->nombre; ?>
+			<?php echo CHtml::ajaxSubmitButton('Siguiente -->',Yii::app()->createUrl('flujocajas/siguiente'),
+															array('success'=>'function(html){ jQuery("#form-flujo").html(html); }'), 
+															array('id'=>'_siguiente')); ?>
+		</div>
+
+		<div id="form-flujo"></div>
 		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
 		<?php echo $form->textFieldGroup($model,'prestamo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>

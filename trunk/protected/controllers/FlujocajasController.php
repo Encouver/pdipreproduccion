@@ -55,6 +55,13 @@ $this->render('view',array(
 ));
 }
 
+public function actionAnterior(){
+
+}
+public function actionSiguiente(){
+
+}
+
 /**
 * Creates a new model.
 * If creation is successful, the browser will be redirected to the 'view' page.
@@ -70,6 +77,8 @@ public function actionCreate()
 	{
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
 
+		$_SESSION['ano'] = 0;
+		$_SESSION['periodo']= 0;
 		/*$this->renderPartial('_form',array(
 			'model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas
 			));*/

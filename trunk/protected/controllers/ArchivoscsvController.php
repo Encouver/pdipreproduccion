@@ -178,7 +178,7 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 													}
 
 												}else
-													$errores.='Pais repetido.';
+													$errores.='Pais "'.trim($pkey).'" ya se encuentra registrado.';
 
 											}else
 												$errores.='Pais: "'.trim($pkey).'" no existe.';
