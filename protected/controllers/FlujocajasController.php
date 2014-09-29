@@ -103,7 +103,7 @@ public function actionSiguiente(){
 		if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
 		{
 			$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
-			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->validate()){
+			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->save()){
 				//echo 'bien';
 				Yii::app()->session['periodo']+=1;
 				Yii::app()->session['periodo']=abs(Yii::app()->session['periodo'] % $periodoAno);
@@ -112,6 +112,7 @@ public function actionSiguiente(){
 						Yii::app()->session['ano']+=1;
 					else
 					{
+						$this->redirect(array('index'));
 						Yii::app()->session['periodo']=Yii::app()->session['periodo'] - 1;
 						Yii::app()->session['periodo']=abs(Yii::app()->session['periodo'] % $periodoAno);
 					}

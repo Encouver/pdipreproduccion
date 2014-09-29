@@ -34,19 +34,19 @@
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
     															array('id'=>'_anterior','disabled'=> (Yii::app()->session['periodo']==0 &&
                                                                          Yii::app()->session['ano']==0) )); ?>
-    			Año: <?php echo Yii::app()->session['ano']; ?> Periodo: <?php echo Yii::app()->session['periodo']; ?>
-    			<?php 
-              echo CHtml::ajaxSubmitButton('Siguiente -->',Yii::app()->createUrl('flujocajas/siguiente'),
+    			<div>Año: <?php echo Yii::app()->session['ano']; ?> Periodo: <?php echo Yii::app()->session['periodo']; ?> </div>
+    			<?php $ultimo = (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']);
+              echo CHtml::ajaxSubmitButton((!$ultimo) ? 'Siguiente -->' : 'Finalizar', Yii::app()->createUrl('flujocajas/siguiente'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
-    															array('id'=>'_siguiente','disabled'=> (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
-                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']) )); ?>
+    															array('id'=>'_siguiente',)); ?>
     		</div>
-        <?php if(Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
+        <?php /*if(Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
                                                                          Yii::app()->session['ano']==Yii::app()->session['anoSel'])
                         echo CHtml::ajaxSubmitButton('Guardar Todo',Yii::app()->createUrl('flujocajas/gtod'),
-                                                                     array('update'=>'function(html){ jQuery("#resultados").empty().html(html); }'), 
+                                  array('success'=>'function(html){ jQuery("#resultados").empty().html(html); }'), 
                                   array('id'=>'_guardartodo',
-                                   ));
+                                   ));*/
                                                                          ?>
 
         <?php echo $form->errorSummary($model); ?>
