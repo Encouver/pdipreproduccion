@@ -27,7 +27,7 @@
 	}else{ ?>
 
 
-    
+
     		<div id='navegador-flujo' >
 
     			<?php echo CHtml::ajaxSubmitButton('<-- Anterior',Yii::app()->createUrl('flujocajas/anterior'),
@@ -37,7 +37,7 @@
     			<div>Año: <?php echo Yii::app()->session['ano']; ?> Periodo: <?php echo Yii::app()->session['periodo']; ?> </div>
     			<?php $ultimo = (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
                                                                          Yii::app()->session['ano']==Yii::app()->session['anoSel']);
-              echo CHtml::ajaxSubmitButton((!$ultimo) ? 'Siguiente -->' : 'Finalizar', Yii::app()->createUrl('flujocajas/siguiente'),
+                echo CHtml::ajaxSubmitButton((!$ultimo) ? 'Siguiente -->' : 'Finalizar',(!$ultimo) ? Yii::app()->createUrl('flujocajas/siguiente'):Yii::app()->createUrl('flujocajas/gotd'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
     															array('id'=>'_siguiente',)); ?>
     		</div>
@@ -49,8 +49,23 @@
                                    ));*/
                                                                          ?>
 
-        <?php echo $form->errorSummary($model); ?>
-    		
+        <?php if(isset($total))
+                  echo $form->errorSummary($model,$total);
+                else
+                  echo $form->errorSummary($model); ?>
+
+      <?php if(isset($total)){
+            ?>
+
+          <?php echo $form->textFieldGroup($total,'valor_neto',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+
+          <?php echo $form->textFieldGroup($total,'costo_beneficio',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+
+          <?php echo $form->textFieldGroup($total,'tasa_retorno',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
+
+      <?php
+        }?>
+
     		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
     		<?php echo $form->textFieldGroup($model,'prestamo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
