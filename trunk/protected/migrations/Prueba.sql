@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.3.2
 -- Dumped by pg_dump version 9.3.2
--- Started on 2014-09-28 12:50:56
+-- Started on 2014-09-29 10:14:09
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -812,9 +812,11 @@ CREATE TABLE flujocajas (
     costos_rcb double precision NOT NULL,
     ingresos_rcbact double precision NOT NULL,
     costos_rcbact double precision NOT NULL,
-    fecha_registro timestamp without time zone DEFAULT now() NOT NULL,
+    fecha_registro date DEFAULT now(),
     estatus character varying(1) DEFAULT 1 NOT NULL,
-    proyecto_id integer NOT NULL
+    proyecto_id integer NOT NULL,
+    periodo integer NOT NULL,
+    ano integer NOT NULL
 );
 
 
@@ -1490,7 +1492,7 @@ ALTER TABLE ONLY financiamientos ALTER COLUMN id SET DEFAULT nextval('financiami
 
 
 --
--- TOC entry 2078 (class 2604 OID 157520)
+-- TOC entry 2077 (class 2604 OID 157520)
 -- Name: id; Type: DEFAULT; Schema: pdi; Owner: postgres
 --
 
@@ -1618,8 +1620,8 @@ COPY archivo_presupuestos_tmp (codarancel_id, unidad_id, fecha_cierre, montousd,
 --
 
 COPY archivoscsv (id, proyecto_id, archivo, tipo_csv, fecha) FROM stdin;
-23	3	8D0EAF7A8AD3F53407714A96B5E787AB.csv	0	2014-09-28
-24	3	093B1B74C2EB9B887327E7C621461E8C.csv	exportacion	2014-09-28
+48	3	EEA7807BE911E7F5AED5F46864C2873C.csv	importacion	2014-09-28
+52	3	AD80BD278C74CAA0F9B2367706A1FA66.csv	exportacion	2014-09-29
 \.
 
 
@@ -1629,7 +1631,7 @@ COPY archivoscsv (id, proyecto_id, archivo, tipo_csv, fecha) FROM stdin;
 -- Name: archivoscsv_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: divisa
 --
 
-SELECT pg_catalog.setval('archivoscsv_id_seq', 24, true);
+SELECT pg_catalog.setval('archivoscsv_id_seq', 52, true);
 
 
 --
@@ -1657,7 +1659,7 @@ SELECT pg_catalog.setval('bienes_id_seq', 1, false);
 -- Name: cronograma_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('cronograma_id_seq', 100011, true);
+SELECT pg_catalog.setval('cronograma_id_seq', 300023, true);
 
 
 --
@@ -1667,7 +1669,6 @@ SELECT pg_catalog.setval('cronograma_id_seq', 100011, true);
 --
 
 COPY cronogramas (insumo, cod_arancelario, unidad_id, cantidad, costo_total, fecha_estimada, fecha_registro, valido, proyecto_id, tipo, id) FROM stdin;
-Fortuner 2016	2	10	45	546654	1989-09-09	2014-09-28	\N	3	exportacion	100011
 \.
 
 
@@ -1736,7 +1737,6 @@ COPY estatus (id, descripcion, fecha_registro, valido) FROM stdin;
 --
 
 COPY exportaciones_paises (id, cpais, cronograma_id, proyecto_id) FROM stdin;
-9	2491	100011	3
 \.
 
 
@@ -1746,7 +1746,7 @@ COPY exportaciones_paises (id, cpais, cronograma_id, proyecto_id) FROM stdin;
 -- Name: exportaciones_paises_id_seq; Type: SEQUENCE SET; Schema: pdi; Owner: postgres
 --
 
-SELECT pg_catalog.setval('exportaciones_paises_id_seq', 9, true);
+SELECT pg_catalog.setval('exportaciones_paises_id_seq', 100019, true);
 
 
 --
@@ -1774,7 +1774,7 @@ SELECT pg_catalog.setval('financiamientos_id_seq', 1, false);
 -- Data for Name: flujocajas; Type: TABLE DATA; Schema: pdi; Owner: postgres
 --
 
-COPY flujocajas (id, inversion, prestamo, ingresos, costos, reinversion, valor_residual, pagos, depreciacion_negativo, utilidad_antesimp, utilidad_despuesimp, impuestos, depreciacion_positivo, flujo_operativo, flujo_proyectado, ingresos_rcb, costos_rcb, ingresos_rcbact, costos_rcbact, fecha_registro, estatus, proyecto_id) FROM stdin;
+COPY flujocajas (id, inversion, prestamo, ingresos, costos, reinversion, valor_residual, pagos, depreciacion_negativo, utilidad_antesimp, utilidad_despuesimp, impuestos, depreciacion_positivo, flujo_operativo, flujo_proyectado, ingresos_rcb, costos_rcb, ingresos_rcbact, costos_rcbact, fecha_registro, estatus, proyecto_id, periodo, ano) FROM stdin;
 \.
 
 
@@ -1816,7 +1816,7 @@ COPY parroquia (id, descripcion, municipio_id) FROM stdin;
 COPY periodos (id, nombre, valor) FROM stdin;
 1	Semestre	2
 2	Trimestre	4
-3	Mes	1
+3	Mes	12
 \.
 
 
@@ -2989,7 +2989,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-09-28 12:50:56
+-- Completed on 2014-09-29 10:14:09
 
 --
 -- PostgreSQL database dump complete
