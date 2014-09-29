@@ -150,11 +150,6 @@ public function actionGtod()
 	$anos = Yii::app()->session['anoSel'];
 
 	
-	if(isset($_POST['Totalflujocajas'])){
-		$totalFlujoCajas->attributes =  $_POST['Totalflujocajas'];
-		if($totalFlujoCajas->validate()){
-		}
-	}
 	if(isset($_POST['Flujocajas']))
 	{
 		//if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
@@ -184,7 +179,13 @@ public function actionGtod()
 				}
 			}
 		}
-		$totalFlujoCajas->save();
+		if(isset($_POST['Totalflujocajas'])){
+			$totalFlujoCajas->attributes =  $_POST['Totalflujocajas'];
+			if($totalFlujoCajas->save()){
+			}
+		}
+
+		//$totalFlujoCajas->save();
 	  	$transaction->commit();
 	  	echo 'Grabe';
 	  	//$this->redirect(array('view'));

@@ -37,16 +37,17 @@
     			<div>Año: <?php echo Yii::app()->session['ano']; ?> Periodo: <?php echo Yii::app()->session['periodo']; ?> </div>
     			<?php $ultimo = (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
                                                                          Yii::app()->session['ano']==Yii::app()->session['anoSel']);
-                echo CHtml::ajaxSubmitButton((!$ultimo) ? 'Siguiente -->' : 'Finalizar',(!$ultimo) ? Yii::app()->createUrl('flujocajas/siguiente'):Yii::app()->createUrl('flujocajas/gotd'),
+
+                echo CHtml::ajaxSubmitButton('Siguiente -->' ,Yii::app()->createUrl('flujocajas/siguiente'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
-    															array('id'=>'_siguiente',)); ?>
+    															array('id'=>'_siguiente','hidden'=>(!$ultimo)?false:true)); ?>
     		</div>
         <?php /*if(Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
-                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel'])
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel'])*/
                         echo CHtml::ajaxSubmitButton('Guardar Todo',Yii::app()->createUrl('flujocajas/gtod'),
                                   array('success'=>'function(html){ jQuery("#resultados").empty().html(html); }'), 
-                                  array('id'=>'_guardartodo',
-                                   ));*/
+                                  array('id'=>'_guardartodo','hidden'=>(!$ultimo)?true:false
+                                   ));
                                                                          ?>
 
         <?php if(isset($total))
