@@ -198,7 +198,15 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 					        }else{
 					        	//$transaction->rollback();
-					        	$errores .= $nc.'<br>Falta una o varias columna/s en la linea: '.$fila;
+					        	if($nc==7)
+					        	{
+					        		//$this->actionDownload();
+					        		//$errores .= $datos['0'].';'.$datos['1'].';'.$datos['2'].';'.$datos['3'].';'.$datos['4'].';'.$datos['5'].';'.$datos['6'];
+					        	}else
+					        	{
+
+					        	}
+					        	$errores .= '<br>Falta una o varias columna/s en la linea: '.$fila;
 					        }
 
 				        }
@@ -243,6 +251,14 @@ public function actionImport()
 
 	$this->Cronograma($model,'importacion');	
 }
+
+public function actionDownload()
+	{
+		$file = 'ruta.rar';
+		//echo $file;
+        return Yii::app()->getRequest()->sendFile('archivo.rar',@file_get_contents($file),'application/x-rar-compressed');
+		
+	}
 
 /**
 * Updates a particular model.
