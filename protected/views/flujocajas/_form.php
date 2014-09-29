@@ -4,9 +4,6 @@
 )); ?>
 
 <p class="help-block">Fields with <span class="required">*</span> are required.</p>
-
-
-
 	<?php 
 	if(isset($totalFlujoCajas) && !isset($totalFlujoCajas->anos) && !isset($totalFlujoCajas->periodo_id)){ ?>
     <?php echo $form->errorSummary($totalFlujoCajas); ?>
