@@ -53,7 +53,13 @@
     															array('id'=>'_siguiente','disabled'=> (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
                                                                          Yii::app()->session['ano']==Yii::app()->session['anoSel']) )); ?>
     		</div>
-
+        <?php if(Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel'])
+                        echo CHtml::Button('Guardar Todo', 
+                                  array('id'=>'_guardartodo','submit'=>Yii::app()->createUrl('flujocajas/guardartodo'),
+                                    'disabled' => !(Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']) ));
+                                                                         ?>
         <?php echo $form->errorSummary($model); ?>
     		
     		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
