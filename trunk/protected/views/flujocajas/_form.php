@@ -50,8 +50,8 @@
     			<?php 
               echo CHtml::ajaxSubmitButton('Siguiente -->',Yii::app()->createUrl('flujocajas/siguiente'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
-    															array('id'=>'_siguiente','disabled'=> (Yii::app()->session['periodo']==Yii::app()->session['periodoSel'] &&
-                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']-1) )); ?>
+    															array('id'=>'_siguiente','disabled'=> (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
+                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']) )); ?>
     		</div>
 
         <?php echo $form->errorSummary($model); ?>
