@@ -27,7 +27,7 @@ public function accessRules()
 {
 return array(
 array('allow',  // allow all users to perform 'index' and 'view' actions
-'actions'=>array('index','view'),
+'actions'=>array('index','view', 'siguiente','anterior'),
 'users'=>array('*'),
 ),
 array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -77,8 +77,9 @@ public function actionCreate()
 	{
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
 
-		$_SESSION['ano'] = 0;
-		$_SESSION['periodo']= 0;
+
+		Yii::app()->session['ano'] = 0;
+		Yii::app()->session['periodo'] = 0;
 		/*$this->renderPartial('_form',array(
 			'model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas
 			));*/
