@@ -8,7 +8,7 @@
 <?php echo $form->errorSummary($model); ?>
 
 	<?php 
-	if(!isset($totalFlujoCajas->anos) && !isset($totalFlujoCajas->periodo_id)){ ?>
+	if(isset($totalFlujoCajas) && !isset($totalFlujoCajas->anos) && !isset($totalFlujoCajas->periodo_id)){ ?>
 
 		<?php echo $form->labelEx($totalFlujoCajas,'anos'); ?>
 		<?php echo $form->dropDownList($totalFlujoCajas, 'anos', 
@@ -43,7 +43,7 @@
 			<?php echo CHtml::ajaxSubmitButton('<-- Anterior',Yii::app()->createUrl('flujocajas/anterior'),
 															array('success'=>'function(html){ jQuery("#form-flujo").html(html); }'), 
 															array('id'=>'_anterior')); ?>
-			Años: <?php echo $totalFlujoCajas->anos; ?> Periodo: <?php echo Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id))->nombre; ?>
+			Años: <?php echo Yii::app()->session['ano']; ?> Periodo: <?php echo Yii::app()->session['periodo']; ?>-->
 			<?php echo CHtml::ajaxSubmitButton('Siguiente -->',Yii::app()->createUrl('flujocajas/siguiente'),
 															array('success'=>'function(html){ jQuery("#form-flujo").html(html); }'), 
 															array('id'=>'_siguiente')); ?>
