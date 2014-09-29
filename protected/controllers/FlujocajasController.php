@@ -66,6 +66,8 @@ public function actionAnterior(){
 				echo 'bien';
 		}
 	}
+
+
 	Yii::app()->session['periodo']-=1;
 	Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
 	if(Yii::app()->session['periodo'] == Yii::app()->session['periodoSel']-1){	
@@ -74,7 +76,7 @@ public function actionAnterior(){
 	}
 	Yii::app()->session['modelos'] = $modelos;
 	$this->renderPartial('_form',array(
-		'model'=>Yii::app()->session['modelos'][Yii::app()->session['ano']][Yii::app()->session['periodo']],//'totalFlujoCajas'=>$totalFlujoCajas
+		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],//'totalFlujoCajas'=>$totalFlujoCajas
 	));
 }
 public function actionSiguiente(){
@@ -90,12 +92,15 @@ public function actionSiguiente(){
 		}
 	}
 
-	Yii::app()->session['periodo']+=1;
-	Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
-	if(Yii::app()->session['periodo'] == 0){	
-		if(Yii::app()->session['ano'] < Yii::app()->session['anoSel'])	
-			Yii::app()->session['ano']+=1;
-	}
+
+
+		Yii::app()->session['periodo']+=1;
+		Yii::app()->session['periodo']=Yii::app()->session['periodo']%Yii::app()->session['periodoSel'];
+		if(Yii::app()->session['periodo'] == 0){	
+			if(Yii::app()->session['ano'] < Yii::app()->session['anoSel'])	
+				Yii::app()->session['ano']+=1;
+		}
+	
 	Yii::app()->session['modelos'] = $modelos;
 
 	$this->renderPartial('_form',array(
