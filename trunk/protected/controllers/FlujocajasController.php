@@ -328,8 +328,7 @@ public function actionActualizar($id)
 					//Se cargo bien
 
 					foreach ($flujoCajas as $key => $value) {
-						# code...
-						$modelos[$value[$i]->ano][$value[$i]->periodo] = $value;	
+						$modelos[$value->ano][$value->periodo] = $value;	
 					}
 
 					Yii::app()->session['modelos'] = $modelos;
