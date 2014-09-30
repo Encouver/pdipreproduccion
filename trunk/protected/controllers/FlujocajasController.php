@@ -180,9 +180,15 @@ public function actionGtod()
 			}
 		}
 		if(isset($_POST['Totalflujocajas'])){
-			$totalFlujoCajas->attributes =  $_POST['Totalflujocajas'];
+			$total = new Totalflujocajas;
+			$total->attributes =  $_POST['Totalflujocajas'];
+			$totalFlujoCajas->valor_neto = $total->valor_neto;
+			$totalFlujoCajas->costo_beneficio = $total->costo_beneficio;
+			$totalFlujoCajas->tasa_retorno = $total->tasa_retorno;
+
 			if($totalFlujoCajas->save()){
-			}
+			}else throw new Exception(CHtml::errorSummary($totalFlujoCajas), 1);
+			
 		}
 
 		//$totalFlujoCajas->save();
