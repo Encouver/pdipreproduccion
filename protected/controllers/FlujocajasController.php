@@ -207,12 +207,7 @@ public function actionGtod()
 		//$totalFlujoCajas->save();
 	  	$transaction->commit();
 
-	  	unset(Yii::app()->session['modelos']);
-	  	unset(Yii::app()->session['totalFlujoCajas']);
-	  	unset(Yii::app()->session['ano']);
-	  	unset(Yii::app()->session['periodo']);
-	  	unset(Yii::app()->session['anoSel']);
-	  	unset(Yii::app()->session['periodoSel']);
+	  	$this->limpiarSessions();
 
 		 echo CHtml::link('Registro completado',array('flujocajas/index'));
 
@@ -311,24 +306,39 @@ public function actionCreate()
 	'model'=>$model, 'totalFlujoCajas'=>$totalFlujoCajas
 	));
 }
-
+	private function limpiarSessions(){
+		if(isset(Yii::app()->session['modelos']))
+	  	unset(Yii::app()->session['modelos']);
+	  if(isset(Yii::app()->session['totalFlujoCajas']))
+	  	unset(Yii::app()->session['totalFlujoCajas']);
+	  if(isset(Yii::app()->session['ano']))
+	  	unset(Yii::app()->session['ano']);
+	  if(isset(Yii::app()->session['periodo']))
+	  	unset(Yii::app()->session['periodo']);
+	  if(isset(Yii::app()->session['anoSel']))
+	  	unset(Yii::app()->session['anoSel']);
+	  if(isset(Yii::app()->session['periodoSel']))
+	  	unset(Yii::app()->session['periodoSel']);
+	  }
 // Recibe el id del proyecto
 public function actionUpdate($id)
 {
+
+		$this->limpiarSessions();
+	
+	$model = new Flujocajas;
 	$totalFlujoCajas = new Totalflujocajas;
 
 	if(!isset(Yii::app()->session['modelos']) && !isset(Yii::app()->session['totalFlujoCajas'])){
-		$totalFlujoCajas = Totalflujocajas::model()->find('proyecto_id=?',array($id));
-		$totalFlujoCajas = Yii::app()->session['totalFlujoCajas'];
-
+		$totalFlujoCajas = Totalflujocajas::model()->find('proyecto_id=?',array($id));		
 		$flujoCajas = Flujocajas::model()->findAll('proyecto_id=?', array($id));
 		
 		if($totalFlujoCajas && $flujoCajas){
+			Yii::app()->session['totalFlujoCajas'] = $totalFlujoCajas;
 			$periodo = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id));
 				if(count($flujoCajas) == ($totalFlujoCajas->anos+1)*$periodo->valor)
 				{
 					//Se cargo bien
-					
 					$modelos[][] = new Flujocajas;
 					foreach ($flujoCajas as $key => $value) {
 						$modelos[$value->ano][$value->periodo] = $value;	
@@ -347,12 +357,11 @@ public function actionUpdate($id)
 					//problema en la carga
 				}
 
-
+		
 		$this->render('update',array(
-			'model'=>Yii::app()->session['modelos'][Yii::app()->session['ano']][Yii::app()->session['periodo']], 
+			'model'=> Yii::app()->session['modelos'][Yii::app()->session['ano']][Yii::app()->session['periodo']], 
 			'total'=> Yii::app()->session['totalFlujoCajas']
 		));
-
 		}
 	}
 
