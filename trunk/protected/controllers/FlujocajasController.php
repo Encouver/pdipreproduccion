@@ -214,6 +214,8 @@ public function actionGtod()
 	  	unset(Yii::app()->session['anoSel']);
 	  	unset(Yii::app()->session['periodoSel']);
 
+		 echo CHtml::link('Registro completado',array('flujocajas/index'));
+
 	  	//echo 'Grabe';
 	  	//$this->redirect(array('view'));
 	}catch(Exception $e)
@@ -226,7 +228,7 @@ public function actionGtod()
 	    throw $e;
 	}
 
-		
+
 }
 
 /**
