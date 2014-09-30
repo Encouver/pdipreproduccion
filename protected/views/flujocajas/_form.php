@@ -41,20 +41,19 @@
                 echo CHtml::ajaxSubmitButton('Siguiente -->' ,Yii::app()->createUrl('flujocajas/siguiente'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
     															array('id'=>'_siguiente','hidden'=>($ultimo)?true:false)); ?>
-    		</div>
+    		
         <?php 
                         echo CHtml::ajaxSubmitButton('Guardar Todo',Yii::app()->createUrl('flujocajas/gtod'),
-                                  array('success'=>'function(html){ jQuery("#resultados").empty().html(html); }'), 
-                                  array('id'=>'_guardartodo','hidden'=>(!$ultimo)?true:false
+                                  array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
+                                  array('id'=>'_gtod','hidden'=>(!$ultimo)?true:false
                                    ));
                                                                          ?>
+        </div>
 
-        <?php if(isset($total))
-                  echo $form->errorSummary($model,$total);
-                else
-                  echo $form->errorSummary($model); ?>
+       
 
-      <?php if(isset($total)){
+      <?php if($ultimo){
+            echo $form->errorSummary($total);
             ?>
 
           <?php echo $form->textFieldGroup($total,'valor_neto',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
@@ -66,6 +65,8 @@
       <?php
         }?>
 
+        <?php echo $form->errorSummary($model); ?>
+        
     		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
     		<?php echo $form->textFieldGroup($model,'prestamo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>

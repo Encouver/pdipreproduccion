@@ -72,6 +72,15 @@ public function actionAnterior(){
 		}
 	}
 
+	if(isset($_POST['Totalflujocajas'])){
+		$total = new Totalflujocajas;
+		$total->attributes =  $_POST['Totalflujocajas'];
+		Yii::app()->session['totalFlujoCajas']->valor_neto = $total->valor_neto;
+		Yii::app()->session['totalFlujoCajas']->costo_beneficio = $total->costo_beneficio;
+		Yii::app()->session['totalFlujoCajas']->tasa_retorno = $total->tasa_retorno;
+
+		Yii::app()->session['totalFlujoCajas']->validate(array('valor_neto','costo_beneficio','tasa_retorno'));
+	}
 
 		Yii::app()->session['periodo'] = Yii::app()->session['periodo'] - 1;
 		if(Yii::app()->session['periodo']<0)
@@ -88,8 +97,9 @@ public function actionAnterior(){
 		}
 
 	Yii::app()->session['modelos'] = $modelos;
+
 	$this->renderPartial('_form',array(
-		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],//'totalFlujoCajas'=>$totalFlujoCajas
+		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'total'=>Yii::app()->session['totalFlujoCajas']
 	));
 }
 public function actionSiguiente(){
@@ -121,27 +131,30 @@ public function actionSiguiente(){
 		}
 	}
 
+	if(isset($_POST['Totalflujocajas'])){
+		$total = new Totalflujocajas;
+		$total->attributes =  $_POST['Totalflujocajas'];
+		Yii::app()->session['totalFlujoCajas']->valor_neto = $total->valor_neto;
+		Yii::app()->session['totalFlujoCajas']->costo_beneficio = $total->costo_beneficio;
+		Yii::app()->session['totalFlujoCajas']->tasa_retorno = $total->tasa_retorno;
+
+		Yii::app()->session['totalFlujoCajas']->validate(array('valor_neto','costo_beneficio','tasa_retorno'));
+
+	}
 
 	
 	Yii::app()->session['modelos'] = $modelos;
-	$ultimo = (Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
-                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel']);
 	
+		$this->renderPartial('_form',array(
+			'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'total'=>Yii::app()->session['totalFlujoCajas']
+		));
 
-	if($ultimo)
-			$this->renderPartial('_form',array(
-				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'total'=>Yii::app()->session['totalFlujoCajas']
-			));
-	else
-			$this->renderPartial('_form',array(
-				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],
-			));
 }
 
 public function actionGtod()
 {
 
-	echo '<h1>ENTRE</h1>';
+	//echo '<h1>ENTRE</h1>';
 
 	$modelos = Yii::app()->session['modelos'];
 	$totalFlujoCajas = Yii::app()->session['totalFlujoCajas'];
@@ -149,16 +162,25 @@ public function actionGtod()
 	$periodoAno = Yii::app()->session['periodoSel'];
 	$anos = Yii::app()->session['anoSel'];
 
-	
+	if(isset($_POST['Totalflujocajas'])){
+		$total = new Totalflujocajas;
+		$total->attributes =  $_POST['Totalflujocajas'];
+		$totalFlujoCajas->valor_neto = $total->valor_neto;
+		$totalFlujoCajas->costo_beneficio = $total->costo_beneficio;
+		$totalFlujoCajas->tasa_retorno = $total->tasa_retorno;
+	}
 	if(isset($_POST['Flujocajas']))
 	{
-		//if(isset($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]))
 		$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes = $_POST['Flujocajas'];
-		if(!$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->validate())
+		$error  = !$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->validate();
+		$error =  !$totalFlujoCajas->validate() || $error;
+		if($error)
 		{
-				/*$this->renderPartial('create',array(
-				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'totalFlujoCajas'=>$totalFlujoCajas
-				));*/
+				$this->renderPartial('_form',array(
+				'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']],'total'=>$totalFlujoCajas
+				));
+				Yii::app()->end();
+				
 		}
 
 	}
@@ -172,32 +194,35 @@ public function actionGtod()
 				if($modelos[$i][$j]->save())
 				{
 
-				}else{//throw new Exception("Hubo un error guardando los datos.", 1);
-					/*$this->renderPartial('create',array(
-					'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'totalFlujoCajas'=>$totalFlujoCajas
-					));*/
+				}else{throw new Exception("Hubo un error guardando los datos.", 1);
+
 				}
 			}
 		}
-		if(isset($_POST['Totalflujocajas'])){
-			$total = new Totalflujocajas;
-			$total->attributes =  $_POST['Totalflujocajas'];
-			$totalFlujoCajas->valor_neto = $total->valor_neto;
-			$totalFlujoCajas->costo_beneficio = $total->costo_beneficio;
-			$totalFlujoCajas->tasa_retorno = $total->tasa_retorno;
 
 			if($totalFlujoCajas->save()){
 			}else throw new Exception(CHtml::errorSummary($totalFlujoCajas), 1);
-			
-		}
+
 
 		//$totalFlujoCajas->save();
 	  	$transaction->commit();
-	  	echo 'Grabe';
+
+	  	unset(Yii::app()->session['modelos']);
+	  	unset(Yii::app()->session['totalFlujoCajas']);
+	  	unset(Yii::app()->session['ano']);
+	  	unset(Yii::app()->session['periodo']);
+	  	unset(Yii::app()->session['anoSel']);
+	  	unset(Yii::app()->session['periodoSel']);
+
+	  	//echo 'Grabe';
 	  	//$this->redirect(array('view'));
 	}catch(Exception $e)
 	{
 	    $transaction->rollback();
+
+		/*$this->renderPartial('create',array(
+		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'totalFlujoCajas'=>$totalFlujoCajas
+			));*/
 	    throw $e;
 	}
 
@@ -210,13 +235,31 @@ public function actionGtod()
 */
 
 public function actionCreate()
-{
+{	  			  
 	$model=new Flujocajas;
 	$totalFlujoCajas = new Totalflujocajas;
 	// Uncomment the following line if AJAX validation is needed
 	// $this->performAjaxValidation($model);
+	
+	if(isset(Yii::app()->session['modelos']) && isset(Yii::app()->session['totalFlujoCajas'])){
+		$modelos = Yii::app()->session['modelos'];
+		$totalFlujoCajas = Yii::app()->session['totalFlujoCajas'];
+		
+		if(isset($_POST['Flujocajas']))
+		{
+			$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->attributes=$_POST['Flujocajas'];	
 
-	if(isset($_POST['Totalflujocajas']))
+			if($modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']]->validate()){
+				//$this->redirect(array('view','id'=>$model->id));
+			}
+		}
+
+		$this->render('create',array(
+		'model'=>$model, 'total'=>$totalFlujoCajas
+		));
+		Yii::app()->end();
+	}
+	elseif(isset($_POST['Totalflujocajas']))
 	{
 		$totalFlujoCajas->attributes = $_POST['Totalflujocajas'];
 		
@@ -251,23 +294,16 @@ public function actionCreate()
 				));*/
 			//Yii::app()->end();
 			$totalFlujoCajas = null;
-		}else{
-			//$totalFlujoCajas = new Totalflujocajas;
-		}
-
 		$this->render('create',array(
-		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'totalFlujoCajas'=>$totalFlujoCajas
+		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'total'=>$totalFlujoCajas
 		));
 
 		Yii::app()->end();
+		}
+
+
 	}
 
-	/*if(isset($_POST['Flujocajas']))
-	{
-		$model->attributes=$_POST['Flujocajas'];
-		if($model->save())
-			$this->redirect(array('view','id'=>$model->id));
-	}*/
 
 	$this->render('create',array(
 	'model'=>$model, 'totalFlujoCajas'=>$totalFlujoCajas
