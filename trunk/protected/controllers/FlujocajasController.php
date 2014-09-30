@@ -27,7 +27,7 @@ public function accessRules()
 {
 return array(
 array('allow',  // allow all users to perform 'index' and 'view' actions
-'actions'=>array('index','view', 'siguiente','anterior','gtod'),
+'actions'=>array('index','view', 'siguiente','anterior','gtod','actualizar'),
 'users'=>array('*'),
 ),
 array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -295,7 +295,7 @@ public function actionCreate()
 				'model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas
 				));*/
 			//Yii::app()->end();
-			$totalFlujoCajas = null;
+			//$totalFlujoCajas = null;
 		$this->render('create',array(
 		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'total'=>$totalFlujoCajas
 		));
@@ -312,6 +312,65 @@ public function actionCreate()
 	));
 }
 
+
+public function actionActualizar($id)
+{
+
+	$modelos[][] = new Flujocajas;
+
+	if(!isset(Yii::app()->session['modelos']) && !isset(Yii::app()->session['totalFlujoCajas'])){
+		$totalFlujoCajas = Totalflujocajas::model()->find('proyecto_id=?',array($id));
+		$flujoCajas = Flujocajas::model()->findAll('proyecto_id=?', array($id));
+		$periodo = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id));
+		if($totalFlujoCajas && $flujoCajas){
+				if(count($flujoCajas) == ($totalFlujoCajas->anos+1)*$periodo->valor)
+				{
+					//Se cargo bien
+
+					foreach ($flujoCajas as $key => $value) {
+						# code...
+						$modelos[$value[$i]->ano][$value[$i]->periodo] = $value;	
+					}
+
+					Yii::app()->session['modelos'] = $modelos;
+					Yii::app()->session['totalFlujoCajas'] = $totalFlujoCajas;
+
+					Yii::app()->session['ano'] = 0;
+					Yii::app()->session['periodo'] = 0;
+					Yii::app()->session['periodoSel'] = $periodo->valor;
+					Yii::app()->session['anoSel'] = $totalFlujoCajas->anos;
+
+				}else
+				{
+					//problema en la carga
+				}
+
+		}
+	}else
+		$modelos = Yii::app()->session['modelos'];
+
+	$this->render('update',array(
+		'model'=>Yii::app()->session[Yii::app()->session['ano']][Yii::app()->session['periodo']], 
+		'total'=> Yii::app()->session['totalFlujoCajas']
+	));
+
+/*
+	// Uncomment the following line if AJAX validation is needed
+	// $this->performAjaxValidation($model);
+
+	if(isset($_POST['Flujocajas']))
+	{
+		$model->attributes=$_POST['Flujocajas'];
+		if($model->save())
+			$this->redirect(array('view','id'=>$model->id));
+	}
+
+
+	$this->render('update',array(
+	'model'=>$model,
+	));*/
+}
+
 /**
 * Updates a particular model.
 * If update is successful, the browser will be redirected to the 'view' page.
@@ -319,21 +378,21 @@ public function actionCreate()
 */
 public function actionUpdate($id)
 {
-$model=$this->loadModel($id);
+	$model=$this->loadModel($id);
 
-// Uncomment the following line if AJAX validation is needed
-// $this->performAjaxValidation($model);
+	// Uncomment the following line if AJAX validation is needed
+	// $this->performAjaxValidation($model);
 
-if(isset($_POST['Flujocajas']))
-{
-$model->attributes=$_POST['Flujocajas'];
-if($model->save())
-$this->redirect(array('view','id'=>$model->id));
-}
+	if(isset($_POST['Flujocajas']))
+	{
+		$model->attributes=$_POST['Flujocajas'];
+		if($model->save())
+			$this->redirect(array('view','id'=>$model->id));
+	}
 
-$this->render('update',array(
-'model'=>$model,
-));
+	$this->render('update',array(
+		'model'=>$model,
+	));
 }
 
 /**
@@ -343,17 +402,17 @@ $this->render('update',array(
 */
 public function actionDelete($id)
 {
-if(Yii::app()->request->isPostRequest)
-{
-// we only allow deletion via POST request
-$this->loadModel($id)->delete();
+	if(Yii::app()->request->isPostRequest)
+	{
+	// we only allow deletion via POST request
+	$this->loadModel($id)->delete();
 
-// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-if(!isset($_GET['ajax']))
-$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-}
-else
-throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+	if(!isset($_GET['ajax']))
+		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+	else
+		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 }
 
 /**
