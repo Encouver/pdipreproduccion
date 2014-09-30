@@ -349,7 +349,7 @@ public function actionActualizar($id)
 		$modelos = Yii::app()->session['modelos'];
 
 	$this->render('update',array(
-		'model'=>Yii::app()->session[Yii::app()->session['ano']][Yii::app()->session['periodo']], 
+		'model'=>Yii::app()->session['modelos'][Yii::app()->session['ano']][Yii::app()->session['periodo']], 
 		'total'=> Yii::app()->session['totalFlujoCajas']
 	));
 
