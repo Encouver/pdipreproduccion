@@ -40,10 +40,9 @@
 
                 echo CHtml::ajaxSubmitButton('Siguiente -->' ,Yii::app()->createUrl('flujocajas/siguiente'),
     															array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
-    															array('id'=>'_siguiente','hidden'=>(!$ultimo)?false:true)); ?>
+    															array('id'=>'_siguiente','hidden'=>($ultimo)?true:false)); ?>
     		</div>
-        <?php /*if(Yii::app()->session['periodo']==Yii::app()->session['periodoSel']-1 &&
-                                                                         Yii::app()->session['ano']==Yii::app()->session['anoSel'])*/
+        <?php 
                         echo CHtml::ajaxSubmitButton('Guardar Todo',Yii::app()->createUrl('flujocajas/gtod'),
                                   array('success'=>'function(html){ jQuery("#resultados").empty().html(html); }'), 
                                   array('id'=>'_guardartodo','hidden'=>(!$ultimo)?true:false

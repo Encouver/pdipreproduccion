@@ -36,7 +36,7 @@ class Totalflujocajas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('proyecto_id, valor_neto, costo_beneficio, tasa_retorno, fecha_registro, anos, periodo_id', 'required'),
+			array('proyecto_id, valor_neto, costo_beneficio, tasa_retorno, anos, periodo_id', 'required'),
 			array('proyecto_id, anos, periodo_id', 'numerical', 'integerOnly'=>true),
 			array('valor_neto, costo_beneficio, tasa_retorno', 'numerical'),
 			array('estatus', 'length', 'max'=>1),

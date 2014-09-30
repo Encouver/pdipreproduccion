@@ -13141,3 +13141,234 @@ Stack trace:
 REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/siguiente
 in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php (117)
 in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php (13)
+2014/09/29 22:06:24 [error] [exception.Exception] exception 'Exception' with message 'Error Processing Request' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:185
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:08:34 [error] [php] Trying to get property of non-object (C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:183)
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): FlujocajasController->runAction()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): FlujocajasController->filterAccessControl()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): FlujocajasController->runActionWithFilters()
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): FlujocajasController->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CWebApplication->run()
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php (183)
+in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php (13)
+2014/09/29 22:09:11 [error] [php] Trying to get property of non-object (C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:184)
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): FlujocajasController->runAction()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): FlujocajasController->filterAccessControl()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): FlujocajasController->runActionWithFilters()
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): FlujocajasController->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CWebApplication->run()
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php (184)
+in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php (13)
+2014/09/29 22:09:47 [error] [exception.Exception] exception 'Exception' with message 'Error Processing Request' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:188
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:10:53 [error] [exception.Exception] exception 'Exception' with message 'Error Processing Request 1' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:188
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:11:20 [error] [exception.Exception] exception 'Exception' with message 'Error Processing Request ' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:188
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:11:25 [error] [exception.Exception] exception 'Exception' with message 'Error Processing Request ' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:188
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:31:35 [error] [exception.Exception] exception 'Exception' with message '1' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:188
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:36:39 [error] [exception.Exception] exception 'Exception' with message 'Error Processing Request' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:190
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:41:11 [error] [exception.Exception] exception 'Exception' with message '<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Fecha Registro no puede ser nulo.</li>
+</ul></div>' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:190
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:51:22 [error] [exception.Exception] exception 'Exception' with message '<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Fecha Registro no puede ser nulo.</li>
+</ul></div>' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:190
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
+2014/09/29 22:51:58 [error] [exception.Exception] exception 'Exception' with message '<div class="errorSummary"><p>Por favor corrija los siguientes errores de ingreso:</p>
+<ul>
+<li>Fecha Registro no puede ser nulo.</li>
+</ul></div>' in C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\controllers\FlujocajasController.php:190
+Stack trace:
+#0 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\actions\CInlineAction.php(49): FlujocajasController->actionGtod()
+#1 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#3 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#5 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#6 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#7 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(291): CFilterChain->run()
+#8 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#9 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(282): CController->run('gtod')
+#10 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('flujocajas/gtod')
+#11 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\yii\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\index.php(13): CApplication->run()
+#13 {main}
+REQUEST_URI=/pdipreproduccion/index.php?r=flujocajas/gtod
+HTTP_REFERER=http://localhost/pdipreproduccion/index.php?r=flujocajas/create
+---
