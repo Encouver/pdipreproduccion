@@ -312,21 +312,24 @@ public function actionCreate()
 	));
 }
 
-
-public function actionActualizar($id)
+// Recibe el id del proyecto
+public function actionUpdate($id)
 {
-
-	$modelos[][] = new Flujocajas;
+	$totalFlujoCajas = new Totalflujocajas;
 
 	if(!isset(Yii::app()->session['modelos']) && !isset(Yii::app()->session['totalFlujoCajas'])){
 		$totalFlujoCajas = Totalflujocajas::model()->find('proyecto_id=?',array($id));
+		$totalFlujoCajas = Yii::app()->session['totalFlujoCajas'];
+
 		$flujoCajas = Flujocajas::model()->findAll('proyecto_id=?', array($id));
-		$periodo = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id));
+		
 		if($totalFlujoCajas && $flujoCajas){
+			$periodo = Periodos::model()->find('id=?',array($totalFlujoCajas->periodo_id));
 				if(count($flujoCajas) == ($totalFlujoCajas->anos+1)*$periodo->valor)
 				{
 					//Se cargo bien
-
+					
+					$modelos[][] = new Flujocajas;
 					foreach ($flujoCajas as $key => $value) {
 						$modelos[$value->ano][$value->periodo] = $value;	
 					}
@@ -344,37 +347,22 @@ public function actionActualizar($id)
 					//problema en la carga
 				}
 
+
+		$this->render('update',array(
+			'model'=>Yii::app()->session['modelos'][Yii::app()->session['ano']][Yii::app()->session['periodo']], 
+			'total'=> Yii::app()->session['totalFlujoCajas']
+		));
+
 		}
-	}else
-		$modelos = Yii::app()->session['modelos'];
-
-	$this->render('update',array(
-		'model'=>Yii::app()->session['modelos'][Yii::app()->session['ano']][Yii::app()->session['periodo']], 
-		'total'=> Yii::app()->session['totalFlujoCajas']
-	));
-
-/*
-	// Uncomment the following line if AJAX validation is needed
-	// $this->performAjaxValidation($model);
-
-	if(isset($_POST['Flujocajas']))
-	{
-		$model->attributes=$_POST['Flujocajas'];
-		if($model->save())
-			$this->redirect(array('view','id'=>$model->id));
 	}
 
-
-	$this->render('update',array(
-	'model'=>$model,
-	));*/
 }
 
 /**
 * Updates a particular model.
 * If update is successful, the browser will be redirected to the 'view' page.
 * @param integer $id the ID of the model to be updated
-*/
+*//*
 public function actionUpdate($id)
 {
 	$model=$this->loadModel($id);
@@ -392,7 +380,7 @@ public function actionUpdate($id)
 	$this->render('update',array(
 		'model'=>$model,
 	));
-}
+}*/
 
 /**
 * Deletes a particular model.
