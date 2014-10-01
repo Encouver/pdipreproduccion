@@ -50,9 +50,9 @@ array('deny',  // deny all users
 */
 public function actionView($id)
 {
-$this->render('view',array(
-'model'=>$this->loadModel($id),
-));
+	$this->render('view',array(
+		'model'=>$this->loadModel($id),
+	));
 }
 
 public function actionAnterior(){
@@ -204,22 +204,15 @@ public function actionGtod()
 			}else throw new Exception(CHtml::errorSummary($totalFlujoCajas), 1);
 
 
-		//$totalFlujoCajas->save();
 	  	$transaction->commit();
 
 	  	$this->limpiarSessions();
 
 		 echo CHtml::link('Registro completado',array('flujocajas/admin'));
 
-	  	//echo 'Grabe';
-	  	//$this->redirect(array('view'));
 	}catch(Exception $e)
 	{
 	    $transaction->rollback();
-
-		/*$this->renderPartial('create',array(
-		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'totalFlujoCajas'=>$totalFlujoCajas
-			));*/
 	    throw $e;
 	}
 
@@ -393,11 +386,36 @@ public function actionUpdate($id)
 	));
 }*/
 
+public function actionDelete($id)
+{
+
+	
+	$transaction = Yii::app()->db->beginTransaction();
+	try
+	{
+		if(Totalflujocajas::model()->deleteAll('proyecto_id=?', array($id))){
+		}else throw new Exception('No se pudo eliminar.', 1);
+
+		if(Flujocajas::model()->deleteAll('proyecto_id=?', array($id))){
+		}else throw new Exception('No se pudo eliminar.', 1);
+
+	  	$transaction->commit();
+
+	}catch(Exception $e)
+	{
+	    $transaction->rollback();
+	    throw $e;
+	}
+
+	$this->redirect(array('admin'));
+}
+
+
 /**
 * Deletes a particular model.
 * If deletion is successful, the browser will be redirected to the 'admin' page.
 * @param integer $id the ID of the model to be deleted
-*/
+*//*
 public function actionDelete($id)
 {
 	if(Yii::app()->request->isPostRequest)
@@ -411,7 +429,7 @@ public function actionDelete($id)
 	}
 	else
 		throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-}
+}*/
 
 /**
 * Lists all models.
