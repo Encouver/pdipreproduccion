@@ -44,30 +44,7 @@ return false;
 						'filter'=>$model,
 						'columns'=>array(
 								'proyecto_id',
-								/*'id',
-								'inversion',
-								'prestamo',
-								'ingresos',
-								'costos',
-								'reinversion',
-								
-								'valor_residual',
-								'pagos',
-								'depreciacion_negativo',
-								'utilidad_antesimp',
-								'utilidad_despuesimp',
-								'impuestos',
-								'depreciacion_positivo',
-								'flujo_operativo',
-								'flujo_proyectado',
-								'ingresos_rcb',
-								'costos_rcb',
-								'ingresos_rcbact',
-								'costos_rcbact',
-								'fecha_registro',
-								'estatus',
-								'proyecto_id',
-								*/
+							
 						array(
 							'class'=>'booster.widgets.TbButtonColumn',
 							'updateButtonUrl'=>'Yii::app()->createUrl("/flujocajas/update", array("id" => $data->proyecto_id))',
