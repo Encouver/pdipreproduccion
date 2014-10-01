@@ -48,6 +48,8 @@ return false;
 						array(
 							'class'=>'booster.widgets.TbButtonColumn',
 							'updateButtonUrl'=>'Yii::app()->createUrl("/flujocajas/update", array("id" => $data->proyecto_id))',
+							'deleteButtonUrl'=>'Yii::app()->createUrl("/flujocajas/delete", array("id" => $data->proyecto_id))',
+							'viewButtonOptions'=>array('hidden'=>true)
 						),
 ),
 )); ?>
