@@ -49,7 +49,7 @@
                                    ));
                 ?> <br><br>
 
-                <?php echo CHtml::link('Cancelar',Yii::app()->createUrl('flujocajas/admin')
+                <?php echo CHtml::link('Cancelar',Yii::app()->createUrl('flujocajas/cancelar')
                          );
                                                                          ?>
         </div>

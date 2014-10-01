@@ -27,11 +27,11 @@ public function accessRules()
 {
 return array(
 array('allow',  // allow all users to perform 'index' and 'view' actions
-'actions'=>array('index','view', 'siguiente','anterior','gtod','actualizar'),
+'actions'=>array('index','view', 'siguiente','anterior','gtod'),
 'users'=>array('*'),
 ),
 array('allow', // allow authenticated user to perform 'create' and 'update' actions
-'actions'=>array('create','update'),
+'actions'=>array('create','update','cancelar'),
 'users'=>array('*'),
 ),
 array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -217,6 +217,13 @@ public function actionGtod()
 	}
 
 
+}
+
+public function actionCancelar()
+{	 
+	$this->limpiarSessions();
+
+	$this->redirect(array('create'));
 }
 
 /**
@@ -448,7 +455,7 @@ $this->render('index',array(
 public function actionAdmin()
 {
 	$this->limpiarSessions();
-	
+
 	$model=new Totalflujocajas('search');
 	$model->unsetAttributes();  // clear any default values
 	if(isset($_GET['Totalflujocajas']))
