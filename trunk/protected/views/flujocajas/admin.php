@@ -11,13 +11,13 @@ array('label'=>'Create Flujocajas','url'=>array('create')),
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
-$('.search-form').toggle();
-return false;
+	$('.search-form').toggle();
+	return false;
 });
 $('.search-form form').submit(function(){
-$.fn.yiiGridView.update('flujocajas-grid', {
-data: $(this).serialize()
-});
+	$.fn.yiiGridView.update('flujocajas-grid', {
+		data: $(this).serialize()
+	});
 return false;
 });
 ");
@@ -33,42 +33,44 @@ return false;
 
 <?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button btn')); ?>
 <div class="search-form" style="display:none">
-	<?php $this->renderPartial('_search',array(
+	<?php $this->renderPartial('/totalflujocajas/_search',array(
 	'model'=>$model,
 )); ?>
 </div><!-- search-form -->
 
 <?php $this->widget('booster.widgets.TbGridView',array(
-'id'=>'flujocajas-grid',
-'dataProvider'=>$model->search(),
-'filter'=>$model,
-'columns'=>array(
-		'id',
-		'inversion',
-		'prestamo',
-		'ingresos',
-		'costos',
-		'reinversion',
-		/*
-		'valor_residual',
-		'pagos',
-		'depreciacion_negativo',
-		'utilidad_antesimp',
-		'utilidad_despuesimp',
-		'impuestos',
-		'depreciacion_positivo',
-		'flujo_operativo',
-		'flujo_proyectado',
-		'ingresos_rcb',
-		'costos_rcb',
-		'ingresos_rcbact',
-		'costos_rcbact',
-		'fecha_registro',
-		'estatus',
-		'proyecto_id',
-		*/
-array(
-'class'=>'booster.widgets.TbButtonColumn',
-),
+						'id'=>'totalflujocajas-grid',
+						'dataProvider'=>$model->search(),
+						'filter'=>$model,
+						'columns'=>array(
+								'proyecto_id',
+								/*'id',
+								'inversion',
+								'prestamo',
+								'ingresos',
+								'costos',
+								'reinversion',
+								
+								'valor_residual',
+								'pagos',
+								'depreciacion_negativo',
+								'utilidad_antesimp',
+								'utilidad_despuesimp',
+								'impuestos',
+								'depreciacion_positivo',
+								'flujo_operativo',
+								'flujo_proyectado',
+								'ingresos_rcb',
+								'costos_rcb',
+								'ingresos_rcbact',
+								'costos_rcbact',
+								'fecha_registro',
+								'estatus',
+								'proyecto_id',
+								*/
+						array(
+							'class'=>'booster.widgets.TbButtonColumn',
+							'updateButtonUrl'=>'Yii::app()->createUrl("/flujocajas/update", array("id" => $data->proyecto_id))',
+						),
 ),
 )); ?>
