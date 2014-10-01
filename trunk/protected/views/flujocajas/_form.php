@@ -43,10 +43,14 @@
     															array('id'=>'_siguiente','hidden'=>($ultimo)?true:false)); ?>
     		
         <?php 
-                        echo CHtml::ajaxSubmitButton('Guardar Todo',Yii::app()->createUrl('flujocajas/gtod'),
+                echo CHtml::ajaxSubmitButton('Guardar Todo',Yii::app()->createUrl('flujocajas/gtod'),
                                   array('success'=>'function(html){ jQuery("#flujocajas-form").empty().html(html); }'), 
                                   array('id'=>'_gtod','hidden'=>(!$ultimo)?true:false
                                    ));
+                ?> <br><br>
+
+                <?php echo CHtml::link('Cancelar',Yii::app()->createUrl('flujocajas/admin')
+                         );
                                                                          ?>
         </div>
 
@@ -66,7 +70,7 @@
         }?>
 
         <?php echo $form->errorSummary($model); ?>
-        
+
     		<?php echo $form->textFieldGroup($model,'inversion',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>
 
     		<?php echo $form->textFieldGroup($model,'prestamo',array('widgetOptions'=>array('htmlOptions'=>array('class'=>'span5')))); ?>

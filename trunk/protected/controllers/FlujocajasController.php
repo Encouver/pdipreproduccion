@@ -447,6 +447,8 @@ $this->render('index',array(
 */
 public function actionAdmin()
 {
+	$this->limpiarSessions();
+	
 	$model=new Totalflujocajas('search');
 	$model->unsetAttributes();  // clear any default values
 	if(isset($_GET['Totalflujocajas']))
