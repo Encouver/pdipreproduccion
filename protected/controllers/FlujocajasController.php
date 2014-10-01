@@ -209,7 +209,7 @@ public function actionGtod()
 
 	  	$this->limpiarSessions();
 
-		 echo CHtml::link('Registro completado',array('flujocajas/index'));
+		 echo CHtml::link('Registro completado',array('flujocajas/admin'));
 
 	  	//echo 'Grabe';
 	  	//$this->redirect(array('view'));
@@ -427,14 +427,14 @@ $this->render('index',array(
 */
 public function actionAdmin()
 {
-$model=new Flujocajas('search');
-$model->unsetAttributes();  // clear any default values
-if(isset($_GET['Flujocajas']))
-$model->attributes=$_GET['Flujocajas'];
+	$model=new Totalflujocajas('search');
+	$model->unsetAttributes();  // clear any default values
+	if(isset($_GET['Totalflujocajas']))
+		$model->attributes=$_GET['Totalflujocajas'];
 
-$this->render('admin',array(
-'model'=>$model,
-));
+	$this->render('admin',array(
+	'model'=>$model,
+	));
 }
 
 /**
