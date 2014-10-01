@@ -237,7 +237,13 @@ public function actionCreate()
 	$totalFlujoCajas = new Totalflujocajas;
 	// Uncomment the following line if AJAX validation is needed
 	// $this->performAjaxValidation($model);
-	
+
+	$proyecto_id = 3;
+
+	// Solo puede haber un plan para cada proyecto.
+	if(Totalflujocajas::model()->find('proyecto_id=?',array($proyecto_id)))
+		$this->redirect(array('admin'));
+
 	if(isset(Yii::app()->session['modelos']) && isset(Yii::app()->session['totalFlujoCajas'])){
 		$modelos = Yii::app()->session['modelos'];
 		$totalFlujoCajas = Yii::app()->session['totalFlujoCajas'];
@@ -262,7 +268,7 @@ public function actionCreate()
 		
 		if($totalFlujoCajas->validate(array('periodo_id','anos')))
 		{	
-			$totalFlujoCajas->proyecto_id = 3;
+			$totalFlujoCajas->proyecto_id = $proyecto_id;
 			$totalFlujoCajas->estatus = 1;
 
 			Yii::app()->session['totalFlujoCajas'] = $totalFlujoCajas;
@@ -274,7 +280,7 @@ public function actionCreate()
 			{
 				for($j=0;$j<$periodoAno;$j++){
 					$modelos[$i][$j] = new Flujocajas;
-					$modelos[$i][$j]->proyecto_id = 3;
+					$modelos[$i][$j]->proyecto_id = $proyecto_id;
 					$modelos[$i][$j]->ano = $i;
 					$modelos[$i][$j]->periodo = $j;
 				}
@@ -286,11 +292,7 @@ public function actionCreate()
 			Yii::app()->session['periodo'] = 0;
 			Yii::app()->session['periodoSel'] = $periodoAno;
 			Yii::app()->session['anoSel'] = $totalFlujoCajas->anos;
-			/*$this->render('flujo',array(
-				'model'=>$model,'totalFlujoCajas'=>$totalFlujoCajas
-				));*/
-			//Yii::app()->end();
-			//$totalFlujoCajas = null;
+
 		$this->render('create',array(
 		'model'=>$modelos[Yii::app()->session['ano']][Yii::app()->session['periodo']], 'total'=>$totalFlujoCajas
 		));
