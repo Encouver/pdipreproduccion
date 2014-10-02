@@ -24,6 +24,11 @@
             <default_value/>
             <description/>
         </parameter>
+        <parameter>
+            <name>tipo</name>
+            <default_value/>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -89,14 +94,14 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Prueba</name>
-    <server>localhost</server>
-    <type>POSTGRESQL</type>
+    <name>Oracle</name>
+    <server>&#x24;&#x7b;oracle.server&#x7d;</server>
+    <type>ORACLE</type>
     <access>Native</access>
-    <database>Prueba</database>
-    <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4bb16bd64d980aac9</password>
+    <database>&#x24;&#x7b;oracle.Db&#x7d;</database>
+    <port>1521</port>
+    <username>&#x24;&#x7b;oracle.Userdb&#x7d;</username>
+    <password>&#x24;&#x7b;oracle.Psswdb&#x7d;</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -104,7 +109,31 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>postgres</name>
+    <server>&#x24;&#x7b;pdi.server&#x7d;</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;pdi.Db&#x7d;</database>
+    <port>&#x24;&#x7b;pdi.PortDb&#x7d;</port>
+    <username>&#x24;&#x7b;pdi.Userdb&#x7d;</username>
+    <password>&#x24;&#x7b;pdi.Psswdb&#x7d;</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;pdi.PortDb&#x7d;</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -121,10 +150,7 @@
   <hop> <from>CSV file input</from><to>Get System Info</to><enabled>Y</enabled> </hop>
   <hop> <from>Get System Info</from><to>Add sequence</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables 2</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Table input</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
   <hop> <from>cronogramas</from><to>Split field to rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Table input 2</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split field to rows</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup 2</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup</from><to>Filter rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Add constants 3</to><enabled>Y</enabled> </hop>
@@ -135,6 +161,12 @@
   <hop> <from>Filter rows 2</from><to>Dummy &#x28;do nothing&#x29; 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Dummy &#x28;do nothing&#x29; 2</from><to>cronogramas</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 3 2</from><to>log unidades</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split field to rows</from><to>String operations</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Gen_pais</from><to>String operations 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations 2</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>gen_unidades</from><to>String operations 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations 3</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -193,14 +225,47 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>537</xloc>
+      <yloc>85</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants 3</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
       <field>
-        <name>tipo</name>
+        <name>descripcion</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>Exportaci&#xf3;n</nullif>
+        <nullif>El pais no existe</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>campo</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Pais</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -208,8 +273,53 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>537</xloc>
-      <yloc>136</yloc>
+      <xloc>199</xloc>
+      <yloc>646</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants 3 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>descripcion</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>El pais no existe</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>campo</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Pais</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>871</xloc>
+      <yloc>380</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -227,7 +337,7 @@
            </partitioning>
       <valuename>id</valuename>
       <use_database>Y</use_database>
-      <connection>Prueba</connection>
+      <connection>postgres</connection>
       <schema>pdi</schema>
       <seqname>cronograma_id_seq</seqname>
       <use_counter>N</use_counter>
@@ -299,7 +409,7 @@
         <group>.</group>
         <length>10</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>cantidad</name>
@@ -349,7 +459,45 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>305</xloc>
-      <yloc>205</yloc>
+      <yloc>246</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29;</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>176</xloc>
+      <yloc>508</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dummy &#x28;do nothing&#x29; 2</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>868</xloc>
+      <yloc>507</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -365,12 +513,12 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
+    <connection>postgres</connection>
     <execute_each_row>N</execute_each_row>
     <single_statement>N</single_statement>
     <replace_variables>Y</replace_variables>
     <quoteString>N</quoteString>
-    <sql>delete from pdi.cronogramas where proyecto_id &#x3d; &#x24;&#x7b;proyecto_id&#x7d;&#x3b;&#xa;delete from pdi.exportaciones_paises where proyecto_id &#x3d; &#x24;&#x7b;proyecto_id&#x7d;&#x3b;&#xa;delete from pdi.log_cronogramas where proyecto_id &#x3d; &#x24;&#x7b;proyecto_id&#x7d;&#x3b; &#xa;</sql>
+    <sql>delete from pdi.exportaciones_paises where cronograma_id in &#x28;select id from pdi.cronogramas  where proyecto_id &#x3d; &#x24;&#x7b;proyecto_id&#x7d; and tipo &#x3d; &#x27;&#x24;&#x7b;tipo&#x7d;&#x27; &#x29; &#x3b;&#xa;delete from pdi.cronogramas where proyecto_id &#x3d; &#x24;&#x7b;proyecto_id&#x7d; and tipo &#x3d; &#x27;&#x24;&#x7b;tipo&#x7d;&#x27;&#x3b;&#xa;delete from pdi.log_cronogramas where proyecto_id &#x3d; &#x24;&#x7b;proyecto_id&#x7d; and tipo &#x3d; &#x27;&#x24;&#x7b;tipo&#x7d;&#x27;&#x3b; &#xa;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -380,8 +528,92 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>49</xloc>
-      <yloc>254</yloc>
+      <xloc>77</xloc>
+      <yloc>246</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>5</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Dummy &#x28;do nothing&#x29;</send_true_to>
+<send_false_to>Add constants 3</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>CPAIS</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>311</xloc>
+      <yloc>508</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows 2</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>5</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Dummy &#x28;do nothing&#x29; 2</send_true_to>
+<send_false_to>Add constants 3 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>cunidad</leftvalue>
+ <function>IS NOT NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>716</xloc>
+      <yloc>380</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Gen_pais</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>postgres</connection>
+    <sql>SELECT&#xd;&#xa;  cpais&#xd;&#xa;, dpais&#xd;&#xa;&#xd;&#xa;FROM &#x22;public&#x22;.gen_pais&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>445</xloc>
+      <yloc>306</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -406,7 +638,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>348</xloc>
-      <yloc>108</yloc>
+      <yloc>85</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -438,7 +670,7 @@
       <field>
         <name>ruta</name>
         <variable>&#x24;&#x7b;ruta&#x7d;</variable>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -480,11 +712,23 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>tipo</name>
+        <variable>&#x24;&#x7b;tipo&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>610</xloc>
-      <yloc>265</yloc>
+      <yloc>246</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -509,8 +753,8 @@
    <delimiter_is_regex>N</delimiter_is_regex>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>582</xloc>
-      <yloc>473</yloc>
+      <xloc>683</xloc>
+      <yloc>517</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -526,7 +770,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>Table input</from>
+    <from>String operations 3</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -545,8 +789,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>726</xloc>
-      <yloc>226</yloc>
+      <xloc>716</xloc>
+      <yloc>246</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -562,7 +806,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>Table input 2</from>
+    <from>String operations 2</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>Y</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -581,15 +825,15 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>399</xloc>
-      <yloc>473</yloc>
+      <xloc>446</xloc>
+      <yloc>508</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Table input</name>
-    <type>TableInput</type>
+    <name>String operations</name>
+    <type>StringOperations</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -598,24 +842,32 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
-    <sql>SELECT&#xa;  cunidad&#x3a;&#x3a;Numeric&#xa;, dunidad&#xa;, sesion_id&#xa;FROM &#x22;public&#x22;.gen_unidades&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <fields>
+      <field>
+        <in_stream_name>paises_1</in_stream_name>
+        <out_stream_name/>
+        <trim_type>both</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>716</xloc>
-      <yloc>38</yloc>
+      <xloc>576</xloc>
+      <yloc>514</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Table input 2</name>
-    <type>TableInput</type>
+    <name>String operations 2</name>
+    <type>StringOperations</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -624,17 +876,59 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
-    <sql>SELECT&#xa;  cpais&#xa;, dpais&#xa;, sesion_id&#xa;, ddocumento_identificacion&#xa;, cdivisa_aceptada&#xa;, bfiltroliq&#xa;FROM &#x22;public&#x22;.gen_pais&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <fields>
+      <field>
+        <in_stream_name>dpais</in_stream_name>
+        <out_stream_name/>
+        <trim_type>both</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>338</yloc>
+      <xloc>445</xloc>
+      <yloc>394</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>String operations 3</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>dunidad</in_stream_name>
+        <out_stream_name/>
+        <trim_type>both</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>728</xloc>
+      <yloc>130</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -650,7 +944,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
+    <connection>postgres</connection>
     <schema>pdi</schema>
     <table>cronogramas</table>
     <commit>10000</commit>
@@ -715,7 +1009,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>946</xloc>
+      <xloc>868</xloc>
       <yloc>615</yloc>
       <draw>Y</draw>
       </GUI>
@@ -732,7 +1026,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
+    <connection>postgres</connection>
     <schema>pdi</schema>
     <table>exportaciones_paises</table>
     <commit>10000</commit>
@@ -765,8 +1059,34 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>70</xloc>
-      <yloc>348</yloc>
+      <xloc>71</xloc>
+      <yloc>372</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>gen_unidades</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>postgres</connection>
+    <sql>SELECT&#xd;&#xa;  cunidad&#x3a;&#x3a;Numeric&#xd;&#xa;, dunidad&#xd;&#xa;, sesion_id&#xd;&#xa;FROM &#x22;public&#x22;.gen_unidades&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>716</xloc>
+      <yloc>38</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -782,7 +1102,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
+    <connection>postgres</connection>
     <schema>pdi</schema>
     <table>log_cronogramas</table>
     <commit>10000</commit>
@@ -820,6 +1140,10 @@
           <column_name>linea</column_name>
           <stream_name>linea</stream_name>
         </field>
+        <field>
+          <column_name>tipo</column_name>
+          <stream_name>tipo</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -840,7 +1164,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Prueba</connection>
+    <connection>postgres</connection>
     <schema>pdi</schema>
     <table>log_cronogramas</table>
     <commit>10000</commit>
@@ -878,197 +1202,15 @@
           <column_name>linea</column_name>
           <stream_name>linea</stream_name>
         </field>
+        <field>
+          <column_name>tipo</column_name>
+          <stream_name>tipo</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1025</xloc>
-      <yloc>490</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>5</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Dummy &#x28;do nothing&#x29;</send_true_to>
-<send_false_to>Add constants 3</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>cpais</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>317</xloc>
       <yloc>508</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>5</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Dummy &#x28;do nothing&#x29; 2</send_true_to>
-<send_false_to>Add constants 3 2</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>cunidad</leftvalue>
- <function>IS NOT NULL</function>
- <rightvalue/>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>738</xloc>
-      <yloc>380</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants 3</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>descripcion</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>El pais no existe</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>campo</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Pais</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>199</xloc>
-      <yloc>598</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants 3 2</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>descripcion</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>El pais no existe</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>campo</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Pais</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>871</xloc>
-      <yloc>333</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy &#x28;do nothing&#x29;</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>176</xloc>
-      <yloc>476</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dummy &#x28;do nothing&#x29; 2</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>868</xloc>
-      <yloc>507</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

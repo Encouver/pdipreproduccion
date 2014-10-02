@@ -76,20 +76,20 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 	
 	//Cronogramas::
 
-	//$sql="select * from pdi.cronogramas";
-	//$connection=Yii::app()->db; 
-	//$command = $connection->createCommand($sql);
+	$sql="select * from pdi.cronogramas";
+	$connection=Yii::app()->db; 
+	$command = $connection->createCommand($sql);
 	//$rowCount=$command->execute(); // execute the non-query SQL
-	//$dataReader=$command->query(); // execute a query SQL
+	$dataReader=$command->query(); // execute a query SQL
 
-	/*print_r($dataReader);
+	print_r($dataReader);
 
 	foreach ($dataReader as $key => $value) {
 		# code...
 		echo $value;
-	}*/
+	}
 
-	//die("probando");
+	die("probando");
 	$errores='';
 	// Uncomment the following line if AJAX validation is needed
 	// $this->performAjaxValidation($model);
@@ -104,10 +104,8 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 	if(isset($_POST['Archivoscsv']))
 	{
 		$nombre_tem = $this->NewGuid().'.csv';
-		$info = GenJuridico::model()->find('CMAIL_PRIM=:email', array(':email'=>$user));	
-		$empresa = $info['SEMPRESA'];
-		$proyecto = Proyectos::model()->find('empresa_id=:empresa AND estatus=:status',array(':empresa'=>$empresa, ':status'=>1));
-		$model->proyecto_id=$proyecto['id'];
+
+		$model->proyecto_id=3;
 		$model->tipo_csv=$tipoCronograma;
 		if($tipoCronograma == 'importacion')
 			$model->tipo_csv=$tipoCronograma;
@@ -119,24 +117,24 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 			$model->archivo = $nombre_tem;
 		}
 		
-		Archivoscsv::model()->deleteAll('proyecto_id=:proyecto_id and tipo_csv=:tipo',array(':proyecto_id'=>$model->proyecto_id, ':tipo'=>$tipoCronograma));
+		//Archivoscsv::model()->deleteAll('proyecto_id=:proyecto_id and tipo_csv=:tipo',array(':proyecto_id'=>$model->proyecto_id, ':tipo'=>$tipoCronograma));
 		
 		
-		if($model->save())
-		{
-			$archivo->saveAs('csv/'.$tipoCronograma.'/'.$model->archivo);
+		//if($model->save())
+		//{
+			//$archivo->saveAs('csv/'.$tipoCronograma.'/'.$model->archivo);
 
-			$archivo = dirname(Yii::app()->request->scriptFile).'/csv/'.$tipoCronograma.'/'.$model->archivo;
-			
+			//$archivo = dirname(Yii::app()->request->scriptFile).'/csv/'.$tipoCronograma.'/'.$model->archivo;
 
-			$command = '/home/www-data/data-integration/pan.sh -file:/home/www-data/data-integration/carga_masiva.ktr -param:proyecto_id='.$model->proyecto_id.' -param:ruta='.$archivo.' -param:tipo='.$tipoCronograma;
-			
+
+			//$command = 'C:\Users\EdgarLeal\Desktop\data-integration\pan.sh -file:C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\etl\carga_masiva.ktr -param:proyecto_id='.$model->proyecto_id.' -param:ruta='.$archivo.' -param:tipo='.$tipoCronograma;
+
+			$command = '/home/www-data/data-integration/pan.sh -file:/home/www-data/data-integration/carga_masiva.ktr -param:proyecto_id=4 -param:ruta=/app/pdi-des/csv/exportacion/FF865AF7CBDBE277DBA818561F2419F2.csv -param:tipo=exportaciones';
+;
 	
 			$this->salida = exec($command ,$this->out,$this->estatus);
 			
-			
-			
-		}
+		//}
 	}
 
 	$this->render($vista,array(
