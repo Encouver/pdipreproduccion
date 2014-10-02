@@ -1,4 +1,6 @@
 <?php
+//include(Yii::app()->basePath .'\components\cargaThread.php');
+
 
 class ArchivoscsvController extends Controller
 {
@@ -7,8 +9,8 @@ class ArchivoscsvController extends Controller
 * using two-column layout. See 'protected/views/layouts/column2.php'.
 */
 //public $layout='//layouts/column2';
-	public $salida;
-	public $out;
+	//public $salida;
+	//public $out;
 	public $estatus;
 
 
@@ -74,25 +76,7 @@ $this->render('view',array(
 
 public function Cronograma($model, $tipoCronograma = 'exportacion'){
 	
-	//Cronogramas::
-
-	//$sql="select * from pdi.cronogramas";
-	//$connection=Yii::app()->db; 
-	//$command = $connection->createCommand($sql);
-	//$rowCount=$command->execute(); // execute the non-query SQL
-	//$dataReader=$command->query(); // execute a query SQL
-
-	/*print_r($dataReader);
-
-	foreach ($dataReader as $key => $value) {
-		# code...
-		echo $value;
-	}*/
-
-	//die("probando");
 	$errores='';
-	// Uncomment the following line if AJAX validation is needed
-	// $this->performAjaxValidation($model);
 		
 	$nc=7;
 	$vista = 'export';
@@ -104,10 +88,10 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 	if(isset($_POST['Archivoscsv']))
 	{
 		$nombre_tem = $this->NewGuid().'.csv';
-		$info = GenJuridico::model()->find('CMAIL_PRIM=:email', array(':email'=>$user));	
-		$empresa = $info['SEMPRESA'];
-		$proyecto = Proyectos::model()->find('empresa_id=:empresa AND estatus=:status',array(':empresa'=>$empresa, ':status'=>1));
-		$model->proyecto_id=$proyecto['id'];
+		//$info = GenJuridico::model()->find('CMAIL_PRIM=:email', array(':email'=>$user));	
+		//$empresa = $info['SEMPRESA'];
+		//$proyecto = Proyectos::model()->find('empresa_id=:empresa AND estatus=:status',array(':empresa'=>$empresa, ':status'=>1));
+		$model->proyecto_id=3;
 		$model->tipo_csv=$tipoCronograma;
 		if($tipoCronograma == 'importacion')
 			$model->tipo_csv=$tipoCronograma;
@@ -131,9 +115,14 @@ public function Cronograma($model, $tipoCronograma = 'exportacion'){
 
 			$command = '/home/www-data/data-integration/pan.sh -file:/home/www-data/data-integration/carga_masiva.ktr -param:proyecto_id='.$model->proyecto_id.' -param:ruta='.$archivo.' -param:tipo='.$tipoCronograma;
 			
-	
-			$this->salida = exec($command ,$this->out,$this->estatus);
 			
+			//$command = 'C:\Users\EdgarLeal\Desktop\data-integration\pan.sh -file:"C:\Program Files (x86)\Apache Software Foundation\Apache2.2\htdocs\pdipreproduccion\protected\etl\carga_masiva.ktr" -param:proyecto_id='.$model->proyecto_id.' -param:ruta='.$archivo.' -param:tipo='.$tipoCronograma;
+			
+			//$this->salida = exec($command ,$this->out,$this->estatus);
+
+			proc_open($command, descriptorspec, pipes)
+
+			//echo $this->salida;
 			
 			
 		}
